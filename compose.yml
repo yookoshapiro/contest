@@ -32,12 +32,6 @@ services:
       - "3306:3306"
     networks:
       - default
-    healthcheck:
-      test: netstat -ltn | grep -q -c ":3306" || exit 1
-      interval: 10s
-      timeout: 3s
-      start_period: 5s
-      retries: 3
 
   php:
     hostname: php
@@ -56,12 +50,6 @@ services:
       - source: php_ini
         target: usr/local/etc/php/php.ini
         mode: 0644
-    healthcheck:
-      test: netstat -ltn | grep -q -c ":9000" || exit 1
-      interval: 10s
-      timeout: 3s
-      start_period: 5s
-      retries: 3
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
