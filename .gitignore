@@ -1,0 +1,7 @@
+.idea
+.env
+/lib/vendor/
+/lib/composer.lock
+/var/log/access.log
+/var/log/error.log
+/var/log/xdebug.log

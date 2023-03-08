@@ -1,0 +1,10 @@
+FROM php:8.2-fpm-alpine
+
+RUN apk add --no-cache linux-headers && \
+ mkdir -p /tmp/pear && \
+ cd /tmp/pear && \
+ pecl bundle xdebug && \
+ docker-php-ext-install /tmp/pear/xdebug && \
+ rm -Rf /tmp/pear
+
+COPY docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/

@@ -1,0 +1,38 @@
+{
+    "name": "yookoshapiro/contest",
+    "description": "Versuch einer Anwendung zur schnelleren Auswertung der Nachtwanderung der Feuerwehr Dechow.",
+    "version": "0.1",
+    "authors": [
+        {
+            "name": "Steven Markgraf",
+            "email": "yooko.shapiro@gmail.com",
+            "homepage": "https://steven-markgraf.de",
+            "role": "Developer"
+        }
+    ],
+    "license": "MIT",
+    "type": "project",
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "require": {
+        "php": "<=8.2.3",
+        "doctrine/dbal": "^3.6",
+        "doctrine/orm": "^2.14",
+        "filp/whoops": "^2.15",
+        "php-di/php-di": "^7.0",
+        "slim/psr7": "^1.6",
+        "slim/slim": "4.*",
+        "symfony/cache": "^6.2"
+    },
+    "autoload": {
+        "files": [
+            "files/function.development.php",
+            "files/function.path.php"
+        ],
+        "psr-4": {
+            "": "namespace/"
+        }
+    }
+}
