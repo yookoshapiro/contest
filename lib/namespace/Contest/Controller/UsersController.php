@@ -28,8 +28,6 @@ final class UsersController
             ]
         ]));
 
-        # Test
-
         return $response;
 
     }
