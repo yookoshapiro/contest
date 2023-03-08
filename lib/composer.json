@@ -22,7 +22,8 @@
         "illuminate/database": "^10.3",
         "php-di/php-di": "^7.0",
         "slim/psr7": "^1.6",
-        "slim/slim": "4.*"
+        "slim/slim": "4.*",
+        "vlucas/phpdotenv": "^5.5"
     },
     "autoload": {
         "files": [

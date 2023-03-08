@@ -13,6 +13,8 @@ configs:
     file: var/docker/nginx/nginx.conf
   php_ini:
     file: var/docker/php/php.ini-development
+  dot_env:
+    file: .env
 
 services:
 
@@ -49,6 +51,9 @@ services:
     configs:
       - source: php_ini
         target: usr/local/etc/php/php.ini
+        mode: 0644
+      - source: dot_env
+        target: var/www/html/.env
         mode: 0644
     extra_hosts:
       - "host.docker.internal:host-gateway"
