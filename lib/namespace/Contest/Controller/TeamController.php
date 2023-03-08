@@ -7,7 +7,7 @@ namespace Contest\Controller;
 use Slim\Routing\RouteCollectorProxy;
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 
-final class TeamController
+final class TeamController extends AbstractController
 {
 
 

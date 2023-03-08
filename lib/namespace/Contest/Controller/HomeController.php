@@ -6,7 +6,7 @@ namespace Contest\Controller;
 
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 
-final class HomeController
+final class HomeController extends AbstractController
 {
 
     /**

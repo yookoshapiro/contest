@@ -7,7 +7,7 @@ namespace Contest\Controller;
 use Slim\Routing\RouteCollectorProxy;
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 
-final class AuthController
+final class AuthController extends AbstractController
 {
 
 
