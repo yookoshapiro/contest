@@ -8,7 +8,7 @@ use Slim\Routing\RouteCollectorProxy;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-final class UsersController extends AbstractController
+final class UsersController
 {
 
     /**
@@ -23,7 +23,7 @@ final class UsersController extends AbstractController
 
         $response->getBody()->write(json_encode([
             [
-                'id' => '458cbcfd39ed4fee03dd442c6e2ad4f9'
+                'id' => '9511ed457ec938910023a53738cb6b88'
             ]
         ]));
 
