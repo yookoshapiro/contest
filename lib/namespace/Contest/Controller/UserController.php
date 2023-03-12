@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Contest\Controller;
 
+use Contest\Database\User;
 use Cake\Validation\Validator;
 use Slim\Routing\RouteCollectorProxy;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -23,13 +24,26 @@ final class UserController
     public function show(Request $request, Response $response, array $attr): Response
     {
 
-        $payload = json_encode([
-            'id' => $attr['id'],
-            'name' => 'Yooko Shapiro'
-        ]);
-        $response->getBody()->write($payload);
+        try
+        {
 
-        return $response;
+            $user = User::findOrFail( $attr['id'] );
+            $response->getBody()->write( $user->toJson() );
+
+            return $response;
+
+        }
+        catch (\Exception $ex)
+        {
+
+            $response->getBody()->write(json_encode([
+                'error' => "no user with id '{$attr['id']}' found"
+            ]));
+
+            return $response
+                ->withStatus(404);
+
+        }
 
     }
 
@@ -43,6 +57,28 @@ final class UserController
      */
     public function create(Request $request, Response $response): Response
     {
+
+        $newUser = new User;
+        $post = $request->getParsedBody();
+
+        $newUser->name = $post['name'];
+        $newUser->password = password_hash($post['name'], PASSWORD_DEFAULT);
+
+        foreach(['email', 'active', 'is_admin'] as $key)
+        {
+
+            if (array_key_exists($key, $post)) {
+                $newUser->{$key} = $post[ $key ];
+            }
+
+        }
+
+        $newUser->save();
+
+        $response->getBody()->write(json_encode([
+            'created' => true,
+            'id' => $newUser->id
+        ]));
 
         return $response
             ->withStatus(201);
@@ -92,7 +128,7 @@ final class UserController
     {
 
         $group->post('', [self::class, 'create'])->add( self::getValidationMiddleware(true) );
-        $group->get('/{id}', [self::class, 'show'])->add( self::getValidationMiddleware() );
+        $group->get('/{id}', [self::class, 'show']);
         $group->patch('/{id}', [self::class, 'edit'])->add( self::getValidationMiddleware() );
         $group->delete('/{id}', [self::class, 'remove'])->add( self::getValidationMiddleware() );
 
@@ -118,7 +154,9 @@ final class UserController
             {
 
                 $response = new \Slim\Psr7\Response();
-                $response->getBody()->write( json_encode($errors) );
+                $response->getBody()->write(json_encode([
+                    'error' => $errors
+                ]));
 
                 return $response
                     ->withStatus(400);
@@ -146,68 +184,52 @@ final class UserController
         $validator = new Validator();
 
         $validator
-            ->requirePresence('id', 'update', 'Die ID wird benötigt.')
-            ->add('id', 'id_length', [
-                'rule' => function($value, $context)
-                {
-
-                    if ($context['newRecord'] === true or strlen($value) === 36) {
-                        return true;
-                    }
-
-                    return 'Die ID ist zu ' . (strlen($value) < 36 ? 'kurz.' : 'lang.');
-
-                }
-            ]);
-
-        $validator
-            ->requirePresence('phrase', false)
-            ->add('phrase', 'phrase_length', [
-            'rule' => function($value, $context)
+            ->requirePresence('id', 'update')
+            ->add('id', 'id_length', ['rule' => function($value, $context)
             {
 
-                if ($context['newRecord'] === true or strlen($value) === 8) {
+                if ($context['newRecord'] === true or strlen($value) === 26) {
                     return true;
                 }
 
-                return 'Die Phrase ist zu ' . (strlen($value) < 8 ? 'kurz.' : 'lang.');
+                return 'The id is to ' . (strlen($value) < 26 ? 'short.' : 'long.');
 
-            }
-        ]);
-
-        $validator
-            ->requirePresence('name', 'create', 'Der Name wird benötigt.')
-            ->notEmptyString('name', 'Der Name darf nicht leer sein.')
-            ->add('name', [
-                'length' => [
-                    'rule' => ['minLength', 3],
-                    'message' => 'Der Name muss min. 3 Zeichen lang sein.'
-                ]
-            ]);
+            }]);
 
         $validator
-            ->requirePresence('password', 'create', 'Ein Passwort wird benötigt.')
-            ->notEmptyString('password', 'Das Passwort darf nicht leer sein.')
-            ->add('password', [
-                'length' => [
-                    'rule' => ['minLength', 8],
-                    'message' => 'Das Passwort muss min. 8 Zeichen lang sein.'
-                ]
-            ]);
+            ->requirePresence('name', 'create')
+            ->notEmptyString('name')
+            ->add('name', ['length' => [
+                'rule' => ['minLength', 3],
+                'message' => 'The provided name needs to be at least 3 charakters long.'
+            ]]);
+
+        $validator
+            ->requirePresence('password', 'create')
+            ->notEmptyString('password')
+            ->add('password', ['length' => [
+                'rule' => ['minLength', 8],
+                'message' => 'The provided password needs to be at least 8 charakters long.'
+            ]]);
 
         $validator
             ->requirePresence('email', false)
-            ->notEmptyString('email', 'Die E-Mail darf nicht leer sein.')
+            ->notEmptyString('email')
             ->add('email', "email_valid", [
                 'rule' => "email",
-                'message' => 'Es muss eine gültige E-Mail sein.'
+                'message' => 'The provided e-mail must be valid.'
             ]);
 
         $validator
             ->requirePresence('active', false)
-            ->add('active', 'active_type', [
-                'rule' => 'boolean'
-            ]);
+            ->add('active', 'active_type', ['rule' => 'boolean']);
+
+        $validator
+            ->requirePresence('is_admin', false)
+            ->add('is_admin', 'admin_type', ['rule' => 'boolean'])
+            ->add('is_admin', 'admin_rights', ['rule' => function() {
+                return 'To change this field, admin rights are required.';
+            }]);
 
         return $validator->validate($data, $newRecord);
 
