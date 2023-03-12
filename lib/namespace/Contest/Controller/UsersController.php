@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Contest\Controller;
 
+use Contest\Database\User;
 use Slim\Routing\RouteCollectorProxy;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -21,11 +22,10 @@ final class UsersController
     public function list(Request $request, Response $response): Response
     {
 
-        $response->getBody()->write(json_encode([
-            [
-                'id' => '9511ed457ec938910023a53738cb6b88'
-            ]
-        ]));
+        $query = $request->getQueryParams();
+        $users = User::limit( $query['limit'] ?? 20 )->get();
+
+        $response->getBody()->write( $users->toJson() );
 
         return $response;
 
