@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Contest\Controller;
 
 use Contest\Database\User;
+use Slim\Routing\RouteContext;
 use Cake\Validation\Validator;
 use Slim\Routing\RouteCollectorProxy;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 
 final class UserController
 {
@@ -18,32 +20,15 @@ final class UserController
      *
      * @param Request $request
      * @param Response $response
-     * @param array $attr
      * @return Response
      */
-    public function show(Request $request, Response $response, array $attr): Response
+    public function show(Request $request, Response $response): Response
     {
 
-        try
-        {
+        $user = $request->getAttribute('user');
+        $response->getBody()->write( $user->toJson() );
 
-            $user = User::findOrFail( $attr['id'] );
-            $response->getBody()->write( $user->toJson() );
-
-            return $response;
-
-        }
-        catch (\Exception $ex)
-        {
-
-            $response->getBody()->write(json_encode([
-                'error' => "no user with id '{$attr['id']}' found"
-            ]));
-
-            return $response
-                ->withStatus(404);
-
-        }
+        return $response;
 
     }
 
@@ -62,7 +47,7 @@ final class UserController
         $post = $request->getParsedBody();
 
         $newUser->name = $post['name'];
-        $newUser->password = password_hash($post['name'], PASSWORD_DEFAULT);
+        $newUser->password = password_hash($post['password'], PASSWORD_DEFAULT);
 
         foreach(['email', 'active', 'is_admin'] as $key)
         {
@@ -96,6 +81,24 @@ final class UserController
     public function edit(Request $request, Response $response): Response
     {
 
+        $post = $request->getParsedBody();
+        $user = $request->getAttribute('user');
+
+        if (array_key_exists('password', $post)) {
+            $user->password = password_hash($post['password'], PASSWORD_DEFAULT);
+        }
+
+        foreach(['name', 'email', 'active', 'is_admin'] as $key)
+        {
+
+            if (array_key_exists($key, $post)) {
+                $user->{$key} = $post[ $key ];
+            }
+
+        }
+
+        $user->save();
+
         return $response
             ->withStatus(204);
 
@@ -112,6 +115,8 @@ final class UserController
     public function remove(Request $request, Response $response): Response
     {
 
+        $request->getAttribute('user')->delete();
+
         return $response
             ->withStatus(204);
 
@@ -127,10 +132,18 @@ final class UserController
     public static function router(RouteCollectorProxy $group): void
     {
 
-        $group->post('', [self::class, 'create'])->add( self::getValidationMiddleware(true) );
-        $group->get('/{id}', [self::class, 'show']);
-        $group->patch('/{id}', [self::class, 'edit'])->add( self::getValidationMiddleware() );
-        $group->delete('/{id}', [self::class, 'remove'])->add( self::getValidationMiddleware() );
+        $group->post('', [self::class, 'create'])
+            ->add( self::getValidationMiddleware(true) );
+
+        $group->get('/{id}', [self::class, 'show'])
+            ->add( self::getUserMiddleware() );
+
+        $group->patch('/{id}', [self::class, 'edit'])
+            ->add( self::getUserMiddleware() )
+            ->add( self::getValidationMiddleware() );
+
+        $group->delete('/{id}', [self::class, 'remove'])
+            ->add( self::getUserMiddleware() );
 
     }
 
@@ -144,7 +157,7 @@ final class UserController
     public static function getValidationMiddleware(bool $newRecord = false): callable
     {
 
-        return function($request, $handler) use ($newRecord)
+        return function(Request $request, RequestHandler $handler) use ($newRecord) : Response
         {
 
             $post = $request->getParsedBody();
@@ -184,19 +197,6 @@ final class UserController
         $validator = new Validator();
 
         $validator
-            ->requirePresence('id', 'update')
-            ->add('id', 'id_length', ['rule' => function($value, $context)
-            {
-
-                if ($context['newRecord'] === true or strlen($value) === 26) {
-                    return true;
-                }
-
-                return 'The id is to ' . (strlen($value) < 26 ? 'short.' : 'long.');
-
-            }]);
-
-        $validator
             ->requirePresence('name', 'create')
             ->notEmptyString('name')
             ->add('name', ['length' => [
@@ -228,10 +228,51 @@ final class UserController
             ->requirePresence('is_admin', false)
             ->add('is_admin', 'admin_type', ['rule' => 'boolean'])
             ->add('is_admin', 'admin_rights', ['rule' => function() {
-                return 'To change this field, admin rights are required.';
+                return 'Admin rights are required to change that field.';
             }]);
 
         return $validator->validate($data, $newRecord);
+
+    }
+
+
+    /**
+     * Setzt den aktuellen Benutzer als Attribut in das Request-Objekt.
+     *
+     * @return callable
+     */
+    protected static function getUserMiddleware(): callable
+    {
+
+        return function(Request $request, RequestHandler $handler): Response
+        {
+
+            $routeContext = RouteContext::fromRequest($request);
+            $route = $routeContext->getRoute();
+            $id = $route->getArgument('id');
+
+            try {
+
+                return $handler->handle(
+                    $request->withAttribute('user', User::findOrFail($id))
+                );
+
+            }
+            catch (\Exception $ex)
+            {
+
+                $response = new \Slim\Psr7\Response;
+
+                $response->getBody()->write(json_encode([
+                    'error' => "no user with id '{$id}' found"
+                ]));
+
+                return $response
+                    ->withStatus(404);
+
+            }
+
+        };
 
     }
 
