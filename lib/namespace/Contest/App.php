@@ -9,6 +9,7 @@ use DI\{Container, ContainerBuilder};
 
 use Slim\App as Slim;
 use Slim\Factory\AppFactory;
+use Illuminate\Database\Connection;
 
 use Whoops\Run;
 use Contest\Exception\ApiException;
@@ -92,6 +93,9 @@ readonly class App
         $app = AppFactory::createFromContainer( $container );
 
         $container->set(Slim::class, $app);
+        $container->get(Connection::class); # Aufruf der Verbindung, damit die Einstellungen geladen werden
+
+        $app->addBodyParsingMiddleware();
         $app->group('', Router::class);
 
         $this->slim = $app;
