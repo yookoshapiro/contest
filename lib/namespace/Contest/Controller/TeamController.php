@@ -14,7 +14,6 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 final class TeamController
 {
 
-
     /**
      * Gibt ein Team wieder.
      *

@@ -24,7 +24,7 @@ final class UsersController
 
         $query = $request->getQueryParams();
 
-        $users = User::select(['id', 'name', 'active'])
+        $users = User::query()->select(['id', 'name', 'is_active'])
             ->limit( $query['limit'] ?? 20 )
             ->get();
 

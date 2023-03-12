@@ -13,7 +13,7 @@ class TeamsController
 {
 
     /**
-     *
+     * Gibt alle Teams wieder.
      *
      * @param Request  $request
      * @param Response $response
@@ -24,7 +24,7 @@ class TeamsController
 
         $query = $request->getQueryParams();
 
-        $users = Team::select(['id', 'name'])
+        $users = Team::query()->select(['id', 'name'])
             ->limit( $query['limit'] ?? 20 )
             ->get();
 
