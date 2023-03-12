@@ -13,6 +13,7 @@ class User extends Model
     # Aktiviere Ulids als PrimaryKey
     use HasUlids;
 
+    # Passwort nicht standardmäßig anzeigen
     protected $hidden = ['password'];
 
 }
