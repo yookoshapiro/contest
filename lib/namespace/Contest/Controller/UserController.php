@@ -48,7 +48,7 @@ final class UserController
         $newUser->name = $post['name'];
         $newUser->password = password_hash($post['password'], PASSWORD_DEFAULT);
 
-        foreach(['email', 'active', 'is_admin'] as $key)
+        foreach(['email', 'is_active', 'is_admin'] as $key)
         {
 
             if (array_key_exists($key, $post)) {
@@ -87,7 +87,7 @@ final class UserController
             $user->password = password_hash($post['password'], PASSWORD_DEFAULT);
         }
 
-        foreach(['name', 'email', 'active', 'is_admin'] as $key)
+        foreach(['name', 'email', 'is_active', 'is_admin'] as $key)
         {
 
             if (array_key_exists($key, $post)) {
@@ -185,8 +185,8 @@ final class UserController
             ]);
 
         $validator
-            ->requirePresence('active', false)
-            ->add('active', 'active_type', ['rule' => 'boolean']);
+            ->requirePresence('is_active', false)
+            ->add('is_active', 'active_type', ['rule' => 'boolean']);
 
         $validator
             ->requirePresence('is_admin', false)
