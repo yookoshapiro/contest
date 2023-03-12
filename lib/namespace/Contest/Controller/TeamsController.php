@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Contest\Controller;
 
-use Contest\Database\User;
+use Contest\Database\Team;
 use Slim\Routing\RouteCollectorProxy;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-final class UsersController
+class TeamsController
 {
 
     /**
-     * Gibt alle Benutzer wieder.
+     *
      *
      * @param Request  $request
      * @param Response $response
@@ -24,7 +24,7 @@ final class UsersController
 
         $query = $request->getQueryParams();
 
-        $users = User::select(['id', 'name', 'active'])
+        $users = Team::select(['id', 'name'])
             ->limit( $query['limit'] ?? 20 )
             ->get();
 
@@ -32,7 +32,7 @@ final class UsersController
         {
 
             $response->getBody()->write(json_encode([
-                'error' => 'no users found'
+                'error' => 'no teams found'
             ]));
 
             return $response
@@ -53,7 +53,7 @@ final class UsersController
      * @param RouteCollectorProxy $group
      * @return void
      */
-    public static function router(RouteCollectorProxy $group): void{
+    public static function router(RouteCollectorProxy $group): void {
         $group->get('', [self::class, 'list']);
     }
 

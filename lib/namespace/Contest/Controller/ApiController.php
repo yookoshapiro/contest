@@ -85,6 +85,7 @@ final class ApiController
 
         $group->group('/auth', [AuthController::class, 'router']);
         $group->group('/team', [TeamController::class, 'router']);
+        $group->group('/teams', [TeamsController::class, 'router']);
         $group->group('/user', [UserController::class, 'router']);
         $group->group('/users', [UsersController::class, 'router']);
 
