@@ -7,10 +7,21 @@ namespace Contest\Controller;
 use Contest\Api\ApiStatus;
 use Slim\Routing\RouteCollectorProxy;
 use Psr\Http\Message\ResponseInterface as Response;
+use Contest\Contract\Config\ConfigInterface as Config;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 final class ApiController
 {
+
+    /**
+     * Erzeugt diese Klasse.
+     *
+     * @param Config $config
+     */
+    public function __construct(
+        public readonly Config $config
+    ) {}
+
 
     /**
      * Antwort auf 'api'.
@@ -39,8 +50,20 @@ final class ApiController
     public function status(Request $request, Response $response): Response
     {
 
-        $payload = json_encode(['status' => ApiStatus::OK]);
-        $response->getBody()->write($payload);
+        if ($this->config->get('status.state') !== ApiStatus::OK)
+        {
+
+            $response->getBody()->write(json_encode([
+                'status' => $this->config->get('status.state'),
+                'message' => $this->config->get('status.message')
+            ]));
+
+            return $response
+                ->withStatus(503);
+
+        }
+
+        $response->getBody()->write( json_encode(['status' => ApiStatus::OK]) );
 
         return $response;
 
