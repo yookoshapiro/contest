@@ -18,7 +18,7 @@ abstract class ValidationMiddleware
      * @return callable
      */
     public static function forCreating(callable|array $validation): callable {
-        return self::getMiddleware($validation, true);
+        return self::factory($validation, true);
     }
 
 
@@ -29,7 +29,7 @@ abstract class ValidationMiddleware
      * @return callable
      */
     public static function forUpdating(callable|array $validation): callable {
-        return self::getMiddleware($validation);
+        return self::factory($validation);
     }
 
 
@@ -40,7 +40,7 @@ abstract class ValidationMiddleware
      * @param bool           $newRecord
      * @return callable
      */
-    public static function getMiddleware(callable|array $validation, bool $newRecord = false): callable
+    public static function factory(callable|array $validation, bool $newRecord = false): callable
     {
 
         return function(Request $request, RequestHandler $handler) use ($validation, $newRecord) : Response
