@@ -10,7 +10,7 @@ class ApiException extends Exception
 {
 
     public static function createFromException(Exception $ex): self {
-        return new self($ex->message, $ex->code, $ex);
+        return new self($ex->getMessage(), (int) $ex->getCode(), $ex);
     }
 
 }
