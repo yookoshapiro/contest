@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Contest\Controller;
 
 use Contest\Database\User;
+use Contest\Middleware\Api;
 use Slim\Routing\RouteContext;
 use Cake\Validation\Validator;
 use Slim\Routing\RouteCollectorProxy;
@@ -133,52 +134,17 @@ final class UserController
     {
 
         $group->post('', [self::class, 'create'])
-            ->add( self::getValidationMiddleware(true) );
+            ->add( Api\ValidationMiddleware::forCreating( [self::class, 'dataValidation'] ) );
 
         $group->get('/{id}', [self::class, 'show'])
             ->add( self::getUserMiddleware() );
 
         $group->patch('/{id}', [self::class, 'edit'])
             ->add( self::getUserMiddleware() )
-            ->add( self::getValidationMiddleware() );
+            ->add( Api\ValidationMiddleware::forUpdating( [self::class, 'dataValidation'] ) );
 
         $group->delete('/{id}', [self::class, 'remove'])
             ->add( self::getUserMiddleware() );
-
-    }
-
-
-    /**
-     * Gibt eine Middleware zum Validieren der Benutzereingaben wieder.
-     *
-     * @param bool $newRecord
-     * @return callable
-     */
-    public static function getValidationMiddleware(bool $newRecord = false): callable
-    {
-
-        return function(Request $request, RequestHandler $handler) use ($newRecord) : Response
-        {
-
-            $post = $request->getParsedBody();
-            $errors = self::dataValidation($post, $newRecord);
-
-            if (count($errors) !== 0)
-            {
-
-                $response = new \Slim\Psr7\Response();
-                $response->getBody()->write(json_encode([
-                    'error' => $errors
-                ]));
-
-                return $response
-                    ->withStatus(400);
-
-            }
-
-            return $handler->handle($request);
-
-        };
 
     }
 
@@ -191,7 +157,7 @@ final class UserController
      *                                                   false, wenn Eintrag aktualisiert wird
      * @return array
      */
-    protected static function dataValidation(array $data, bool $newRecord = true): array
+    public static function dataValidation(array $data, bool $newRecord = true): array
     {
 
         $validator = new Validator();
