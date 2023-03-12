@@ -23,7 +23,21 @@ final class UsersController
     {
 
         $query = $request->getQueryParams();
-        $users = User::limit( $query['limit'] ?? 20 )->get();
+
+        $users = User::select(['id', 'name', 'active'])
+            ->limit ($query['limit'] ?? 20 )
+            ->get();
+
+        if ($users->count() === 0) {
+
+            $response->getBody()->write(json_encode([
+                'error' => 'no users found'
+            ]));
+
+            return $response
+                ->withStatus(404);
+
+        }
 
         $response->getBody()->write( $users->toJson() );
 
