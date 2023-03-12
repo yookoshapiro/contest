@@ -15,7 +15,7 @@ final class UserController
 {
 
     /**
-     * Zeigt einen Benutzer an.
+     * Gibt einen Benutzer wieder.
      *
      * @param Request $request
      * @param Response $response
@@ -105,7 +105,7 @@ final class UserController
 
 
     /**
-     * Entfernt einen Benutzer.
+     * Löscht einen Benutzer.
      *
      * @param Request  $request
      * @param Response $response
@@ -132,14 +132,14 @@ final class UserController
     {
 
         $group->post('', [self::class, 'create'])
-            ->add( Api\ValidationMiddleware::forCreating( [self::class, 'dataValidation'] ) );
+            ->add( Api\ValidationMiddleware::forCreating( [self::class, 'validation'] ) );
 
         $group->get('/{id}', [self::class, 'show'])
             ->add( Api\EntryMiddleware::factory( User::class ) );
 
         $group->patch('/{id}', [self::class, 'edit'])
             ->add( Api\EntryMiddleware::factory( User::class ) )
-            ->add( Api\ValidationMiddleware::forUpdating( [self::class, 'dataValidation'] ) );
+            ->add( Api\ValidationMiddleware::forUpdating( [self::class, 'validation'] ) );
 
         $group->delete('/{id}', [self::class, 'remove'])
             ->add( Api\EntryMiddleware::factory( User::class ) );
@@ -148,14 +148,14 @@ final class UserController
 
 
     /**
-     * Validiert die Eingaben zu einem Benutzer und gibt alle Fehler als Array zurück
+     * Validiert die Eingaben zu einem Benutzer und gibt alle Fehler als Array zurück.
      *
      * @param array $data
      * @param bool $newRecord [optional] default: true - true, wenn neuer Eintrag
      *                                                   false, wenn Eintrag aktualisiert wird
      * @return array
      */
-    public static function dataValidation(array $data, bool $newRecord = true): array
+    public static function validation(array $data, bool $newRecord = true): array
     {
 
         $validator = new Validator();
