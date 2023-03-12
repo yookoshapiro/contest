@@ -13,7 +13,6 @@ return [
     Config::class => DI\create(Contest\Configuration\Manager::class)
         ->constructor( root_path('lib/config/'), DI\get(Dotenv\Dotenv::class) ),
 
-
     Illuminate\Database\Connection::class => DI\factory(function(Config $config)
     {
 
