@@ -13,7 +13,7 @@ final class UsersController
 {
 
     /**
-     *
+     * Gibt alle Benutzer wieder.
      *
      * @param Request  $request
      * @param Response $response
