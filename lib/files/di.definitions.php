@@ -14,7 +14,6 @@ return [
         ->constructor( root_path('lib/config/'), DI\get(Dotenv\Dotenv::class) ),
 
 
-
     Illuminate\Database\Connection::class => DI\factory(function(Config $config)
     {
 

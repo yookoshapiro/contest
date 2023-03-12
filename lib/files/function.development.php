@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 if( ! function_exists('dd'))
 {
+
     /**
      * Gibt den übergebenen Wert durch die var_dump-Funktion aus und beendet das Skript.
      *
@@ -32,6 +33,7 @@ if( ! function_exists('dd'))
 
 if( ! function_exists('vdp'))
 {
+
     /**
      * Gibt den übergebenen Wert durch die var_dump-Funktion aus.
      *
