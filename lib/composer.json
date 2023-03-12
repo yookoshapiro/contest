@@ -28,7 +28,8 @@
     "autoload": {
         "files": [
             "files/function.development.php",
-            "files/function.path.php"
+            "files/function.path.php",
+            "files/function.array.php"
         ],
         "psr-4": {
             "": "namespace/"

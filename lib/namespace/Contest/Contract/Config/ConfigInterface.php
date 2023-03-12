@@ -12,8 +12,27 @@ interface ConfigInterface
      *
      * @param string $key
      * @param mixed  $value
-     * @return ConfigInterface
+     * @return void
      */
-    public function set(string $key, mixed $value): ConfigInterface;
+    public function set(string $key, mixed $value): void;
+
+
+    /**
+     * Gibt zurück, ob es den gesuchten Schlüssel gibt.
+     *
+     * @param string $key
+     * @return bool
+     */
+    public function has(string $key): bool;
+
+
+    /**
+     * Gibt einen Wert aus den Einstellungen wieder.
+     *
+     * @param string $key
+     * @param mixed  $default
+     * @return mixed
+     */
+    public function get(string $key, mixed $default): mixed;
 
 }
