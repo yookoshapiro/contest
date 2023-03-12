@@ -6,12 +6,10 @@ namespace Contest\Controller;
 
 use Contest\Database\User;
 use Contest\Middleware\Api;
-use Slim\Routing\RouteContext;
 use Cake\Validation\Validator;
 use Slim\Routing\RouteCollectorProxy;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 
 final class UserController
 {
@@ -137,14 +135,14 @@ final class UserController
             ->add( Api\ValidationMiddleware::forCreating( [self::class, 'dataValidation'] ) );
 
         $group->get('/{id}', [self::class, 'show'])
-            ->add( self::getUserMiddleware() );
+            ->add( Api\EntryMiddleware::factory( User::class ) );
 
         $group->patch('/{id}', [self::class, 'edit'])
-            ->add( self::getUserMiddleware() )
+            ->add( Api\EntryMiddleware::factory( User::class ) )
             ->add( Api\ValidationMiddleware::forUpdating( [self::class, 'dataValidation'] ) );
 
         $group->delete('/{id}', [self::class, 'remove'])
-            ->add( self::getUserMiddleware() );
+            ->add( Api\EntryMiddleware::factory( User::class ) );
 
     }
 
@@ -198,47 +196,6 @@ final class UserController
             }]);
 
         return $validator->validate($data, $newRecord);
-
-    }
-
-
-    /**
-     * Setzt den aktuellen Benutzer als Attribut in das Request-Objekt.
-     *
-     * @return callable
-     */
-    protected static function getUserMiddleware(): callable
-    {
-
-        return function(Request $request, RequestHandler $handler): Response
-        {
-
-            $routeContext = RouteContext::fromRequest($request);
-            $route = $routeContext->getRoute();
-            $id = $route->getArgument('id');
-
-            try {
-
-                return $handler->handle(
-                    $request->withAttribute('user', User::findOrFail($id))
-                );
-
-            }
-            catch (\Exception $ex)
-            {
-
-                $response = new \Slim\Psr7\Response;
-
-                $response->getBody()->write(json_encode([
-                    'error' => "no user with id '{$id}' found"
-                ]));
-
-                return $response
-                    ->withStatus(404);
-
-            }
-
-        };
 
     }
 
