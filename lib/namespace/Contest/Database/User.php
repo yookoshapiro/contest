@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Contest\Database;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Model für die users-Tabelle.
@@ -19,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property bool $is_admin
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property Collection $stations
  */
 class User extends Model
 {
@@ -26,13 +29,23 @@ class User extends Model
     # Aktiviere Ulids als PrimaryKey
     use HasUlids;
 
-    # Passwort nicht standardmäßig anzeigen
-    protected $hidden = ['password'];
+    # Diese Felder nicht anzeigen
+    protected $hidden = ['password', 'pivot'];
 
     # Legt die Spalten fest, die in andere Typen umgewandelt werden soll
     protected $casts = [
         'is_active' => 'bool',
         'is_admin' => 'bool'
     ];
+
+
+    /**
+     * Many-To-Many-Beziehung zwischen User und Station herstellen.
+     *
+     * @return BelongsToMany
+     */
+    public function stations(): BelongsToMany {
+        return $this->belongsToMany( Station::class );
+    }
 
 }

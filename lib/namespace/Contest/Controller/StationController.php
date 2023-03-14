@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Contest\Controller;
 
+use Contest\Database\User;
 use Contest\Middleware\Api;
 use Contest\Database\Station;
 use Contest\Enum\StationType;
@@ -113,6 +114,83 @@ class StationController
 
 
     /**
+     * Zeigt die Benutzer, die der Station zugeordnet wurden, an.
+     *
+     * @param Request  $request
+     * @param Response $response
+     * @return Response
+     */
+    public function show_users(Request $request, Response $response): Response
+    {
+
+        $station = $request->getAttribute('station');
+        $response->getBody()->write(json_encode([
+            'data' => $station->users
+        ]));
+
+        return $response;
+
+    }
+
+
+    /**
+     * Fügt einen Benutzer einer Station hinzu.
+     *
+     * @param Request  $request
+     * @param Response $response
+     * @return Response
+     */
+    public function add_user(Request $request, Response $response): Response
+    {
+
+        $station = $request->getAttribute('station');
+        $user = $request->getAttribute('user');
+
+        if ($station->users()->find($user->id) !== null)
+        {
+
+            $response->getBody()->write(json_encode([
+                'error' => "user '{$user->name}' already assign to station '{$station->name}'"
+            ]));
+
+            return $response
+                ->withStatus(500);
+
+        }
+
+        $station->users()->save( $user );
+
+        $response->getBody()->write(json_encode([
+            'data' => "user '{$user->name}' added to station '{$station->name}'"
+        ]));
+
+        return $response;
+
+    }
+
+
+    /**
+     * Entfernt einen Benutzer von einer Station.
+     *
+     * @param Request  $request
+     * @param Response $response
+     * @return Response
+     */
+    public function remove_user(Request $request, Response $response): Response
+    {
+
+        $station = $request->getAttribute('station');
+        $user = $request->getAttribute('user');
+
+        $station->users()->detach( $user );
+
+        return $response
+            ->withStatus(201);
+
+    }
+
+
+    /**
      * Router für die Route '/api/station'
      *
      * @param RouteCollectorProxy $group
@@ -133,6 +211,17 @@ class StationController
 
         $group->delete('/{id}', [self::class, 'remove'])
             ->add( Api\EntryMiddleware::factory( Station::class ) );
+
+        $group->get('/{id}/users', [self::class, 'show_users'])
+            ->add( Api\EntryMiddleware::factory( Station::class ) );
+
+        $group->post('/{id}/user', [self::class, 'add_user'])
+            ->add( Api\EntryMiddleware::factory( Station::class ) )
+            ->add( Api\EntryMiddleware::fromBody( User::class, 'user_id' )  );
+
+        $group->delete('/{id}/user', [self::class, 'remove_user'])
+            ->add( Api\EntryMiddleware::factory( Station::class ) )
+            ->add( Api\EntryMiddleware::fromBody( User::class, 'user_id' )  );
 
     }
 
