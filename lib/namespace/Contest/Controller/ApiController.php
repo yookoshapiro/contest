@@ -32,6 +32,7 @@ final class ApiController
      */
     public function show(Request $request, Response $response): Response
     {
+
         $payload = json_encode(['message' => 'Welcome to the Feuerwehr Dechow Contest API.']);
         $response->getBody()->write($payload);
 
@@ -71,6 +72,26 @@ final class ApiController
 
 
     /**
+     * Wird aufgerufen, wenn keine der anderen Routen einen Treffer landete.
+     *
+     * @param Request  $request
+     * @param Response $response
+     * @return Response
+     */
+    public function unknown(Request $request, Response $response): Response
+    {
+
+        $response->getBody()->write(json_encode([
+            'error' => 'route not found'
+        ]));
+
+        return $response
+            ->withStatus(404);
+
+    }
+
+
+    /**
      * Routen für die Route '/api'.
      *
      * @param RouteCollectorProxy $group
@@ -80,7 +101,6 @@ final class ApiController
     {
 
         $group->get('', [self::class, 'show']);
-        $group->get('/', [self::class, 'show']);
         $group->get('/status', [self::class, 'status']);
 
         $group->group('/auth', [AuthController::class, 'router']);
@@ -93,6 +113,8 @@ final class ApiController
 
         $group->group('/station', [StationController::class, 'router']);
         $group->group('/stations', [StationsController::class, 'router']);
+
+        $group->get('/{path:.*}', [self::class, 'unknown']);
 
     }
 
