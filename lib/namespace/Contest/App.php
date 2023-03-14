@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Contest;
 
+use Contest\Exception\ApiException;
+use DI\ContainerBuilder;
 use Exception, Throwable;
-use DI\{Container, ContainerBuilder};
-
+use Illuminate\Database\Connection;
+use Psr\Container\ContainerInterface;
 use Slim\App as Slim;
 use Slim\Factory\AppFactory;
-use Illuminate\Database\Connection;
-
 use Whoops\Run;
-use Contest\Exception\ApiException;
 use Whoops\Handler\{PrettyPageHandler, JsonResponseHandler};
 
 readonly class App
@@ -92,6 +91,7 @@ readonly class App
         $container = $this->getContainer();
         $app = AppFactory::createFromContainer( $container );
 
+        $container->set(ContainerInterface::class, $container);
         $container->set(Slim::class, $app);
         $container->get(Connection::class); # Aufruf der Verbindung, damit die Einstellungen geladen werden
 
@@ -112,7 +112,7 @@ readonly class App
     protected function getContainer(): Container
     {
 
-        $builder = new ContainerBuilder();
+        $builder = new ContainerBuilder(Container::class);
         $builder->addDefinitions( root_path('lib/files/di.definitions.php') );
 
         return $builder->build();

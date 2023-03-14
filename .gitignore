@@ -5,3 +5,4 @@
 /var/log/access.log
 /var/log/error.log
 /var/log/xdebug.log
+/var/log/clockwork/
