@@ -38,18 +38,19 @@ class EntryMiddleware
      * Setzt den aktuellen Benutzer als Attribut in das Request-Objekt.
      *
      * @param string $class
+     * @param string $attributeName
      * @return callable
      */
-    public static function factory(string $class): callable
+    public static function factory(string $class, string $attributeName = 'id'): callable
     {
 
-        return function(Request $request, RequestHandler $handler) use ($class): Response
+        return function(Request $request, RequestHandler $handler) use ($class, $attributeName): Response
         {
 
             $routeContext = RouteContext::fromRequest($request);
             $route = $routeContext->getRoute();
 
-            $id = $route->getArgument('id');
+            $id = $route->getArgument($attributeName);
             $name = self::extractName($class);
 
             try
