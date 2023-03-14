@@ -6,10 +6,10 @@ namespace Contest\Controller;
 
 use Contest\Middleware\Api;
 use Contest\Database\Station;
+use Contest\Enum\StationType;
 use Cake\Validation\Validator;
 use Slim\Routing\RouteCollectorProxy;
 use Psr\Http\Message\ResponseInterface as Response;
-use Contest\Enum\{StationValueOrder, StationValueType};
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class StationController
@@ -48,12 +48,8 @@ class StationController
 
         $newStation->name = $post['name'];
 
-        if (array_key_exists('value_type', $post)) {
-            $newStation->value_type = StationValueType::from( $post['value_type'] );
-        }
-
-        if (array_key_exists('value_order', $post)) {
-            $newStation->value_order = StationValueOrder::from( $post['value_order'] );
+        if (array_key_exists('type', $post)) {
+            $newStation->type = StationType::extract( (int) $post['type'] );
         }
 
         $newStation->save();
@@ -86,12 +82,8 @@ class StationController
             $station->name = $post['name'];
         }
 
-        if (array_key_exists('value_type', $post)) {
-            $station->value_type = StationValueType::from( $post['value_type'] );
-        }
-
-        if (array_key_exists('value_order', $post)) {
-            $station->value_order = StationValueOrder::from( $post['value_order'] );
+        if (array_key_exists('type', $post)) {
+            $station->value_type = StationType::from( $post['type'] );
         }
 
         $station->save();
@@ -166,30 +158,8 @@ class StationController
             ]]);
 
         $validator
-            ->requirePresence('value_type', false)
-            ->add('value_type', 'value_type_content', ['rule' => function($value, $context)
-            {
-
-                if (in_array($value, StationValueType::values())) {
-                    return true;
-                }
-
-                return 'The provide value type need to be one of the following: ' . implode(' ,', StationValueType::values());
-
-            }]);
-
-        $validator
-            ->requirePresence('value_order', false)
-            ->add('value_order', 'value_order_content', ['rule' => function($value, $context)
-            {
-
-                if (in_array($value, StationValueOrder::values())) {
-                    return true;
-                }
-
-                return 'The provide value order need to be one of the following: ' . implode(' ,', StationValueOrder::values());
-
-            }]);
+            ->requirePresence('type', false)
+            ->range('type', [2, array_sum(StationType::values())]);
 
 
         return $validator->validate($data, $newRecord);
