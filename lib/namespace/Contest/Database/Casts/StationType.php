@@ -13,7 +13,7 @@ class StationType implements CastsAttributes, SerializesCastableAttributes
 {
 
     /**
-     * Bereitet die Daten für die Datenbank vor.
+     * Gibt Daten aus der Datenbank wieder.
      *
      * @param Model  $model
      * @param string $key
@@ -27,7 +27,7 @@ class StationType implements CastsAttributes, SerializesCastableAttributes
 
 
     /**
-     * Daten aus der Datenbank für die Anwendung vorbereiten.
+     * Setzt Daten für die Datenbank.
      *
      * @param Model  $model
      * @param string $key

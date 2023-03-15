@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Contest\Database;
 
 use Carbon\Carbon;
+use Contest\Database\Casts\Password;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
@@ -35,7 +36,8 @@ class User extends Model
     # Legt die Spalten fest, die in andere Typen umgewandelt werden soll
     protected $casts = [
         'is_active' => 'bool',
-        'is_admin' => 'bool'
+        'is_admin' => 'bool',
+        'password' => Password::class
     ];
 
 

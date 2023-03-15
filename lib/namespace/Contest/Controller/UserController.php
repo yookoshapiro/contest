@@ -45,10 +45,7 @@ final class UserController
         $newUser = new User;
         $post = $request->getParsedBody();
 
-        $newUser->name = $post['name'];
-        $newUser->password = password_hash($post['password'], PASSWORD_DEFAULT);
-
-        foreach(['email', 'is_active', 'is_admin'] as $key)
+        foreach(['name', 'password', 'email', 'is_active', 'is_admin'] as $key)
         {
 
             if (array_key_exists($key, $post)) {
@@ -83,11 +80,7 @@ final class UserController
         $post = $request->getParsedBody();
         $user = $request->getAttribute('user');
 
-        if (array_key_exists('password', $post)) {
-            $user->password = password_hash($post['password'], PASSWORD_DEFAULT);
-        }
-
-        foreach(['name', 'email', 'is_active', 'is_admin'] as $key)
+        foreach(['name', 'password', 'email', 'is_active', 'is_admin'] as $key)
         {
 
             if (array_key_exists($key, $post)) {
