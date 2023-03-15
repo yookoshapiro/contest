@@ -35,6 +35,40 @@ class EntryMiddleware
     }
 
 
+    protected static function findModel(Request $request, RequestHandler $handler, string $class, string $name, mixed $id): Response
+    {
+
+        try
+        {
+
+            $model = call_user_func([$class, 'find'], $id);
+
+            if ($model === null) {
+                throw new EntryMiddlewareException;
+            }
+
+            return $handler->handle(
+                $request->withAttribute($name, call_user_func([$class, 'findOrFail'], $id))
+            );
+
+        }
+        catch (EntryMiddlewareException $ex)
+        {
+
+            $response = new \Slim\Psr7\Response;
+
+            $response->getBody()->write(json_encode([
+                'error' => "no {$name} with id '{$id}' found"
+            ]));
+
+            return $response
+                ->withStatus(404);
+
+        }
+
+    }
+
+
     /**
      * Setzt den aktuellen Benutzer als Attribut in das Request-Objekt.
      *
@@ -42,7 +76,7 @@ class EntryMiddleware
      * @param string $attributeName
      * @return callable
      */
-    public static function factory(string $class, string $attributeName = 'id'): callable
+    public static function fromQuery(string $class, string $attributeName = 'id'): callable
     {
 
         return function(Request $request, RequestHandler $handler) use ($class, $attributeName): Response
@@ -54,33 +88,7 @@ class EntryMiddleware
             $id = $route->getArgument($attributeName);
             $name = self::extractName($class);
 
-            try
-            {
-
-                $model = call_user_func([$class, 'find'], $id);
-
-                if ($model === null) {
-                    throw new EntryMiddlewareException;
-                }
-
-                return $handler->handle(
-                    $request->withAttribute($name, call_user_func([$class, 'findOrFail'], $id))
-                );
-
-            }
-            catch (EntryMiddlewareException $ex)
-            {
-
-                $response = new \Slim\Psr7\Response;
-
-                $response->getBody()->write(json_encode([
-                    'error' => "no {$name} with id '{$id}' found"
-                ]));
-
-                return $response
-                    ->withStatus(404);
-
-            }
+            return self::findModel($request, $handler, $class, $name, $id);
 
         };
 
@@ -103,33 +111,7 @@ class EntryMiddleware
             $post = $request->getParsedBody();
             $name = self::extractName($class);
 
-            try
-            {
-
-                $model = call_user_func([$class, 'find'], $post[ $attributeName ]);
-
-                if ($model === null) {
-                    throw new EntryMiddlewareException;
-                }
-
-                return $handler->handle(
-                    $request->withAttribute($name, $model)
-                );
-
-            }
-            catch (EntryMiddlewareException $ex)
-            {
-
-                $response = new \Slim\Psr7\Response;
-
-                $response->getBody()->write(json_encode([
-                    'error' => "no {$name} with id '{$post[$attributeName]}' found"
-                ]));
-
-                return $response
-                    ->withStatus(404);
-
-            }
+            return self::findModel($request, $handler, $class, $name, $post[ $attributeName ]);
 
         };
 

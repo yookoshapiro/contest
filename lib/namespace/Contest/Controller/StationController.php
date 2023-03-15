@@ -203,24 +203,24 @@ class StationController
             ->add( Api\ValidationMiddleware::forCreating( [self::class, 'validation'] ) );
 
         $group->get('/{id}', [self::class, 'show'])
-            ->add( Api\EntryMiddleware::factory( Station::class ) );
+            ->add( Api\EntryMiddleware::fromQuery( Station::class ) );
 
         $group->patch('/{id}', [self::class, 'edit'])
-            ->add( Api\EntryMiddleware::factory( Station::class ) )
+            ->add( Api\EntryMiddleware::fromQuery( Station::class ) )
             ->add( Api\ValidationMiddleware::forUpdating( [self::class, 'validation'] ) );
 
         $group->delete('/{id}', [self::class, 'remove'])
-            ->add( Api\EntryMiddleware::factory( Station::class ) );
+            ->add( Api\EntryMiddleware::fromQuery( Station::class ) );
 
         $group->get('/{id}/users', [self::class, 'show_users'])
-            ->add( Api\EntryMiddleware::factory( Station::class ) );
+            ->add( Api\EntryMiddleware::fromQuery( Station::class ) );
 
         $group->post('/{id}/user', [self::class, 'add_user'])
-            ->add( Api\EntryMiddleware::factory( Station::class ) )
+            ->add( Api\EntryMiddleware::fromQuery( Station::class ) )
             ->add( Api\EntryMiddleware::fromBody( User::class, 'user_id' )  );
 
         $group->delete('/{id}/user', [self::class, 'remove_user'])
-            ->add( Api\EntryMiddleware::factory( Station::class ) )
+            ->add( Api\EntryMiddleware::fromQuery( Station::class ) )
             ->add( Api\EntryMiddleware::fromBody( User::class, 'user_id' )  );
 
     }

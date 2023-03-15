@@ -115,14 +115,14 @@ final class TeamController
             ->add( Api\ValidationMiddleware::forCreating( [self::class, 'validation'] ) );
 
         $group->get('/{id}', [self::class, 'show'])
-            ->add( Api\EntryMiddleware::factory( Team::class ) );
+            ->add( Api\EntryMiddleware::fromQuery( Team::class ) );
 
         $group->patch('/{id}', [self::class, 'edit'])
-            ->add( Api\EntryMiddleware::factory( Team::class ) )
+            ->add( Api\EntryMiddleware::fromQuery( Team::class ) )
             ->add( Api\ValidationMiddleware::forUpdating( [self::class, 'validation'] ) );
 
         $group->delete('/{id}', [self::class, 'remove'])
-            ->add( Api\EntryMiddleware::factory( Team::class ) );
+            ->add( Api\EntryMiddleware::fromQuery( Team::class ) );
 
     }
 

@@ -135,14 +135,14 @@ final class UserController
             ->add( Api\ValidationMiddleware::forCreating( [self::class, 'validation'] ) );
 
         $group->get('/{id}', [self::class, 'show'])
-            ->add( Api\EntryMiddleware::factory( User::class ) );
+            ->add( Api\EntryMiddleware::fromQuery( User::class ) );
 
         $group->patch('/{id}', [self::class, 'edit'])
-            ->add( Api\EntryMiddleware::factory( User::class ) )
+            ->add( Api\EntryMiddleware::fromQuery( User::class ) )
             ->add( Api\ValidationMiddleware::forUpdating( [self::class, 'validation'] ) );
 
         $group->delete('/{id}', [self::class, 'remove'])
-            ->add( Api\EntryMiddleware::factory( User::class ) );
+            ->add( Api\EntryMiddleware::fromQuery( User::class ) );
 
     }
 
