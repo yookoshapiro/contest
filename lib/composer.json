@@ -19,6 +19,7 @@
     "require": {
         "php": "<=8.2.3",
         "cakephp/validation": "^4.4",
+        "fakerphp/faker": "^1.21",
         "filp/whoops": "^2.15",
         "illuminate/database": "^10.3",
         "illuminate/events": "^10.3",
@@ -28,6 +29,7 @@
         "ramsey/uuid": "^3.9",
         "slim/psr7": "^1.6",
         "slim/slim": "4.*",
+        "symfony/console": "^6.2",
         "symfony/uid": "^6.2",
         "vlucas/phpdotenv": "^5.5"
     },

@@ -1,0 +1,15 @@
+<?php
+
+declare(strict_types=1);
+
+$_ENV['SHELL_ACTIVE'] = true;
+date_default_timezone_set('UTC');
+
+require_once __DIR__ . '/lib/vendor/autoload.php';
+
+$container = require_once root_path('lib/files/bootstrap.php');
+
+$app = $container->make(Symfony\Component\Console\Application::class);
+$app->add( $container->make(Artisan\Database\PopulateCommand::class) );
+
+$app->run();
