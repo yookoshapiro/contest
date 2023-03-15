@@ -23,7 +23,10 @@ class Manager implements ConfigInterface
         readonly string $path,
         Dotenv $dotenv
     ) {
+
         $dotenv->load();
+        $dotenv->required(['MYSQL_HOST', 'MYSQL_ROOT_PASSWORD', 'MYSQL_DATABASE', 'MYSQL_USER', 'MYSQL_PASSWORD']);
+
     }
 
 
