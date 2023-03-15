@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace Contest;
 
 use Contest\Exception\ApiException;
-use DI\ContainerBuilder;
 use Exception, Throwable;
-use Illuminate\Database\Connection;
-use Psr\Container\ContainerInterface;
 use Slim\App as Slim;
 use Slim\Factory\AppFactory;
 use Whoops\Run;
@@ -88,34 +85,15 @@ readonly class App
     protected function __construct()
     {
 
-        $container = $this->getContainer();
+        $container = require_once root_path('lib/files/bootstrap.php');
         $app = AppFactory::createFromContainer( $container );
 
-        $container->set(ContainerInterface::class, $container);
         $container->set(Slim::class, $app);
-        $container->get(Connection::class); # Aufruf der Verbindung, damit die Einstellungen geladen werden
 
         $app->addBodyParsingMiddleware();
         $app->group('', Router::class);
 
         $this->slim = $app;
-
-    }
-
-
-    /**
-     * Erzeugt den DI-Container.
-     *
-     * @return Container
-     * @throws Exception
-     */
-    protected function getContainer(): Container
-    {
-
-        $builder = new ContainerBuilder(Container::class);
-        $builder->addDefinitions( root_path('lib/files/di.definitions.php') );
-
-        return $builder->build();
 
     }
 
