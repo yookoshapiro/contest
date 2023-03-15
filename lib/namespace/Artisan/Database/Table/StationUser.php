@@ -43,7 +43,10 @@ class StationUser implements DatabaseInterface
         $stations = Station::query()->get();
 
         foreach($stations as $station) {
-            $station->users()->saveMany( $users->random(rand(1,2)) );
+            try {
+                $station->users()->saveMany( $users->random(rand(1,2)) );
+            }
+            catch (\Exception $ex) {}
         }
 
     }

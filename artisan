@@ -11,5 +11,6 @@ $container = require_once root_path('lib/files/bootstrap.php');
 
 $app = $container->make(Symfony\Component\Console\Application::class);
 $app->add( $container->make(Artisan\Database\PopulateCommand::class) );
+$app->add( $container->make(Artisan\Database\CleanCommand::class) );
 
 $app->run();

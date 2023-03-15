@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Artisan\Database;
 
+use Artisan\Contract\DatabaseInterface;
 use Contest\Contract\Config\ConfigInterface as Config;
 use Psr\Container\ContainerInterface as Container;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -44,6 +45,7 @@ class PopulateCommand extends Command
 
         if ( filter_var($input->getOption('multiple'), FILTER_VALIDATE_INT) === false )
         {
+
             $output->writeln("\n<error>                                                   </error>");
             $output->writeln('<error>  invalid option: value of multiple must be a int  </error>');
             $output->writeln("<error>                                                   </error>\n");
@@ -53,6 +55,7 @@ class PopulateCommand extends Command
         }
 
         $tables = array_map(fn($table) => $this->container->make($table), $this->config->get('artisan.database'));
+        $tables = array_filter($tables, fn($table) => $table instanceof DatabaseInterface);
 
         if ($input->getOption('clean'))
         {
