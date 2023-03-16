@@ -15,8 +15,10 @@ $app = $container->make(Symfony\Component\Console\Application::class);
 $app->add( $container->make(Artisan\Create\User::class) );
 
 # Datenbank
-$app->add( $container->make(Artisan\Database\Seed::class) );
 $app->add( $container->make(Artisan\Database\Clean::class) );
+$app->add( $container->make(Artisan\Database\Export::class) );
+$app->add( $container->make(Artisan\Database\Import::class) );
 $app->add( $container->make(Artisan\Database\Migrate::class) );
+$app->add( $container->make(Artisan\Database\Seed::class) );
 
 $app->run();
