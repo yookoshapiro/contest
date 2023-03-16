@@ -40,12 +40,7 @@ class User extends Model
         'password' => Password::class
     ];
 
-
-    /**
-     * Many-To-Many-Beziehung zwischen User und Station herstellen.
-     *
-     * @return BelongsToMany
-     */
+    # Many-To-Many-Beziehung zur Stations-Tabelle
     public function stations(): BelongsToMany {
         return $this->belongsToMany( Station::class );
     }

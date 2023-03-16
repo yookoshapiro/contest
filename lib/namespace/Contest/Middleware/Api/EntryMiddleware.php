@@ -48,7 +48,7 @@ class EntryMiddleware
             }
 
             return $handler->handle(
-                $request->withAttribute($name, call_user_func([$class, 'findOrFail'], $id))
+                $request->withAttribute($name, $model)
             );
 
         }

@@ -114,6 +114,9 @@ final class ApiController
         $group->group('/station', [StationController::class, 'router']);
         $group->group('/stations', [StationsController::class, 'router']);
 
+        $group->group('/result', [ResultController::class, 'router']);
+        $group->group('/results', [ResultsController::class, 'router']);
+
         $group->get('/{path:.*}', [self::class, 'unknown']);
 
     }

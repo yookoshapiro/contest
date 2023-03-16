@@ -9,6 +9,7 @@ use Contest\Database\Casts\StationType;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 
 /**
@@ -18,6 +19,7 @@ use Illuminate\Support\Collection;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Collection $users
+ * @property Collection $results
  */
 class Station extends Model
 {
@@ -33,14 +35,14 @@ class Station extends Model
         'type' => StationType::class
     ];
 
-
-    /**
-     * Mana-To-Many-Beziehung zwischen Station und User herstellen.
-     *
-     * @return BelongsToMany
-     */
+    # Many-To-Many-Beziehung zur Users-Tabelle
     public function users(): BelongsToMany {
         return $this->belongsToMany( User::class );
+    }
+
+    # One-To-Many-Beziehung zur Results-Tabelle
+    public function results(): HasMany {
+        return $this->hasMany( Result::class );
     }
 
 }

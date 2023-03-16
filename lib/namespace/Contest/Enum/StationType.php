@@ -11,16 +11,16 @@ enum StationType: int
     case DESC = 1;
 
     # Erfassung mit einem Zeitwert
-    case TIME = 2;
+    case TIME = 2; # in Millisekunden
 
     # Erfassung mit einem Punktewert
     case POINTS = 4;
 
     # Erfassung mit einem Entfernungswert
-    case DISTANCE = 8;
+    case DISTANCE = 8; # in Millimeter
 
     # Erfassung mit einem Schätzwert
-    case ESTIMATE = 16;
+    case ESTIMATE = 16; # in Gramm
 
 
     /**
