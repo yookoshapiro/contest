@@ -43,7 +43,7 @@ class Clean extends Command
         $tables = array_filter($tables, fn($table) => $table instanceof DatabaseSeedInterface);
 
         foreach($tables as $table) {
-            $table->down();
+            $table->down(true);
         }
 
         return Command::SUCCESS;

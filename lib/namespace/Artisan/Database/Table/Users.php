@@ -28,10 +28,20 @@ class Users implements DatabaseSeedInterface, DatabaseMigrateInterface
     /**
      * Entfernt alle Benutzer aus der Datenbank.
      *
+     * @param bool $force
      * @return void
      */
-    public function down(): void {
-        User::query()->delete();
+    public function down(bool $force = false): void
+    {
+
+        $query = User::query();
+
+        if ($force === false) {
+            $query->where('is_admin', '=', 0);
+        }
+
+        $query->delete();
+
     }
 
 
@@ -94,7 +104,7 @@ class Users implements DatabaseSeedInterface, DatabaseMigrateInterface
             $table->string('password', 100);
             $table->string('email');
             $table->boolean('is_active')->default(true);
-            $table->boolean('is_admin')->default(true);
+            $table->boolean('is_admin')->default(false);
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate();
 
