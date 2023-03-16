@@ -13,7 +13,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(name: 'db:clean')]
-class CleanCommand extends Command
+class Clean extends Command
 {
 
     protected static $defaultDescription = 'Leert alle Tabellen der Datenbank';

@@ -13,8 +13,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-#[AsCommand(name: 'db:populate')]
-class PopulateCommand extends Command
+#[AsCommand(name: 'db:seed')]
+class Seed extends Command
 {
 
     protected static $defaultDescription = 'Füllt die Datenbank mit zufälligen Inhalten.';
