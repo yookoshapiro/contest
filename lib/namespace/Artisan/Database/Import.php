@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Artisan\Database;
 
-use Contest\Contract\Config\ConfigInterface as Config;
 use Illuminate\Database\Connection;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -18,7 +17,6 @@ class Import extends Command
 
     public function __construct
     (
-        public readonly Config $config,
         public readonly Connection $connection
     ){
         parent::__construct();
@@ -39,7 +37,6 @@ class Import extends Command
     {
 
         $path = root_path('var/database/current.sql');
-        $config = $this->config->get('database.connection');
 
         if ($input->getOption('path') !== null) {
             $path = root_path( $input->getOption('path') );
