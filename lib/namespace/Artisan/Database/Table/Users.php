@@ -4,13 +4,26 @@ declare(strict_types=1);
 
 namespace Artisan\Database\Table;
 
+use Artisan\Contract\DatabaseMigrateInterface;
 use Artisan\Contract\DatabaseSeedInterface;
 use Contest\Database\User;
 use Faker\Factory;
+use Illuminate\Database\Connection;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Str;
 
-class Users implements DatabaseSeedInterface
+class Users implements DatabaseSeedInterface, DatabaseMigrateInterface
 {
+
+    /**
+     * Erzeugt dieses Objekt.
+     *
+     * @param Connection $connection
+     */
+    public function __construct(
+        public readonly Connection $connection
+    ){}
+
 
     /**
      * Entfernt alle Benutzer aus der Datenbank.
@@ -47,6 +60,45 @@ class Users implements DatabaseSeedInterface
         }
 
         User::query()->insert($data);
+
+    }
+
+
+    /**
+     * Zerstört die Benutzer-Tabelle.
+     *
+     * @return void
+     */
+    public function destroy(): void {
+        $this->connection->getSchemaBuilder()->dropIfExists('users');
+    }
+
+
+    /**
+     * Erzeugt die Benutzer-Tabelle
+     *
+     * @return void
+     */
+    public function create(): void
+    {
+
+        if ($this->connection->getSchemaBuilder()->hasTable('users')) {
+            return;
+        }
+
+        $this->connection->getSchemaBuilder()->create('users', function(Blueprint $table)
+        {
+
+            $table->ulid('id')->primary();
+            $table->string('name')->index();
+            $table->string('password', 100);
+            $table->string('email');
+            $table->boolean('is_active')->default(true);
+            $table->boolean('is_admin')->default(true);
+            $table->dateTime('created_at')->useCurrent();
+            $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate();
+
+        });
 
     }
 
