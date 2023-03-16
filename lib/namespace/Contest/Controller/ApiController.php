@@ -33,7 +33,7 @@ final class ApiController
     public function show(Request $request, Response $response): Response
     {
 
-        $payload = json_encode(['message' => 'Welcome to the Feuerwehr Dechow Contest API.']);
+        $payload = json_encode(['data' => ['message' => 'Welcome to the Feuerwehr Dechow Contest API.']]);
         $response->getBody()->write($payload);
 
         return $response;
@@ -55,8 +55,10 @@ final class ApiController
         {
 
             $response->getBody()->write(json_encode([
-                'status' => $this->config->get('status.state'),
-                'message' => $this->config->get('status.message')
+                'data' => [
+                    'status' => $this->config->get('status.state'),
+                    'message' => $this->config->get('status.message')
+                ]
             ]));
 
             return $response
@@ -64,7 +66,11 @@ final class ApiController
 
         }
 
-        $response->getBody()->write( json_encode(['status' => ApiStatus::OK]) );
+        $response->getBody()->write(json_encode([
+            'data' => [
+                'status' => ApiStatus::OK
+            ]
+        ]));
 
         return $response;
 

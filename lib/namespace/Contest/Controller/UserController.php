@@ -24,8 +24,9 @@ final class UserController
     public function show(Request $request, Response $response): Response
     {
 
-        $user = $request->getAttribute('user');
-        $response->getBody()->write( $user->toJson() );
+        $response->getBody()->write(json_encode([
+            'data' => $request->getAttribute('user')->load('stations:id,name')
+        ]));
 
         return $response;
 
@@ -57,8 +58,10 @@ final class UserController
         $newUser->save();
 
         $response->getBody()->write(json_encode([
-            'created' => true,
-            'id' => $newUser->id
+            'data' => [
+                'created' => true,
+                'id' => $newUser->id
+            ]
         ]));
 
         return $response

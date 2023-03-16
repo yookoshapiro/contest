@@ -26,8 +26,9 @@ class StationController
     public function show(Request $request, Response $response): Response
     {
 
-        $user = $request->getAttribute('station');
-        $response->getBody()->write( $user->toJson() );
+        $response->getBody()->write(json_encode([
+            'data' => $request->getAttribute('station')->load(['users:id,name','results:id,team_id,type,value'])
+        ]));
 
         return $response;
 
@@ -56,8 +57,10 @@ class StationController
         $newStation->save();
 
         $response->getBody()->write(json_encode([
-            'created' => true,
-            'id' => $newStation->id
+            'data' => [
+                'created' => true,
+                'id' => $newStation->id
+            ]
         ]));
 
         return $response
@@ -111,27 +114,6 @@ class StationController
             ->withStatus(204);
 
     }
-
-
-    /**
-     * Zeigt die Benutzer, die der Station zugeordnet wurden, an.
-     *
-     * @param Request  $request
-     * @param Response $response
-     * @return Response
-     */
-    public function show_users(Request $request, Response $response): Response
-    {
-
-        $station = $request->getAttribute('station');
-        $response->getBody()->write(json_encode([
-            'data' => $station->users
-        ]));
-
-        return $response;
-
-    }
-
 
     /**
      * Fügt einen Benutzer einer Station hinzu.
@@ -210,9 +192,6 @@ class StationController
             ->add( Api\ValidationMiddleware::forUpdating( [self::class, 'validation'] ) );
 
         $group->delete('/{id}', [self::class, 'remove'])
-            ->add( Api\EntryMiddleware::fromQuery( Station::class ) );
-
-        $group->get('/{id}/users', [self::class, 'show_users'])
             ->add( Api\EntryMiddleware::fromQuery( Station::class ) );
 
         $group->post('/{id}/user', [self::class, 'add_user'])

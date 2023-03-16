@@ -24,8 +24,9 @@ final class TeamController
     public function show(Request $request, Response $response): Response
     {
 
-        $user = $request->getAttribute('team');
-        $response->getBody()->write( $user->toJson() );
+        $response->getBody()->write(json_encode([
+            'data' => $request->getAttribute('team')
+        ]));
 
         return $response;
 
@@ -49,8 +50,10 @@ final class TeamController
         $newTeam->save();
 
         $response->getBody()->write(json_encode([
-            'created' => true,
-            'id' => $newTeam->id
+            'data' => [
+                'created' => true,
+                'id' => $newTeam->id
+            ]
         ]));
 
         return $response

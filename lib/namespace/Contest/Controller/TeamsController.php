@@ -40,7 +40,9 @@ class TeamsController
 
         }
 
-        $response->getBody()->write( $users->toJson() );
+        $response->getBody()->write(json_encode([
+            'data' => $users
+        ]));
 
         return $response;
 

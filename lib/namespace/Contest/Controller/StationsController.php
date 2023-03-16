@@ -24,7 +24,8 @@ class StationsController
 
         $query = $request->getQueryParams();
 
-        $users = Station::with('users:id,name')->select(['id', 'name', 'type'])
+        $users = Station::query()
+            ->select(['id', 'name', 'type'])
             ->limit( $query['limit'] ?? 20 )
             ->get();
 
@@ -40,7 +41,9 @@ class StationsController
 
         }
 
-        $response->getBody()->write( $users->toJson() );
+        $response->getBody()->write(json_encode([
+            'data' => $users
+        ]));
 
         return $response;
 

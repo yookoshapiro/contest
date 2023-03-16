@@ -60,8 +60,10 @@ final class AuthController
 
         $response->getBody()->write(json_encode([
 
-            'token' => $login->id,
-            'expired_at' => $login->expires_at
+            'data' => [
+                'token' => $login->id,
+                'expired_at' => $login->expires_at
+            ]
 
         ]));
 
