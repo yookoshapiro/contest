@@ -17,7 +17,8 @@ return [
         Table\Users::class,
         Table\Stations::class,
         Table\Teams::class,
-        Table\StationUser::class
+        Table\StationUser::class,
+        Table\Logins::class
     ]
 
 ];

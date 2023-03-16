@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Artisan\Database\Table;
 
+use Artisan\Contract\DatabaseMigrateInterface;
 use Artisan\Contract\DatabaseSeedInterface;
+use Illuminate\Database\Schema\Blueprint;
 use Contest\Database\{Station, User};
 use Illuminate\Database\Connection;
 
-class StationUser implements DatabaseSeedInterface
+class StationUser implements DatabaseSeedInterface, DatabaseMigrateInterface
 {
 
     /**
@@ -48,6 +50,40 @@ class StationUser implements DatabaseSeedInterface
             }
             catch (\Exception $ex) {}
         }
+
+    }
+
+
+    /**
+     * Zerstört die Stations-Tabelle.
+     *
+     * @return void
+     */
+    public function destroy(): void {
+        $this->connection->getSchemaBuilder()->dropIfExists('station_user');
+    }
+
+
+    /**
+     * Erzeugt die Stations-Tabelle
+     *
+     * @return void
+     */
+    public function create(): void
+    {
+
+        if ($this->connection->getSchemaBuilder()->hasTable('station_user')) {
+            return;
+        }
+
+        $this->connection->getSchemaBuilder()->create('station_user', function(Blueprint $table)
+        {
+
+            $table->ulid('station_id');
+            $table->ulid('user_id');
+            $table->primary(['station_id', 'user_id']);
+
+        });
 
     }
 

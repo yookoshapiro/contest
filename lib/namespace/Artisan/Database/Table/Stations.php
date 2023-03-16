@@ -4,13 +4,26 @@ declare(strict_types=1);
 
 namespace Artisan\Database\Table;
 
+use Artisan\Contract\DatabaseMigrateInterface;
 use Artisan\Contract\DatabaseSeedInterface;
 use Contest\Database\Station;
 use Faker\Factory;
+use Illuminate\Database\Connection;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Str;
 
-class Stations implements DatabaseSeedInterface
+class Stations implements DatabaseSeedInterface, DatabaseMigrateInterface
 {
+
+    /**
+     * Erzeugt dieses Objekt.
+     *
+     * @param Connection $connection
+     */
+    public function __construct(
+        public readonly Connection $connection
+    ){}
+
 
     /**
      * Entfernt alle Stationen aus der Datenbank.
@@ -50,5 +63,42 @@ class Stations implements DatabaseSeedInterface
         Station::query()->insert($data);
 
     }
+
+
+    /**
+     * Zerstört die Stations-Tabelle.
+     *
+     * @return void
+     */
+    public function destroy(): void {
+        $this->connection->getSchemaBuilder()->dropIfExists('stations');
+    }
+
+
+    /**
+     * Erzeugt die Stations-Tabelle
+     *
+     * @return void
+     */
+    public function create(): void
+    {
+
+        if ($this->connection->getSchemaBuilder()->hasTable('stations')) {
+            return;
+        }
+
+        $this->connection->getSchemaBuilder()->create('stations', function(Blueprint $table)
+        {
+
+            $table->ulid('id')->primary();
+            $table->string('name', 100);
+            $table->integer('type')->default(2);
+            $table->dateTime('created_at')->useCurrent();
+            $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate();
+
+        });
+
+    }
+
 
 }
