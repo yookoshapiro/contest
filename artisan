@@ -10,6 +10,11 @@ require_once __DIR__ . '/lib/vendor/autoload.php';
 $container = require_once root_path('lib/files/bootstrap.php');
 
 $app = $container->make(Symfony\Component\Console\Application::class);
+
+# Create
+$app->add( $container->make(Artisan\Create\User::class) );
+
+# Datenbank
 $app->add( $container->make(Artisan\Database\Seed::class) );
 $app->add( $container->make(Artisan\Database\Clean::class) );
 $app->add( $container->make(Artisan\Database\Migrate::class) );

@@ -100,9 +100,9 @@ class Users implements DatabaseSeedInterface, DatabaseMigrateInterface
         {
 
             $table->ulid('id')->primary();
-            $table->string('name')->index();
+            $table->string('name')->unique();
             $table->string('password', 100);
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->boolean('is_active')->default(true);
             $table->boolean('is_admin')->default(false);
             $table->dateTime('created_at')->useCurrent();
