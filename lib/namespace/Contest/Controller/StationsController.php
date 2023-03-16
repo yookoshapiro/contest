@@ -24,7 +24,7 @@ class StationsController
 
         $query = $request->getQueryParams();
 
-        $users = Station::query()->select(['id', 'name', 'type'])
+        $users = Station::with('users:id,name')->select(['id', 'name', 'type'])
             ->limit( $query['limit'] ?? 20 )
             ->get();
 

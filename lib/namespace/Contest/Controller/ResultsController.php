@@ -23,7 +23,7 @@ class ResultsController
     {
 
         $query = $request->getQueryParams();
-        $results = Result::query()
+        $results = Result::with(['station:id,name,type', 'team:id,name'])
             ->limit( $query['limit'] ?? 20 )
             ->get();
 
@@ -39,30 +39,8 @@ class ResultsController
 
         }
 
-        $data = $results->map(function($result)
-        {
-
-            return [
-                'id' => $result->id,
-                'station' => [
-                    'id' => $result->station->id,
-                    'name' => $result->station->name
-                ],
-                'team' => [
-                    'id' => $result->team->id,
-                    'name' => $result->team->name
-                ],
-                'type' => $result->type,
-                'value' => $result->value,
-                'comment' => $result->comment,
-                'created_at' => $result->created_at,
-                'updated_at' => $result->updated_at
-            ];
-
-        });
-
         $response->getBody()->write(json_encode([
-            'data' => $data
+            'data' => $results
         ]));
 
         return $response;
