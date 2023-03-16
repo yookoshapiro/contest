@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Artisan\Database\Table;
 
-use Artisan\Contract\DatabaseInterface;
+use Artisan\Contract\DatabaseSeedInterface;
 use Contest\Database\{Station, User};
 use Illuminate\Database\Connection;
 
-class StationUser implements DatabaseInterface
+class StationUser implements DatabaseSeedInterface
 {
 
     /**

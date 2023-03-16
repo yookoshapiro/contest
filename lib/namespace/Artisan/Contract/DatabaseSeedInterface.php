@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Artisan\Contract;
 
-interface DatabaseInterface
+interface DatabaseSeedInterface
 {
 
     /**

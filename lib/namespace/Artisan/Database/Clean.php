@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Artisan\Database;
 
-use Artisan\Contract\DatabaseInterface;
+use Artisan\Contract\DatabaseSeedInterface;
 use Contest\Contract\Config\ConfigInterface as Config;
 use Psr\Container\ContainerInterface as Container;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -40,7 +40,7 @@ class Clean extends Command
     {
 
         $tables = array_map(fn($table) => $this->container->make($table), $this->config->get('artisan.database'));
-        $tables = array_filter($tables, fn($table) => $table instanceof DatabaseInterface);
+        $tables = array_filter($tables, fn($table) => $table instanceof DatabaseSeedInterface);
 
         foreach($tables as $table) {
             $table->down();

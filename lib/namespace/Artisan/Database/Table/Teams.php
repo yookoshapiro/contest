@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Artisan\Database\Table;
 
-use Artisan\Contract\DatabaseInterface;
+use Artisan\Contract\DatabaseSeedInterface;
 use Contest\Database\Team;
 use Faker\Factory;
 use Illuminate\Support\Str;
 
-class Teams implements DatabaseInterface
+class Teams implements DatabaseSeedInterface
 {
 
     /**
