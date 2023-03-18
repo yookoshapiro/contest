@@ -8,6 +8,7 @@ use Contest\Exception\ApiException;
 use Exception, Throwable;
 use Slim\App as Slim;
 use Slim\Factory\AppFactory;
+use Slim\Views\TwigMiddleware;
 use Whoops\Run;
 use Whoops\Handler\{PrettyPageHandler, JsonResponseHandler};
 
@@ -91,6 +92,7 @@ readonly class App
         $container->set(Slim::class, $app);
 
         $app->addBodyParsingMiddleware();
+        $app->add( $container->get(TwigMiddleware::class) );
         $app->group('', Router::class);
 
         $this->slim = $app;

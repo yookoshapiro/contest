@@ -2,7 +2,10 @@
 .env
 /lib/vendor/
 /lib/composer.lock
+/lib/views/index.twig
 /var/log/access.log
 /var/log/error.log
 /var/log/xdebug.log
 /var/log/clockwork/
+/public/*
+!/public/index.php

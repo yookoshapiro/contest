@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace Contest\Controller;
 
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
+use Slim\Views\Twig;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 final class HomeController
 {
@@ -15,13 +19,12 @@ final class HomeController
      * @param RequestInterface  $request
      * @param ResponseInterface $response
      * @return ResponseInterface
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
-    public function index(RequestInterface $request, ResponseInterface $response): ResponseInterface
-    {
-
-        $response->getBody()->write('Hello World!');
-        return $response;
-
+    public function index(RequestInterface $request, ResponseInterface $response): ResponseInterface {
+        return Twig::fromRequest($request)->render($response, 'index.twig');
     }
 
 
@@ -31,6 +34,9 @@ final class HomeController
      * @param RequestInterface  $request
      * @param ResponseInterface $response
      * @return ResponseInterface
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function __invoke(RequestInterface $request, ResponseInterface $response): ResponseInterface {
         return $this->index($request, $response);

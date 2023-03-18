@@ -29,6 +29,16 @@ return [
 
     Illuminate\Database\Connection::class => DI\factory(function(Illuminate\Database\Capsule\Manager $manager) {
         return $manager->getConnection();
+    }),
+
+    Slim\Views\Twig::class => DI\factory(function()  {
+        return Slim\Views\Twig::create(root_path('lib/views'), [
+            'cache' => false
+        ]);
+    }),
+
+    Slim\Views\TwigMiddleware::class => DI\factory(function(Slim\App $app, Slim\Views\Twig $twig) {
+        return Slim\Views\TwigMiddleware::create($app, $twig);
     })
 
 ];
