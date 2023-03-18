@@ -21,6 +21,7 @@ class Npm extends Command
 
         $this
             ->addArgument('arg', InputArgument::REQUIRED, 'Auszuführender Befehl')
+            ->addArgument('arg2', InputArgument::OPTIONAL, 'Auszuführender Befehl')
             ->setHelp('Führt node.js (npm) im passenden Ordner aus.');
 
     }
@@ -28,7 +29,7 @@ class Npm extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
 
-        echo shell_exec('cd vue && npm ' . $input->getArgument('arg'));
+        echo shell_exec('cd vue && npm ' . $input->getArgument('arg') . ($input->getArgument('arg2') === null ? ' ' . $input->getArgument('arg2') : ''));
 
         return Command::SUCCESS;
 
