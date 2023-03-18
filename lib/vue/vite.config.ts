@@ -8,8 +8,9 @@ export default defineConfig(({ command, mode }) => {
   return {
     plugins: [vue()],
     build: {
-      outDir: "../public",
+      outDir: "../../public",
       assetsInlineLimit: 0,
+      emptyOutDir: true
     }
   }
 

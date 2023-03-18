@@ -29,7 +29,7 @@ class Npm extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
 
-        echo shell_exec('cd vue && npm ' . $input->getArgument('arg') . ($input->getArgument('arg2') === null ? ' ' . $input->getArgument('arg2') : ''));
+        echo shell_exec('cd lib/vue && npm ' . $input->getArgument('arg') . ($input->getArgument('arg2') === null ? ' ' . $input->getArgument('arg2') : ''));
 
         return Command::SUCCESS;
 
