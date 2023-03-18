@@ -21,4 +21,9 @@ $app->add( $container->make(Artisan\Database\Import::class) );
 $app->add( $container->make(Artisan\Database\Migrate::class) );
 $app->add( $container->make(Artisan\Database\Seed::class) );
 
+# Run
+$app->add( $container->make(Artisan\Run\Composer::class) );
+$app->add( $container->make(Artisan\Run\Npm::class) );
+$app->add( $container->make(Artisan\Run\Update::class) );
+
 $app->run();
