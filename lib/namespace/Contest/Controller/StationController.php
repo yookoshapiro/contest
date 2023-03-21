@@ -27,7 +27,7 @@ class StationController
     {
 
         $response->getBody()->write(json_encode([
-            'data' => $request->getAttribute('station')->load(['users:id,name','results:id,team_id,type,value'])
+            'data' => $request->getAttribute('station')->load(['users:id,name', 'results:id,team_id,type,value'])
         ]));
 
         return $response;

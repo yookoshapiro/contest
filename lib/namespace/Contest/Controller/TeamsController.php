@@ -24,7 +24,7 @@ class TeamsController
 
         $query = $request->getQueryParams();
 
-        $users = Team::query()->select(['id', 'name'])
+        $users = Team::with('results:id,station_id,team_id,type,value,comment')->select(['id', 'name'])
             ->limit( $query['limit'] ?? 20 )
             ->get();
 

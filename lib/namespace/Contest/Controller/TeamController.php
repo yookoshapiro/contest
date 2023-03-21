@@ -25,7 +25,7 @@ final class TeamController
     {
 
         $response->getBody()->write(json_encode([
-            'data' => $request->getAttribute('team')
+            'data' => $request->getAttribute('team')->load(['results:id,station_id,team_id,type,value,comment'])
         ]));
 
         return $response;
