@@ -1,26 +1,224 @@
 @import "assets/css/reboot.css";
+@import "assets/css/icons.css";
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  font-size: 16px;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --white: 255, 255, 255;
+  --black: 0, 0, 0;
+  --main: 42, 63, 84;
+  --highlight: 0, 198, 182;
+  --sand: 255,247,214;
+  --red: 226, 119, 122;
+
 }
 
 body {
+  color: rgba(var(--main), .9);
+  background-color: rgb(var(--white));
+
   height: 100vh;
+  width: 100vw;
+}
+
+ul, ol, li {
+  margin: 0;
+  padding: 0;
+}
+
+h3 {
+  font-size: 1.3rem;
+  font-weight: normal;
+}
+
+.little { font-size: .6rem; line-height: .6rem; }
+
+main {
+  width: 92vw;
+  height: 100vh;
+  float: right;
+  padding: 20px;
+  background-color: rgb(var(--black), .05);
+}
+
+#sidebar {
+  float: left;
+  width: 8vw;
+  height: 100vh;
+  position: relative;
+  background-color: rgb(var(--main));
+}
+
+#sidebar #logo {
   width: 100%;
+  height: 140px;
+  background-size: 70px 70px;
   background-repeat: no-repeat;
-  background-size: cover;
   background-position: center center;
-  background-image: url("assets/img/Dark_background_1920x1080.png");
-  background-color: #242424;
+  background-image: url("assets/img/trophy.png");
+}
+
+#main ul {
+  list-style: none;
+}
+
+#main a {
+  display: block;
+  font-size: .9rem;
+  line-height: .9rem;
+  position: relative;
+  color: rgb(var(--white));
+  padding: 20px 20px 20px 40px;
+}
+
+#main a:hover {
+  text-decoration: none;
+  background-color: rgba(var(--white), .1);
+}
+
+#main a.router-link-active {
+  border-right: 5px solid rgb(var(--highlight));
+  background: linear-gradient(rgba(var(--sand), .05), rgb(var(--main))), rgb(var(--main));
+  box-shadow: rgba(var(--black), .25) 0 1px 0, inset rgba(var(--white), .1) 0 1px 0;
+}
+
+#sidebar-footer {
+  width: 100%;
+  height: 40px;
+  bottom: 0;
+  position: absolute;
+  background-color: rgba(var(--black), .2);
+}
+
+#sidebar-footer ul {
+  list-style: none;
+}
+
+#sidebar-footer li {
+  width: 33%;
+  height: 40px;
+  float: left;
+}
+
+#sidebar-footer a {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#sidebar-footer i {
+  width: 100%;
+  height: 100%;
+}
+
+#sidebar-footer a:hover,
+#sidebar-footer a.router-link-active {
+  background-color: rgba(var(--black), .2);
+}
+
+.title {
+}
+
+.title > h3 {
+  width: 50%;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.controls {
+  width: 50%;
+  text-align: right;
+  display: inline-block;
+}
+
+.block {
+  width: 100%;
+  padding: 10px;
+  min-height: 50px;
+  border: 1px solid rgba(var(--main), .2);
+  background-color: rgb(var(--white));
+}
+
+.block .title,
+.block .body {
+  padding: 10px;
+}
+
+.block .title {
+  font-weight: 500;
+  line-height: 1rem;
+  padding-bottom: 20px;
+  border-bottom: 2px solid rgb(var(--main));
+}
+
+.block .body {
+  padding-top: 20px;
+}
+
+.block .body.table {
+  padding: 0;
+}
+
+.block .body.table table {
+  width: 100%;
+  font-size: .9rem;
+  line-height: .9rem;
+}
+
+.block .body.table thead {
+  border-bottom: 2px solid rgba(var(--main), .3);
+}
+
+.block .body.table thead td {
+  font-weight: 500;
+}
+
+.block .body.table tbody tr:not(:last-child) {
+  border-bottom: 1px solid rgba(var(--main), .3);
+}
+
+.block .body.table tbody tr:nth-child(2n+1) {
+  background-color: rgba(var(--main), .05);
+}
+
+.block .body.table td {
+  padding: 15px;
+}
+
+.list-inline i {
+  width: 24px;
+  height: 24px;
+  background-color: rgba(var(--main), .5);
+
+  -webkit-mask-size: 14px;
+  mask-size: 14px;
+}
+
+.list-inline-item {
+  padding: 0;
+  float: left;
+  margin-right: 6px;
+  border: 1px solid rgba(var(--white), 1);
+  background-color: rgba(var(--main), .1);
+  box-shadow: 0 0 0 1px rgba(var(--main), .3);
+}
+
+.list-inline-item.done {
+  background-color: rgba(var(--highlight), .1);
+  box-shadow: 0 0 0 1px rgba(var(--highlight), .5);
+}
+
+.list-inline-item.done i {
+  background-color: rgba(var(--highlight), 1);
 }

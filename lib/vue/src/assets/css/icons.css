@@ -1,0 +1,106 @@
+:not(i).icon::before {
+    content: "";
+    position: absolute;
+    display: block;
+
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 100%;
+
+    background-color: #fff;
+
+    -webkit-mask-size: 16px;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center center;
+}
+
+i.icon {
+    padding: 0;
+    float: left;
+    width: 16px;
+    height: 16px;
+    display: block;
+
+    background-color: #fff;
+
+    -webkit-mask-size: 16px;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center center;
+
+    mask-size: 16px;
+    mask-repeat: no-repeat;
+    mask-position: center center;
+}
+
+:not(i).icon-home::before, i.icon-home {
+    -webkit-mask-image: url("../icon/home_black_48dp.svg");
+    mask-image: url("../icon/home_black_48dp.svg");
+}
+
+:not(i).icon-dashboard::before, i.icon-dashboard {
+    -webkit-mask-image: url("../icon/dashboard_black_48dp.svg");
+    mask-image: url("../icon/dashboard_black_48dp.svg");
+}
+
+:not(i).icon-perm-identity::before, i.icon-perm-identity {
+    -webkit-mask-image: url("../icon/perm_identity_black_48dp.svg");
+    mask-image: url("../icon/perm_identity_black_48dp.svg");
+}
+
+:not(i).icon-people::before, i.icon-people {
+    -webkit-mask-image: url("../icon/people_black_48dp.svg");
+    mask-image: url("../icon/people_black_48dp.svg");
+}
+
+:not(i).icon-location::before, i.icon-location {
+    -webkit-mask-image: url("../icon/location_on_black_48dp.svg");
+    mask-image: url("../icon/location_on_black_48dp.svg");
+}
+
+:not(i).icon-star::before, i.icon-star {
+    -webkit-mask-image: url("../icon/star_rate_black_48dp.svg");
+    mask-image: url("../icon/star_rate_black_48dp.svg");
+}
+
+:not(i).icon-view-list::before, i.icon-view-list {
+    -webkit-mask-image: url("../icon/view_list_black_48dp.svg");
+    mask-image: url("../icon/view_list_black_48dp.svg");
+}
+
+:not(i).icon-settings::before, i.icon-settings {
+    -webkit-mask-image: url("../icon/settings_black_48dp.svg");
+    mask-image: url("../icon/settings_black_48dp.svg");
+}
+
+:not(i).icon-power-setting::before, i.icon-power-setting {
+    -webkit-mask-image: url("../icon/power_settings_new_black_48dp.svg");
+    mask-image: url("../icon/power_settings_new_black_48dp.svg");
+}
+
+:not(i).icon-account-circle::before, i.icon-account-circle {
+    -webkit-mask-image: url("../icon/account_circle_black_48dp.svg");
+    mask-image: url("../icon/account_circle_black_48dp.svg");
+}
+
+:not(i).icon-admin-panel-settings::before, i.icon-admin-panel-settings {
+    -webkit-mask-size: 24px;
+    mask-size: 24px;
+    -webkit-mask-image: url("../icon/admin_panel_settings_black_48dp.svg");
+    mask-image: url("../icon/admin_panel_settings_black_48dp.svg");
+}
+
+:not(i).icon-done::before, i.icon-done {
+    -webkit-mask-image: url("../icon/done_black_48dp.svg");
+    mask-image: url("../icon/done_black_48dp.svg");
+}
+
+:not(i).icon-delete::before, i.icon-delete {
+    -webkit-mask-image: url("../icon/delete_black_48dp.svg");
+    mask-image: url("../icon/delete_black_48dp.svg");
+}
+
+:not(i).icon-edit::before, i.icon-edit {
+    -webkit-mask-image: url("../icon/edit_black_48dp.svg");
+    mask-image: url("../icon/edit_black_48dp.svg");
+}

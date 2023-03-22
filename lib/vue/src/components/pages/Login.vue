@@ -1,0 +1,11 @@
+<template>
+  <main>Login</main>
+</template>
+
+<script setup lang="ts">
+
+</script>
+
+<style scoped>
+
+</style>
