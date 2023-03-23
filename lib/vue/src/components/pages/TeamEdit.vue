@@ -1,6 +1,13 @@
 <template>
-  <div class="title">
-    <h3>Team bearbeiten</h3>
+  <div>
+    <div class="title">
+      <h3>Team bearbeiten</h3>
+    </div>
+    <div class="block">
+
+
+
+    </div>
   </div>
 </template>
 

@@ -1,8 +1,10 @@
 <template>
-  <Navigation></Navigation>
-  <main>
-    <router-view></router-view>
-  </main>
+  <div id="admin">
+    <Navigation></Navigation>
+    <main>
+      <router-view></router-view>
+    </main>
+  </div>
 </template>
 
 <script setup lang="ts">

@@ -44,23 +44,23 @@ h3 {
 
 .little { font-size: .6rem; line-height: .6rem; }
 
-main {
-  width: 92vw;
+#admin main {
+  width: calc(100% - 180px);
   height: 100vh;
   float: right;
   padding: 20px;
   background-color: rgb(var(--black), .05);
 }
 
-#sidebar {
+#admin #sidebar {
   float: left;
-  width: 8vw;
+  width: 180px;
   height: 100vh;
   position: relative;
   background-color: rgb(var(--main));
 }
 
-#sidebar #logo {
+#admin #sidebar #logo {
   width: 100%;
   height: 140px;
   background-size: 70px 70px;
@@ -69,11 +69,11 @@ main {
   background-image: url("assets/img/trophy.png");
 }
 
-#main ul {
+#admin #main ul {
   list-style: none;
 }
 
-#main a {
+#admin #main a {
   display: block;
   font-size: .9rem;
   line-height: .9rem;
@@ -82,18 +82,18 @@ main {
   padding: 20px 20px 20px 40px;
 }
 
-#main a:hover {
+#admin #main a:hover {
   text-decoration: none;
   background-color: rgba(var(--white), .1);
 }
 
-#main a.router-link-active {
+#admin #main a.router-link-active {
   border-right: 5px solid rgb(var(--highlight));
   background: linear-gradient(rgba(var(--sand), .05), rgb(var(--main))), rgb(var(--main));
   box-shadow: rgba(var(--black), .25) 0 1px 0, inset rgba(var(--white), .1) 0 1px 0;
 }
 
-#sidebar-footer {
+#admin #sidebar-footer {
   width: 100%;
   height: 40px;
   bottom: 0;
@@ -101,33 +101,30 @@ main {
   background-color: rgba(var(--black), .2);
 }
 
-#sidebar-footer ul {
+#admin #sidebar-footer ul {
   list-style: none;
 }
 
-#sidebar-footer li {
+#admin #sidebar-footer li {
   width: 33%;
   height: 40px;
   float: left;
 }
 
-#sidebar-footer a {
+#admin #sidebar-footer a {
   width: 100%;
   height: 100%;
   display: block;
 }
 
-#sidebar-footer i {
+#admin #sidebar-footer i {
   width: 100%;
   height: 100%;
 }
 
-#sidebar-footer a:hover,
-#sidebar-footer a.router-link-active {
+#admin #sidebar-footer a:hover,
+#admin #sidebar-footer a.router-link-active {
   background-color: rgba(var(--black), .2);
-}
-
-.title {
 }
 
 .title > h3 {
@@ -209,6 +206,7 @@ main {
   padding: 0;
   float: left;
   margin-right: 6px;
+  margin-bottom: 6px;
   border: 1px solid rgba(var(--white), 1);
   background-color: rgba(var(--main), .1);
   box-shadow: 0 0 0 1px rgba(var(--main), .3);

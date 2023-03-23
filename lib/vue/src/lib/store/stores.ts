@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
+import { AxiosResponse } from 'axios';
+import api from '../api/Api';
 
 export const teamsStore = defineStore('teams', {
 
@@ -8,10 +10,13 @@ export const teamsStore = defineStore('teams', {
     }),
 
     actions: {
-        load: function () {
-            axios.get('http://localhost/api/teams').then((response) => {
+        load: function ()
+        {
+
+            api.teams.get().then((response: AxiosResponse<any>) => {
                 this.teams = response.data.data;
             });
+
         }
     }
 
@@ -24,10 +29,13 @@ export const stationsStore = defineStore('stations', {
     }),
 
     actions: {
-        load: function() {
-            axios.get('http://localhost/api/stations').then((response) => {
+        load: function()
+        {
+
+            api.stations.get().then((response) => {
                 this.stations = response.data.data;
             });
+
         }
     }
 

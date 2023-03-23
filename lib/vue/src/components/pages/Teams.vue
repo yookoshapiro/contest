@@ -15,7 +15,7 @@
             <td style="width: 40px">#</td>
             <td style="width: 400px">Team</td>
             <td style="width: 400px">Ergebnisse</td>
-            <td>Aktionen</td>
+            <td style="min-width: 150px;">Aktionen</td>
           </tr>
           </thead>
           <tbody>
@@ -47,8 +47,8 @@
 <script setup lang="ts">
 
 import { onBeforeMount } from 'vue';
-import { teamsStore, stationsStore } from '../../store/stores';
-import { Station, Team } from '../../interface/interface';
+import { teamsStore, stationsStore } from '../../lib/store/stores';
+import { Station, Team } from '../../lib/interface/tables';
 
 const teams = teamsStore();
 const stations = stationsStore();
