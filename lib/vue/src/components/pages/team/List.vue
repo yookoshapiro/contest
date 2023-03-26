@@ -47,8 +47,8 @@
 <script setup lang="ts">
 
 import { onBeforeMount } from 'vue';
-import { teamsStore, stationsStore } from '../../lib/store/stores';
-import { Station, Team } from '../../lib/interface/tables';
+import { teamsStore, stationsStore } from '../../../lib/store/stores';
+import { Station, Team } from '../../../lib/interface/tables';
 
 const teams = teamsStore();
 const stations = stationsStore();
