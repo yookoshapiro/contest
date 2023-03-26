@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <label :for="name">{{ description }}</label>
-    <input :id="inputId" :name="name" v-model="content" type="text" />
+  <div :class="'input input-submit' + (readonly ? ' readonly' : '')">
+    <label :for="inputId">{{ label }}</label>
+    <div class="input-field">
+      <input :id="inputId" :name="name" v-model="value" type="text" :placeholder="placeholder" :readonly="readonly" />
+    </div>
     <div v-if="error" class="error-message">{{ error }}</div>
   </div>
 </template>
@@ -10,15 +12,17 @@
 import { ref } from 'vue';
 
 interface Props {
-  description: string;
+  label: string;
   name: string;
-  content: string;
+  value?: string;
   error?: string;
   id?: string;
+  placeholder?: string;
+  readonly?: boolean
 }
 
 const props: Props = defineProps({
-  description: {
+  label: {
     type: String,
     required: true
   },
@@ -26,9 +30,9 @@ const props: Props = defineProps({
     type: String,
     required: true
   },
-  content: {
+  value: {
     type: String,
-    required: true
+    default: null
   },
   error: {
     type: String,
@@ -37,9 +41,19 @@ const props: Props = defineProps({
   id: {
     type: String,
     default: null
+  },
+  placeholder: {
+    type: String,
+    default: null
+  },
+  readonly: {
+    type: Boolean,
+    default: false
   }
 });
 
 const inputId = ref(props.id ?? props.name);
-const content = ref(props.content);
+const value = ref(props.value);
+const placeholder = ref(props.placeholder);
+const readonly = ref(props.readonly);
 </script>

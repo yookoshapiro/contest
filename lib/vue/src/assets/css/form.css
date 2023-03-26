@@ -1,0 +1,49 @@
+.input {
+    margin-bottom: 20px;
+}
+
+.input:last-child {
+    margin-bottom: unset;
+}
+
+.input label {
+    width: 300px;
+    font-weight: 500;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.input .input-field {
+    padding: 7px 10px;
+    width: 400px;
+    border-radius: 3px;
+    border: 1px solid rgba(var(--main), .5);
+    display: inline-block;
+}
+
+.input input {
+    width: 100%;
+    border: none;
+    outline: none;
+    line-height: 1rem;
+    color: rgba(var(--main), 1);
+    background-color: transparent;
+}
+
+.input input::placeholder {
+    color: rgba(var(--main), .5);
+}
+
+.input.readonly,
+.input.readonly input {
+    cursor: not-allowed;
+}
+
+.input.input-submit button {
+    border: none;
+    padding: 12px;
+    margin-left: 300px;
+    line-height: 1rem;
+    border-radius: 3px;
+    background-color: rgba(var(--main), 1);
+}

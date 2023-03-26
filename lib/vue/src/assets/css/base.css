@@ -1,0 +1,125 @@
+:root {
+
+    font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    font-size: 16px;
+
+    color-scheme: light dark;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    --white: 255, 255, 255;
+    --black: 0, 0, 0;
+    --main: 42, 63, 84;
+    --highlight: 0, 198, 182;
+    --sand: 255,247,214;
+    --red: 226, 119, 122;
+
+}
+
+body {
+    color: rgba(var(--main), .9);
+    background-color: rgb(var(--white));
+
+    height: 100vh;
+    width: 100vw;
+}
+
+ul, ol, li {
+    margin: 0;
+    padding: 0;
+}
+
+h3 {
+    font-size: 1.3rem;
+    font-weight: normal;
+}
+
+.little { font-size: .6rem; line-height: .6rem; }
+
+#admin main {
+    width: calc(100% - 180px);
+    height: 100vh;
+    float: right;
+    padding: 20px;
+    background-color: rgb(var(--black), .05);
+}
+
+#admin #sidebar {
+    float: left;
+    width: 180px;
+    height: 100vh;
+    position: relative;
+    background-color: rgb(var(--main));
+}
+
+#admin #sidebar #logo {
+    width: 100%;
+    height: 140px;
+    background-size: 70px 70px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url("../img/trophy.png");
+}
+
+#admin #main ul {
+    list-style: none;
+}
+
+#admin #main a {
+    display: block;
+    font-size: .9rem;
+    line-height: .9rem;
+    position: relative;
+    color: rgb(var(--white));
+    padding: 20px 20px 20px 40px;
+}
+
+#admin #main a:hover {
+    text-decoration: none;
+    background-color: rgba(var(--white), .1);
+}
+
+#admin #main a.router-link-active {
+    border-right: 5px solid rgb(var(--highlight));
+    background: linear-gradient(rgba(var(--sand), .05), rgb(var(--main))), rgb(var(--main));
+    box-shadow: rgba(var(--black), .25) 0 1px 0, inset rgba(var(--white), .1) 0 1px 0;
+}
+
+#admin #sidebar-footer {
+    width: 100%;
+    height: 40px;
+    bottom: 0;
+    position: absolute;
+    background-color: rgba(var(--black), .2);
+}
+
+#admin #sidebar-footer ul {
+    list-style: none;
+}
+
+#admin #sidebar-footer li {
+    width: 33%;
+    height: 40px;
+    float: left;
+}
+
+#admin #sidebar-footer a {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+#admin #sidebar-footer i {
+    width: 100%;
+    height: 100%;
+}
+
+#admin #sidebar-footer a:hover,
+#admin #sidebar-footer a.router-link-active {
+    background-color: rgba(var(--black), .2);
+}

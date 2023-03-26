@@ -1,0 +1,93 @@
+.title > h3 {
+    width: 50%;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.controls {
+    width: 50%;
+    text-align: right;
+    display: inline-block;
+}
+
+.block {
+    width: 100%;
+    padding: 10px;
+    min-height: 50px;
+    border: 1px solid rgba(var(--main), .2);
+    background-color: rgb(var(--white));
+}
+
+.block .title,
+.block .body {
+    padding: 10px;
+}
+
+.block .title {
+    font-weight: 500;
+    line-height: 1rem;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgb(var(--main));
+}
+
+.block .body {
+    padding-top: 20px;
+}
+
+.block .body.table {
+    padding: 0;
+}
+
+.block .body.table table {
+    width: 100%;
+    font-size: .9rem;
+    line-height: .9rem;
+}
+
+.block .body.table thead {
+    border-bottom: 2px solid rgba(var(--main), .3);
+}
+
+.block .body.table thead td {
+    font-weight: 500;
+}
+
+.block .body.table tbody tr:not(:last-child) {
+    border-bottom: 1px solid rgba(var(--main), .3);
+}
+
+.block .body.table tbody tr:nth-child(2n+1) {
+    background-color: rgba(var(--main), .05);
+}
+
+.block .body.table td {
+    padding: 15px;
+}
+
+.list-inline i {
+    width: 24px;
+    height: 24px;
+    background-color: rgba(var(--main), .5);
+
+    -webkit-mask-size: 14px;
+    mask-size: 14px;
+}
+
+.list-inline-item {
+    padding: 0;
+    float: left;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    border: 1px solid rgba(var(--white), 1);
+    background-color: rgba(var(--main), .1);
+    box-shadow: 0 0 0 1px rgba(var(--main), .3);
+}
+
+.list-inline-item.done {
+    background-color: rgba(var(--highlight), .1);
+    box-shadow: 0 0 0 1px rgba(var(--highlight), .5);
+}
+
+.list-inline-item.done i {
+    background-color: rgba(var(--highlight), 1);
+}
