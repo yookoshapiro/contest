@@ -12,7 +12,7 @@ export const teamsStore = defineStore('teams', {
         load: function ()
         {
 
-            api.list('teams').then((response: AxiosResponse<any>) => {
+            api.list('team').then((response: AxiosResponse<any>) => {
                 this.teams = response.data.data;
             });
 
@@ -31,7 +31,7 @@ export const stationsStore = defineStore('stations', {
         load: function()
         {
 
-            api.list('stations').then((response) => {
+            api.list('station').then((response) => {
                 this.stations = response.data.data;
             });
 
