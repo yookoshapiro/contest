@@ -15,6 +15,43 @@ final class UserController
 {
 
     /**
+     * Gibt alle Benutzer wieder.
+     *
+     * @param Request  $request
+     * @param Response $response
+     * @return Response
+     */
+    public function list(Request $request, Response $response): Response
+    {
+
+        $query = $request->getQueryParams();
+
+        $users = User::query()->select(['id', 'name', 'is_active'])
+            ->limit( $query['limit'] ?? 20 )
+            ->get();
+
+        if ($users->count() === 0)
+        {
+
+            $response->getBody()->write(json_encode([
+                'error' => 'no users found'
+            ]));
+
+            return $response
+                ->withStatus(404);
+
+        }
+
+        $response->getBody()->write(json_encode([
+            'data' => $users
+        ]));
+
+        return $response;
+
+    }
+
+
+    /**
      * Gibt einen Benutzer wieder.
      *
      * @param Request $request
@@ -126,6 +163,8 @@ final class UserController
      */
     public static function router(RouteCollectorProxy $group): void
     {
+
+        $group->get('', [self::class, 'list']);
 
         $group->post('', [self::class, 'create'])
             ->add( Api\ValidationMiddleware::forCreating( [self::class, 'validation'] ) );

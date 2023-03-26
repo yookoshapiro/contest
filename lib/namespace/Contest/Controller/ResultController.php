@@ -18,6 +18,42 @@ class ResultController
 {
 
     /**
+     * Gibt alle Teams wieder.
+     *
+     * @param Request  $request
+     * @param Response $response
+     * @return Response
+     */
+    public function list(Request $request, Response $response): Response
+    {
+
+        $query = $request->getQueryParams();
+        $results = Result::with(['station:id,name,type', 'team:id,name'])
+            ->limit( $query['limit'] ?? 20 )
+            ->get();
+
+        if ($results->count() === 0)
+        {
+
+            $response->getBody()->write(json_encode([
+                'error' => 'no results found'
+            ]));
+
+            return $response
+                ->withStatus(404);
+
+        }
+
+        $response->getBody()->write(json_encode([
+            'data' => $results
+        ]));
+
+        return $response;
+
+    }
+
+
+    /**
      * Zeigt ein Ergebnis.
      *
      * @param Request  $request
@@ -204,6 +240,8 @@ class ResultController
      */
     public static function router(RouteCollectorProxy $group): void
     {
+
+        $group->get('', [self::class, 'list']);
 
         $group->post('', [self::class, 'create'])
             ->add( Api\ValidationMiddleware::forCreating( [self::class, 'validation'] ) )

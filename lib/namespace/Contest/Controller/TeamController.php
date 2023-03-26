@@ -15,6 +15,43 @@ final class TeamController
 {
 
     /**
+     * Gibt alle Teams wieder.
+     *
+     * @param Request  $request
+     * @param Response $response
+     * @return Response
+     */
+    public function list(Request $request, Response $response): Response
+    {
+
+        $query = $request->getQueryParams();
+
+        $users = Team::with('results:id,station_id,team_id,type,value,comment')->select(['id', 'name'])
+            ->limit( $query['limit'] ?? 20 )
+            ->get();
+
+        if ($users->count() === 0)
+        {
+
+            $response->getBody()->write(json_encode([
+                'error' => 'no teams found'
+            ]));
+
+            return $response
+                ->withStatus(404);
+
+        }
+
+        $response->getBody()->write(json_encode([
+            'data' => $users
+        ]));
+
+        return $response;
+
+    }
+
+
+    /**
      * Gibt ein Team wieder.
      *
      * @param Request $request
@@ -113,6 +150,8 @@ final class TeamController
      */
     public static function router(RouteCollectorProxy $group): void
     {
+
+        $group->get('', [self::class, 'list']);
 
         $group->post('', [self::class, 'create'])
             ->add( Api\ValidationMiddleware::forCreating( [self::class, 'validation'] ) );
