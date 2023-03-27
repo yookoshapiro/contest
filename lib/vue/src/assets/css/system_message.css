@@ -1,0 +1,103 @@
+#system-messages {
+    right: 40px;
+    bottom: 40px;
+    position: absolute;
+}
+
+#system-messages .item {
+    width: 350px;
+    margin-top: 20px;
+    border-radius: 5px;
+    position: relative;
+    padding: 10px 60px 10px 70px;
+    box-shadow: 0 0 5px 3px rgba(var(--main), .1);
+}
+
+#system-messages .item:before {
+    content: "";
+    left: 10px;
+    top: 10px;
+    bottom: 10px;
+    width: 3px;
+    position: absolute;
+}
+
+#system-messages .item.error:before,
+#system-messages .item.error .title.icon:before {
+    background-color: rgba(var(--alert), 1);
+}
+
+#system-messages .item.error .title {
+    color: rgba(var(--alert), 1);
+}
+
+#system-messages .item.warning:before,
+#system-messages .item.warning .title.icon:before {
+    background-color: rgba(var(--warning), 1);
+}
+
+#system-messages .item.warning .title {
+    color: rgba(var(--warning), 1);
+}
+
+#system-messages .item.success:before,
+#system-messages .item.success .title.icon:before {
+    background-color: rgba(var(--success), 1);
+}
+
+#system-messages .item.success .title {
+    color: rgba(var(--success), 1);
+}
+
+#system-messages .item.info:before,
+#system-messages .item.info .title.icon:before {
+    background-color: rgba(var(--info), 1);
+}
+
+#system-messages .item.info .title {
+    color: rgba(var(--info), 1);
+}
+
+#system-messages .title {
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+
+#system-messages .title.icon:before {
+    left: 20px;
+    -webkit-mask-size: 30px;
+    mask-size: 30px;
+}
+
+#system-messages .item.error .title.icon:before {
+    -webkit-mask-size: 34px;
+    mask-size: 34px;
+}
+
+#system-messages .body {
+    font-size: .75rem;
+}
+
+#system-messages .close {
+    top: 0;
+    right: 10px;
+    height: 100%;
+
+    position: absolute;
+    display: table-cell;
+    vertical-align: center;
+}
+
+#system-messages .close i.icon {
+    cursor: pointer;
+    background-color: rgba(var(--main), .5);
+
+    width: 24px;
+    height: 100%;
+    -webkit-mask-size: 24px;
+    mask-size: 24px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

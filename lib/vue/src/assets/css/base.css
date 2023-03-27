@@ -19,10 +19,15 @@
     --sand: 255,247,214;
     --red: 226, 119, 122;
 
+    --success: 92, 184, 92;
+    --warning: 240, 173, 78;
+    --alert: 226, 119, 122;
+    --info: 66, 139, 202;
+
 }
 
 body {
-    color: rgba(var(--main), .9);
+    color: rgba(var(--main), 1);
     background-color: rgb(var(--white));
 
     height: 100vh;
@@ -39,7 +44,15 @@ h3 {
     font-weight: normal;
 }
 
-.little { font-size: .6rem; line-height: .6rem; }
+.little { font-size: .6666666rem; line-height: .6666666rem; letter-spacing: .02rem; }
+
+#app {
+    position: relative;
+}
+
+#admin {
+    overflow: hidden;
+}
 
 #admin main {
     width: calc(100% - 180px);

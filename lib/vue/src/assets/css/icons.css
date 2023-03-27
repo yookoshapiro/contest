@@ -105,3 +105,23 @@ i.icon {
     -webkit-mask-image: url("../icon/error_outline_black_48dp.svg");
     mask-image: url("../icon/error_outline_black_48dp.svg");
 }
+
+:not(i).icon-check_circle::before, i.icon-check_circle {
+    -webkit-mask-image: url("../icon/check_circle_black_48dp.svg");
+    mask-image: url("../icon/check_circle_black_48dp.svg");
+}
+
+:not(i).icon-dangerous::before, i.icon-dangerous {
+    -webkit-mask-image: url("../icon/dangerous_black_48dp.svg");
+    mask-image: url("../icon/dangerous_black_48dp.svg");
+}
+
+:not(i).icon-circle_notifications::before, i.icon-circle_notifications {
+    -webkit-mask-image: url("../icon/circle_notifications_black_48dp.svg");
+    mask-image: url("../icon/circle_notifications_black_48dp.svg");
+}
+
+:not(i).icon-close::before, i.icon-close {
+    -webkit-mask-image: url("../icon/close_black_48dp.svg");
+    mask-image: url("../icon/close_black_48dp.svg");
+}
