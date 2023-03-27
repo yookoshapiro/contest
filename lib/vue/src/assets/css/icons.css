@@ -1,27 +1,4 @@
-:not(i).icon::before {
-    content: "";
-    position: absolute;
-    display: block;
-
-    top: 0;
-    left: 0;
-    width: 40px;
-    height: 100%;
-
-    background-color: #fff;
-
-    -webkit-mask-size: 16px;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: center center;
-}
-
-i.icon {
-    padding: 0;
-    float: left;
-    width: 16px;
-    height: 16px;
-    display: block;
-
+i.icon, .icon:before {
     background-color: #fff;
 
     -webkit-mask-size: 16px;
@@ -31,6 +8,25 @@ i.icon {
     mask-size: 16px;
     mask-repeat: no-repeat;
     mask-position: center center;
+}
+
+:not(i).icon::before {
+    content: "";
+    position: absolute;
+    display: block;
+
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 100%;
+}
+
+i.icon {
+    padding: 0;
+    float: left;
+    width: 16px;
+    height: 16px;
+    display: block;
 }
 
 :not(i).icon-home::before, i.icon-home {
@@ -103,4 +99,9 @@ i.icon {
 :not(i).icon-edit::before, i.icon-edit {
     -webkit-mask-image: url("../icon/edit_black_48dp.svg");
     mask-image: url("../icon/edit_black_48dp.svg");
+}
+
+:not(i).icon-error-outline::before, i.icon-error-outline {
+    -webkit-mask-image: url("../icon/error_outline_black_48dp.svg");
+    mask-image: url("../icon/error_outline_black_48dp.svg");
 }

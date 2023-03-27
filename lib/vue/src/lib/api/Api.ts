@@ -25,18 +25,24 @@ class Api implements ApiInterface
 
     }
 
-    public request(method: string, path: string, parameter?: RouteParameter): Promise<any>
-    {
-
-        return this.handler.request({
-            method: method,
-            url: this.getUrl(path, parameter)
-        });
-
+    public list(path: string, parameter?: RouteParameter): Promise<any> {
+        return this.handler.get(this.getUrl(path, parameter))
     }
 
-    public list(path: string, parameter?: RouteParameter): Promise<any> {
-        return this.request('get', path, parameter);
+    public find(path: string, id: string|number): Promise<any> {
+        return this.handler.get(this.getUrl(path) + '/' + id);
+    }
+
+    public add(path: string, data: object): Promise<any> {
+        return this.handler.post(this.getUrl(path), data);
+    }
+
+    public edit(path: string, id: string|number, data: object): Promise<any> {
+        return this.handler.patch(this.getUrl(path) + '/' + id, data);
+    }
+
+    public remove(path: string, id: string|number): Promise<any> {
+        return this.handler.delete(this.getUrl(path + '/' + id));
     }
 
 }

@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="to" class="linked-button" :class="{'red': color === 'red'}"><slot /></router-link>
+  <button class="simple-button" :class="{'red': color === 'red', 'with-spinner': props['spinner']}"><slot /></button>
 </template>
 
 <script setup lang="ts">
@@ -8,33 +8,36 @@ import {ref} from "vue";
 
 interface Props {
 
-  to: object;
-  color?: string
+  color?: string,
+  spinner?: boolean
 
 }
 
 const props: Props = defineProps({
-  to: {
-    type: Object,
-    required: true
-  },
   color: {
     type: String,
     default: 'highlight'
+  },
+  spinner: {
+    type: Boolean,
+    default: false
   }
 });
 
-const to = ref(props.to);
 const color = ref(props.color);
 
 </script>
 
 <style scoped>
-.linked-button {
+.simple-button {
   padding: 8px;
   margin-right: 5px;
 
+  border: none;
+  outline: none;
+  cursor: pointer;
   border-radius: 3px;
+  position: relative;
   display: inline-block;
   background-color: rgba(var(--highlight), .9);
 
@@ -48,7 +51,7 @@ const color = ref(props.color);
   background-color: rgba(var(--red), .9);
 }
 
-.linked-button:deep() i {
+.simple-button:deep() i {
   margin-right: 5px;
 }
 </style>

@@ -4,19 +4,68 @@
   </div>
   <div class="block">
 
-    <InputText v-if="$route.name === 'editTeam'" name="id" :value="$route.params.id" label="Kennung" readonly />
-    <InputText name="name" label="Name" placeholder="Name des Teams" error="" />
-    <Submit name="submit_team" :text="$route.name === 'addTeam' ? 'Neues Team anlegen' : 'Team bearbeiten'" />
+    <form method="post" :action="$route.path" @submit.prevent="onSubmit">
+      <InputText v-if="$route.name === 'editTeam'" name="id" :modelValue="$route.params.id.toString()" label="Kennung" readonly />
+      <InputText v-model="teamName" name="name" label="Name" placeholder="Name des Teams" :error="error" />
+      <Submit name="submit_team" :text="$route.name === 'addTeam' ? 'Neues Team anlegen' : 'Team bearbeiten'" :spinner="spinner" />
+    </form>
 
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { AxiosResponse } from 'axios';
+import { teamsStore } from '../../../lib/store/stores';
+
 import InputText from '../../elements/form/InputText.vue';
 import Submit from '../../elements/form/Submit.vue';
 
+const $route = useRoute();
+const $router = useRouter();
+const error = ref('');
+const teamName = ref('');
+const teams = teamsStore();
+const spinner = ref(false);
+
+if ($route.name === "editTeam") {
+  teams.find( $route.params.id.toString() ).then((response: AxiosResponse<any>) => {
+    teamName.value = response.data.data.name;
+  });
+}
+
+const onSubmit = function()
+{
+
+  error.value = "";
+  spinner.value = true;
+
+  if ( teamName.value.length === 0 ) {
+    error.value = "Das Feld darf nicht leer sein.";
+    return;
+  }
+
+  if ( teamName.value.length < 3 ) {
+    error.value = "Der Name muss min. 3 Zeichen lang sein.";
+    return;
+  }
+
+  if ($route.name === "addTeam")
+  {
+
+    return teams.add(teamName.value).then(() => {
+      $router.push({name: 'showTeams'});
+      spinner.value = false;
+    });
+
+  }
+
+  return teams.edit($route.params.id.toString(), teamName.value).then(() => {
+    $router.push({name: 'showTeams'});
+    spinner.value = false;
+  });
+
+}
+
 </script>
-
-<style scoped>
-
-</style>

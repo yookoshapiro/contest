@@ -14,11 +14,12 @@
 }
 
 .input .input-field {
-    padding: 7px 10px;
     width: 400px;
+    padding: 7px 10px;
     border-radius: 3px;
-    border: 1px solid rgba(var(--main), .5);
+    position: relative;
     display: inline-block;
+    border: 1px solid rgba(var(--main), .5);
 }
 
 .input input {
@@ -39,11 +40,87 @@
     cursor: not-allowed;
 }
 
-.input.input-submit button {
+.input button {
     border: none;
+    outline: none;
     padding: 12px;
+    cursor: pointer;
+    overflow: hidden;
     margin-left: 300px;
     line-height: 1rem;
     border-radius: 3px;
+    position: relative;
     background-color: rgba(var(--main), 1);
+}
+
+button.with-spinner {
+    color: transparent !important;
+}
+
+button.with-spinner > i {
+    background-color: transparent !important;
+}
+
+@keyframes click-spinner {
+    to {transform: rotate(360deg);}
+}
+
+button.with-spinner::before {
+    content: '';
+    position: absolute;
+    box-sizing: border-box;
+    animation: click-spinner 1.4s ease infinite;
+
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: rgba(var(--white), 1);
+    border-bottom-color: rgba(var(--white), 1);
+}
+
+/**
+ * Fehlermeldung
+ */
+
+.input.error label {
+    color: rgba(var(--red), 1);
+}
+
+.input.error .input-field {
+    border-color: rgba(var(--red), 1);
+}
+
+.input.error input {
+    width: calc(100% - 30px);
+}
+
+.input.error input::placeholder {
+    color: rgba(var(--red), .5);
+}
+
+.input.error .field-icon {
+    top: 9px;
+    right: 10px;
+    position: absolute;
+}
+
+.input.error .field-icon i {
+    width: 22px;
+    height: 22px;
+    -webkit-mask-size: 22px;
+    mask-size: 22px;
+    background-color: rgba(var(--red), 1);
+}
+
+.input .error-message {
+    font-weight: 500;
+    margin-left: 20px;
+    display: inline-block;
+    color: rgba(var(--red), 1);
 }

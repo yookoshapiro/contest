@@ -1,8 +1,9 @@
 <template>
-  <div :class="'input input-submit' + (readonly ? ' readonly' : '')">
+  <div class="input input-text" :class="{readonly, error}">
     <label :for="inputId">{{ label }}</label>
     <div class="input-field">
-      <input :id="inputId" :name="name" v-model="value" type="text" :placeholder="placeholder" :readonly="readonly" />
+      <input :id="inputId" :name="name" :value="modelValue" @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)" type="text" :placeholder="placeholder" :readonly="readonly" />
+      <div v-if="error" class="field-icon"><i class="icon icon-error-outline"></i></div>
     </div>
     <div v-if="error" class="error-message">{{ error }}</div>
   </div>
@@ -14,7 +15,7 @@ import { ref } from 'vue';
 interface Props {
   label: string;
   name: string;
-  value?: string;
+  modelValue?: string;
   error?: string;
   id?: string;
   placeholder?: string;
@@ -31,6 +32,10 @@ const props: Props = defineProps({
     required: true
   },
   value: {
+    type: String,
+    default: null
+  },
+  modelValue: {
     type: String,
     default: null
   },
@@ -52,8 +57,9 @@ const props: Props = defineProps({
   }
 });
 
+defineEmits(['update:modelValue']);
+
 const inputId = ref(props.id ?? props.name);
-const value = ref(props.value);
 const placeholder = ref(props.placeholder);
 const readonly = ref(props.readonly);
 </script>

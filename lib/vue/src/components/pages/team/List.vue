@@ -35,6 +35,7 @@
             </td>
             <td>
               <LinkedButton :to="{name: 'editTeam', params: { id: team.id }}"><i class="icon icon-edit"></i>Bearbeiten</LinkedButton>
+              <SimpleButton @click="deleteTeam(team.id)" color="red" :spinner="spinner.get(team.id)"><i class="icon icon-delete"></i>Löschen</SimpleButton>
             </td>
           </tr>
           </tbody>
@@ -46,16 +47,26 @@
 
 <script setup lang="ts">
 
-import { onBeforeMount } from 'vue';
+import {onBeforeMount, ref} from 'vue';
 import { teamsStore, stationsStore } from '../../../lib/store/stores';
 import { Station, Team } from '../../../lib/interface/tables';
 
+import SimpleButton from '../../elements/SimpleButton.vue';
+import LinkedButton from '../../elements/LinkedButton.vue';
+
 const teams = teamsStore();
 const stations = stationsStore();
+const spinner = ref(new Map<string, boolean>());
 
-onBeforeMount(() => {
+onBeforeMount(() =>
+{
   teams.load();
   stations.load();
+
+  for(let index in teams.teams) {
+    spinner.value.set( teams.teams[ index ].id, false );
+  }
+
 });
 
 const isIn = function(station: Station, team: Team): boolean
@@ -80,5 +91,13 @@ const isIn = function(station: Station, team: Team): boolean
   return result.length > 0;
 
 };
+
+const deleteTeam = function(this: any, id: string)
+{
+
+  spinner.value.set(id, true);
+  teams.remove(id);
+
+}
 
 </script>
