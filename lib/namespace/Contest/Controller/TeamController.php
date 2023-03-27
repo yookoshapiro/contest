@@ -30,18 +30,6 @@ final class TeamController
             ->limit( $query['limit'] ?? 20 )
             ->get();
 
-        if ($users->count() === 0)
-        {
-
-            $response->getBody()->write(json_encode([
-                'error' => 'no teams found'
-            ]));
-
-            return $response
-                ->withStatus(404);
-
-        }
-
         $response->getBody()->write(json_encode([
             'data' => $users
         ]));
