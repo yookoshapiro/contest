@@ -7,6 +7,7 @@
 #system-messages .item {
     width: 350px;
     margin-top: 20px;
+    overflow: hidden;
     border-radius: 5px;
     position: relative;
     padding: 10px 60px 10px 70px;
@@ -15,10 +16,10 @@
 
 #system-messages .item:before {
     content: "";
-    left: 10px;
-    top: 10px;
-    bottom: 10px;
-    width: 3px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 10px;
     position: absolute;
 }
 
@@ -42,20 +43,20 @@
 
 #system-messages .item.success:before,
 #system-messages .item.success .title.icon:before {
-    background-color: rgba(var(--success), 1);
+    background-color: rgba(var(--highlight), 1);
 }
 
 #system-messages .item.success .title {
-    color: rgba(var(--success), 1);
+    color: rgba(var(--highlight), 1);
 }
 
 #system-messages .item.info:before,
 #system-messages .item.info .title.icon:before {
-    background-color: rgba(var(--info), 1);
+    background-color: rgba(var(--main), 1);
 }
 
 #system-messages .item.info .title {
-    color: rgba(var(--info), 1);
+    color: rgba(var(--main), 1);
 }
 
 #system-messages .title {
@@ -64,7 +65,7 @@
 }
 
 #system-messages .title.icon:before {
-    left: 20px;
+    left: 18px;
     -webkit-mask-size: 30px;
     mask-size: 30px;
 }
@@ -80,12 +81,18 @@
 
 #system-messages .close {
     top: 0;
-    right: 10px;
+    right: 0;
     height: 100%;
+    padding: 0 10px;
 
     position: absolute;
     display: table-cell;
     vertical-align: center;
+    border-left: 1px solid rgba(var(--main), .1);
+}
+
+#system-messages .close:hover {
+    background-color: rgba(var(--main), .1);
 }
 
 #system-messages .close i.icon {

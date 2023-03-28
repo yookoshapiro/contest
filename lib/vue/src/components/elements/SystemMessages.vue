@@ -5,7 +5,7 @@
       <div class="item" :class="message.type">
         <div class="title icon" :class="icons[ message.type ]">{{ message.title }}</div>
         <div class="body">{{ message.text }}</div>
-        <div class="close"><i class="icon icon-close" @click="removeItem(message.created_at)" /></div>
+        <div class="close" @click="removeItem(message.created_at)"><i class="icon icon-close" /></div>
       </div>
 
     </div>
@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { systemMessagesStore } from '../../lib/store/message';
+import { systemMessagesStore, SystemMessageType } from '../../lib/store/message';
 
 const messages = systemMessagesStore();
 const icons = {
