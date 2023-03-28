@@ -18,6 +18,7 @@ import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { AxiosResponse } from 'axios';
 import { teamsStore } from '../../../lib/store/stores';
+import { systemMessagesStore, SystemMessageType } from '../../../lib/store/message';
 
 import InputText from '../../elements/form/InputText.vue';
 import Submit from '../../elements/form/Submit.vue';
@@ -28,6 +29,7 @@ const error = ref('');
 const teamName = ref('');
 const teams = teamsStore();
 const spinner = ref(false);
+const systemMessage = systemMessagesStore();
 
 if ($route.name === "editTeam") {
   teams.find( $route.params.id.toString() ).then((response: AxiosResponse<any>) => {
@@ -57,6 +59,11 @@ const onSubmit = function()
     return teams.add(teamName.value).then(() => {
       $router.push({name: 'showTeams'});
       spinner.value = false;
+      systemMessage.add({
+        type: SystemMessageType.success,
+        title: 'Team angelegt',
+        text: "Das Team '" +teamName.value + "' wurde erfolgreich angelegt."
+      });
     });
 
   }
@@ -64,6 +71,11 @@ const onSubmit = function()
   return teams.edit($route.params.id.toString(), teamName.value).then(() => {
     $router.push({name: 'showTeams'});
     spinner.value = false;
+    systemMessage.add({
+      type: SystemMessageType.success,
+      title: 'Team bearbeitet',
+      text: "Das Team '" +teamName.value + "' wurde erfolgreich bearbeitet."
+    });
   });
 
 }

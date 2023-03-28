@@ -5,7 +5,7 @@
       <div class="item" :class="message.type">
         <div class="title icon" :class="icons[ message.type ]">{{ message.title }}</div>
         <div class="body">{{ message.text }}</div>
-        <div class="close"><i class="icon icon-close" @click="getClose(index)" /></div>
+        <div class="close"><i class="icon icon-close" @click="removeItem(message.created_at)" /></div>
       </div>
 
     </div>
@@ -23,8 +23,8 @@ const icons = {
   'info': 'icon-circle_notifications'
 };
 
-const getClose = function(index: number) {
-  messages.remove(index);
+const removeItem = function(timestamp: number) {
+  messages.remove(timestamp);
 }
 
 </script>

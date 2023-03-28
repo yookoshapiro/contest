@@ -20,7 +20,7 @@ export interface SystemMessage
 interface SystemMessageInternal extends SystemMessage
 {
 
-    created_at: Date
+    created_at: number
 
 }
 
@@ -33,20 +33,31 @@ export const systemMessagesStore = defineStore('system-message', {
 
     actions: {
 
-        add(message: SystemMessage)
+        add(message: SystemMessage, timeout: number = 10000)
         {
 
             this.messages.push({
                 type: message.type,
                 title: message.title,
                 text: message.text,
-                created_at: new Date()
+                created_at: Date.now()
             });
+
+            setTimeout(() => {
+                this.remove( this.messages[ this.messages.length - 1 ].created_at );
+            }, timeout);
 
         },
 
-        remove(index: number) {
-            this.messages.splice(index, 1);
+        remove(timestamp: number)
+        {
+
+            let index = this.messages.findIndex(messages => messages.created_at === timestamp);
+
+            if (index > -1) {
+                this.messages.splice(index, 1);
+            }
+
         }
 
     }
