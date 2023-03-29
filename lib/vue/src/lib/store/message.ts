@@ -27,8 +27,8 @@ interface SystemMessageInternal extends SystemMessage
 export const systemMessagesStore = defineStore('system-message', {
 
     state: () => ({
-        messages: Array<SystemMessageInternal>(),
-        time: new Date()
+        messages: Array<SystemMessageInternal>() as Array<SystemMessageInternal>,
+        time: new Date() as Date
     }),
 
     actions: {

@@ -1,0 +1,106 @@
+#system-alert {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    position: absolute;
+    visibility: hidden;
+
+    background-color: rgba(var(--main), .8);
+
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#system-alert.active {
+    visibility: visible;
+}
+
+#system-alert .message {
+    min-width: 200px;
+    max-width: 400px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+#system-alert .message > div {
+    background-color: rgba(var(--white), 1);
+}
+
+#system-alert .body {
+    position: relative;
+    padding: 20px 20px 20px 80px;
+}
+
+#system-alert .body:before {
+    width: 75px;
+    -webkit-mask-size: 40px;
+    mask-size: 40px;
+    background-color: rgba(var(--main), 1);
+}
+
+#system-alert .body .title {
+    font-weight: 500;
+    margin-bottom: 20px;
+    line-height: 1rem;
+}
+
+#system-alert .body .text {
+    font-size: .9rem;
+}
+
+#system-alert button {
+    margin-top: 3px;
+}
+
+#system-alert button {
+    margin-top: 2px;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    background-color: rgba(var(--white), 1);
+    color: rgba(var(--main), 1);
+}
+
+#system-alert button:hover {
+    background-color: rgba(var(--white), .7);
+}
+
+/* message-confirm */
+#system-alert .message-confirm .body:before {
+    -webkit-mask-size: 44px;
+    mask-size: 44px;
+    background-color: rgba(var(--red), 1);
+}
+
+#system-alert .message-confirm .title {
+    color: rgba(var(--red), 1);
+}
+
+#system-alert .message-confirm button {
+    width: calc(50% - 1px);
+    float: left;
+}
+
+#system-alert .message-confirm .button-confirm:hover {
+    color: rgba(var(--white), 1);
+    background-color: rgba(var(--red), .8);
+}
+
+#system-alert .message-confirm .button-cancel {
+    margin-left: 2px;
+    color: rgba(var(--white), 1);
+    background-color: rgba(var(--highlight), .7);
+}
+
+#system-alert .message-confirm .button-cancel:hover {
+    background-color: rgba(var(--highlight), 1);
+}
