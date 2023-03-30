@@ -91,3 +91,30 @@
 .list-inline-item.done i {
     background-color: rgba(var(--highlight), 1);
 }
+
+div.with-spinner {
+    padding-left: 20px;
+    position: relative;
+}
+
+@keyframes click-spinner {
+    to {transform: rotate(360deg);}
+}
+
+div.with-spinner::before {
+    content: '';
+    position: absolute;
+    box-sizing: border-box;
+    animation: click-spinner 1.4s ease infinite;
+
+    top: 50%;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    margin-top: -8px;
+
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: rgba(var(--main), 1);
+    border-bottom-color: rgba(var(--main), 1);
+}
