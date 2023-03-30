@@ -2,41 +2,66 @@ import { defineStore } from 'pinia';
 
 export enum AlertType {
 
-    alert = 'alert',
-    confirm = 'confirm',
-    custom = 'custom'
+    alert,
+    confirm,
+    custom
 
 }
 
-interface Func<T,TResult>
+interface PromiseCallback
 {
-    (item: T): TResult;
+    (item: any): void;
 }
 
-export const AlertStore = defineStore('system-alert', {
+export interface Alert {
+
+    type?: AlertType,
+    title?: string,
+    text?: string
+
+}
+
+interface AlertInternal extends Alert {
+
+    active: boolean,
+    resolve: PromiseCallback,
+    reject: PromiseCallback
+
+}
+
+export const AlertStore = defineStore('alert', {
 
     state: () => ({
-        active: false as boolean,
-        type: AlertType.confirm as AlertType,
-        title: '' as string,
-        text: '' as string,
-        resolve:  (() => {}) as Func<any, void>,
-        reject: (() => {}) as Func<any, void>
+
+        alert: {
+            active: false,
+            resolve: () => {},
+            reject: () => {}
+        } as AlertInternal
+
     }),
 
     actions: {
 
-        async set(type: AlertType, title: string = '', text: string = ''): Promise<any>
+        async set(alert: Alert = {}): Promise<any>
         {
 
-            this.active = true;
-            this.type = type;
-            this.title = title;
-            this.text = text;
+            this.alert.active = true;
+            this.alert.type = (typeof alert.type === "undefined" ? AlertType.alert : alert.type);
 
-            return new Promise((resolve: Func<any, void>, reject: Func<any, void>) => {
-                this.resolve = resolve;
-                this.reject = reject;
+            if (typeof alert.title === "string") {
+                this.alert.title = alert.title;
+            }
+
+            if (typeof alert.text === "string") {
+                this.alert.text = alert.text;
+            }
+
+            return new Promise((resolve: PromiseCallback, reject: PromiseCallback) => {
+
+                this.alert.resolve = resolve;
+                this.alert.reject = reject;
+
             }).finally(() => {
                this.unset();
             });
@@ -44,10 +69,17 @@ export const AlertStore = defineStore('system-alert', {
         },
 
 
-        unset(): void {
-            this.active = false;
-            this.resolve = (n: any) => {};
-            this.reject = (n: any) => {};
+        unset(): void
+        {
+
+            this.alert.active = false;
+            this.alert.resolve = () => {};
+            this.alert.reject = () => {};
+
+            delete this.alert.type;
+            delete this.alert.title;
+            delete this.alert.text;
+
         }
 
     }

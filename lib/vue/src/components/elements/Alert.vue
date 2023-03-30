@@ -1,5 +1,5 @@
 <template>
-  <div id="alert" :class="{active: alert.active === true}" @click.self="alert.reject">
+  <div id="alert" :class="{active: alert.active}" @click.self="alert.reject">
 
     <div v-if="alert.type === AlertType.alert" class="message message-alert">
       <div class="body icon icon-error-outline">
@@ -31,6 +31,6 @@
 
 import { AlertStore, AlertType } from '../../lib/store/alert';
 
-const alert = AlertStore();
+const alert = AlertStore().alert;
 
 </script>

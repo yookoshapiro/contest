@@ -59,7 +59,7 @@ import { onBeforeMount, ref } from 'vue';
 import { Station, Team } from '../../lib/interface/Tables';
 
 import { stationsStore, teamsStore } from '../../lib/store/stores';
-import { AlertType, AlertStore } from '../../lib/store/alert';
+import { AlertStore, AlertType } from '../../lib/store/alert';
 import { NotificationsStore, NotificationType } from "../../lib/store/notifications";
 
 import SimpleButton from "../elements/SimpleButton.vue";
@@ -123,7 +123,7 @@ const showAddTeam = function(): void
   teamName.value = '';
   inputLabel.value = 'Team hinzufügen';
 
-  alert.set(AlertType.custom)
+  alert.set({type: AlertType.custom})
     .then(() => {
 
       activateAlert.value = false;
@@ -146,7 +146,9 @@ const showAddTeam = function(): void
       });
 
     })
-    .catch(() => {});
+    .catch(() => {
+      activateAlert.value = false;
+    });
 
 }
 
@@ -157,7 +159,7 @@ const showEditTeam = function(id: string, name: string): void
   teamName.value = name;
   inputLabel.value = 'Team bearbeiten';
 
-  alert.set(AlertType.custom)
+  alert.set({type: AlertType.custom})
     .then(() => {
 
       activateAlert.value = false;
@@ -183,7 +185,9 @@ const showEditTeam = function(id: string, name: string): void
       });
 
     })
-    .catch(() => {})
+    .catch(() => {
+      activateAlert.value = false;
+    })
     .finally(() => {
       editSpinner.value.set(id, false);
     });
@@ -193,7 +197,11 @@ const showEditTeam = function(id: string, name: string): void
 const deleteTeam = function(id: string, name: string): void
 {
 
-  alert.set(AlertType.confirm, 'Team wirklich löschen?', "Soll das Team '" + name + "' wirklich gelöscht werden?")
+  alert.set({
+    type: AlertType.confirm,
+    title: 'Team wirklich löschen?',
+    text: "Soll das Team '" + name + "' wirklich gelöscht werden?"
+  })
     .then(() => {
 
       deleteSpinner.value.set(id, true);
