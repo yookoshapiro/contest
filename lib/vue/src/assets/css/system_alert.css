@@ -85,7 +85,8 @@
     color: rgba(var(--red), 1);
 }
 
-#system-alert .message-confirm button {
+#system-alert .message-confirm button,
+#system-alert .message-custom button {
     width: calc(50% - 1px);
     float: left;
 }
@@ -95,12 +96,29 @@
     background-color: rgba(var(--red), .8);
 }
 
+#system-alert .message-custom .button-confirm:hover {
+    color: rgba(var(--white), 1);
+    background-color: rgba(var(--highlight), .8);
+}
+
 #system-alert .message-confirm .button-cancel {
     margin-left: 2px;
     color: rgba(var(--white), 1);
     background-color: rgba(var(--highlight), .7);
 }
 
+#system-alert .message-custom .button-cancel {
+    margin-left: 2px;
+}
+
 #system-alert .message-confirm .button-cancel:hover {
     background-color: rgba(var(--highlight), 1);
+}
+
+#system-alert .message-custom .body {
+    padding: 20px;
+}
+
+#system-alert .message-custom {
+    min-width: 400px;
 }
