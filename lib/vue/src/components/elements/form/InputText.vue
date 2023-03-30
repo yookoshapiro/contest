@@ -1,5 +1,5 @@
 <template>
-  <div class="input input-text" :class="{readonly, error}">
+  <div class="input input-text" :class="{ readonly, error, vertical }">
     <label :for="inputId">{{ label }}</label>
     <div class="input-field">
       <input :id="inputId" :name="name" :value="modelValue" @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)" type="text" :placeholder="placeholder" :readonly="readonly" />
@@ -19,7 +19,8 @@ interface Props {
   error?: string;
   id?: string;
   placeholder?: string;
-  readonly?: boolean
+  readonly?: boolean,
+  vertical?: boolean
 }
 
 const props: Props = defineProps({
@@ -52,6 +53,10 @@ const props: Props = defineProps({
     default: null
   },
   readonly: {
+    type: Boolean,
+    default: false
+  },
+  vertical: {
     type: Boolean,
     default: false
   }
