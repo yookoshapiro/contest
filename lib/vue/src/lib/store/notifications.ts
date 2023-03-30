@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 
 export enum NotificationType {
+
     error = 'error',
     warning = 'warning',
     success = 'success',
@@ -13,53 +14,49 @@ export interface Notification
 
     type: NotificationType,
     title: string,
-    text: string
+    text: string,
+    icon?: string,
+    timeout?: number
 
 }
 
-interface NotificationInternal extends Notification
-{
-
-    created_at: number
-
-}
+export const DefaultNotificationIcon = new Map<NotificationType, string>([
+    [NotificationType.warning, 'icon-error-outline'],
+    [NotificationType.error, 'icon-dangerous'],
+    [NotificationType.success, 'icon-check_circle'],
+    [NotificationType.info, 'icon-circle_notifications']
+]);
 
 export const NotificationsStore = defineStore('notifications', {
 
     state: () => ({
-        messages: Array<NotificationInternal>() as Array<NotificationInternal>,
-        time: new Date() as Date
+        notifications: new Map<number, Notification>
     }),
 
     actions: {
 
-        add(notification: Notification, timeout: number = 10000)
+        add(notification: Notification)
         {
 
-            let timestamp = Date.now();
+            if (typeof notification.timeout === "undefined") {
+                notification.timeout = 10000;
+            }
 
-            this.messages.push({
-                type: notification.type,
-                title: notification.title,
-                text: notification.text,
-                created_at: timestamp
-            });
+            if (typeof notification.icon === "undefined") {
+                notification.icon = DefaultNotificationIcon.get( notification.type );
+            }
+
+            let timestamp = Date.now();
+            this.notifications.set(timestamp, notification);
 
             setTimeout(() => {
-                this.remove( timestamp );
-            }, timeout);
+                this.notifications.delete(timestamp);
+            }, notification.timeout);
 
         },
 
-        remove(timestamp: number)
-        {
-
-            let index = this.messages.findIndex(notification => notification.created_at === timestamp);
-
-            if (index > -1) {
-                this.messages.splice(index, 1);
-            }
-
+        remove(timestamp: number) {
+            this.notifications.delete(timestamp);
         }
 
     }
