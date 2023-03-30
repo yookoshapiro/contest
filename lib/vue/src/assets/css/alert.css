@@ -54,14 +54,11 @@
 }
 
 #alert button {
-    margin-top: 3px;
-}
-
-#alert button {
     margin-top: 2px;
     padding: 10px;
     text-align: center;
     font-weight: bold;
+    user-select: none;
 
     width: 100%;
     border: none;
