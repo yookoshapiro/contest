@@ -26,7 +26,7 @@ export const systemAlertStore = defineStore('system-alert', {
 
     actions: {
 
-        async set(type: SystemAlertType, title: string, text: string): Promise<any>
+        async set(type: SystemAlertType, title: string = '', text: string = ''): Promise<any>
         {
 
             this.active = true;
@@ -37,7 +37,9 @@ export const systemAlertStore = defineStore('system-alert', {
             return new Promise((resolve: Func<any, void>, reject: Func<any, void>) => {
                 this.resolve = resolve;
                 this.reject = reject;
-            })
+            }).finally(() => {
+               this.unset();
+            });
 
         },
 
