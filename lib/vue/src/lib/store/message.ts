@@ -36,15 +36,17 @@ export const systemMessagesStore = defineStore('system-message', {
         add(message: SystemMessage, timeout: number = 10000)
         {
 
+            let timestamp = Date.now();
+
             this.messages.push({
                 type: message.type,
                 title: message.title,
                 text: message.text,
-                created_at: Date.now()
+                created_at: timestamp
             });
 
             setTimeout(() => {
-                this.remove( this.messages[ this.messages.length - 1 ].created_at );
+                this.remove( timestamp );
             }, timeout);
 
         },
