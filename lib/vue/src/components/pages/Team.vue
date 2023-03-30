@@ -124,10 +124,24 @@ const showAddTeam = function(): void
   inputLabel.value = 'Team hinzufügen';
 
   alert.set({type: AlertType.custom})
-    .then(() => {
+    .then((response) => {
 
       activateAlert.value = false;
       inputLabel.value = '';
+
+      if (teamName.value === "")
+      {
+
+        notifications.add({
+          type: NotificationType.warning,
+          title: 'Kein neues Team anlegt',
+          text: "Es wurde kein neues Team angelegt, da das Feld mit dem Namen leer war."
+        });
+
+        return response;
+
+      }
+
       showAddSpinner.value = true;
 
       return teams.add(teamName.value).then((result) =>
