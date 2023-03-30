@@ -1,12 +1,12 @@
 <template>
-  <div id="system-alert" :class="{active: alert.active === true}" @click.self="cancel">
+  <div id="system-alert" :class="{active: alert.active === true}" @click.self="alert.reject">
 
     <div v-if="alert.type === SystemAlertType.alert" class="message message-alert">
       <div class="body icon icon-error-outline">
-        <div class="title">Feuerwehr Schlagsdorf löschen</div>
-        <div class="text">Möchtest du wirklich das Team 'Feuerwehr Schlagsdorf' löschen?<br><br>Alle bereits hinterlegten Ergebnisse können dann nicht mehr wiederhergestellt werden.</div>
+        <div class="title">{{ alert.title }}</div>
+        <div class="text">{{ alert.text }}</div>
       </div>
-      <button @click.self="cancel">OK</button>
+      <button @click.self="alert.reject">OK</button>
     </div>
 
     <div v-if="alert.type === SystemAlertType.confirm" class="message message-confirm">
@@ -14,14 +14,14 @@
         <div class="title">{{ alert.title }}</div>
         <div class="text">{{ alert.text }}</div>
       </div>
-      <button class="button-confirm" @click.self="confirm">Löschen</button>
-      <button class="button-cancel" @click.self="cancel">Abbrechen</button>
+      <button class="button-confirm" @click.self="alert.resolve">Löschen</button>
+      <button class="button-cancel" @click.self="alert.reject">Abbrechen</button>
     </div>
 
     <div v-if="alert.type === SystemAlertType.custom" class="message message-custom">
-      <div class="body"></div>
-      <button class="button-confirm" @click.self="confirm">Löschen</button>
-      <button class="button-cancel" @click.self="cancel">Abbrechen</button>
+      <div id="message-custom" class="body"></div>
+      <button class="button-confirm" @click.self="alert.resolve">Bestätigen</button>
+      <button class="button-cancel" @click.self="alert.reject">Abbrechen</button>
     </div>
 
   </div>
@@ -29,18 +29,9 @@
 
 <script setup lang="ts">
 
+import { onMounted, onUnmounted } from 'vue';
 import { systemAlertStore, SystemAlertType } from '../../lib/store/alert';
 
 const alert = systemAlertStore();
-
-const confirm = function () {
-  alert.resolve(null);
-  alert.unset();
-}
-
-const cancel = function () {
-  alert.reject(null);
-  alert.unset();
-}
 
 </script>
