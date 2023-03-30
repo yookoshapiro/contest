@@ -59,7 +59,7 @@ import { onBeforeMount, ref } from 'vue';
 import { Station, Team } from '../../lib/interface/Tables';
 
 import { stationsStore, teamsStore } from '../../lib/store/stores';
-import { systemAlertStore, SystemAlertType } from '../../lib/store/alert';
+import { AlertType, AlertStore } from '../../lib/store/alert';
 import { NotificationsStore, NotificationType } from "../../lib/store/notifications";
 
 import SimpleButton from "../elements/SimpleButton.vue";
@@ -69,7 +69,7 @@ import InputText from "../elements/form/InputText.vue";
 const teams = teamsStore();
 const stations = stationsStore();
 
-const alert = systemAlertStore();
+const alert = AlertStore();
 const notifications = NotificationsStore();
 
 const activateAlert = ref(false);
@@ -123,7 +123,7 @@ const showAddTeam = function(): void
   teamName.value = '';
   inputLabel.value = 'Team hinzufügen';
 
-  alert.set(SystemAlertType.custom)
+  alert.set(AlertType.custom)
     .then(() => {
 
       activateAlert.value = false;
@@ -157,7 +157,7 @@ const showEditTeam = function(id: string, name: string): void
   teamName.value = name;
   inputLabel.value = 'Team bearbeiten';
 
-  alert.set(SystemAlertType.custom)
+  alert.set(AlertType.custom)
     .then(() => {
 
       activateAlert.value = false;
@@ -193,7 +193,7 @@ const showEditTeam = function(id: string, name: string): void
 const deleteTeam = function(id: string, name: string): void
 {
 
-  alert.set(SystemAlertType.confirm, 'Team wirklich löschen?', "Soll das Team '" + name + "' wirklich gelöscht werden?")
+  alert.set(AlertType.confirm, 'Team wirklich löschen?', "Soll das Team '" + name + "' wirklich gelöscht werden?")
     .then(() => {
 
       deleteSpinner.value.set(id, true);

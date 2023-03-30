@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-export enum SystemAlertType {
+export enum AlertType {
 
     alert = 'alert',
     confirm = 'confirm',
@@ -13,11 +13,11 @@ interface Func<T,TResult>
     (item: T): TResult;
 }
 
-export const systemAlertStore = defineStore('system-alert', {
+export const AlertStore = defineStore('system-alert', {
 
     state: () => ({
         active: false as boolean,
-        type: SystemAlertType.confirm as SystemAlertType,
+        type: AlertType.confirm as AlertType,
         title: '' as string,
         text: '' as string,
         resolve:  (() => {}) as Func<any, void>,
@@ -26,7 +26,7 @@ export const systemAlertStore = defineStore('system-alert', {
 
     actions: {
 
-        async set(type: SystemAlertType, title: string = '', text: string = ''): Promise<any>
+        async set(type: AlertType, title: string = '', text: string = ''): Promise<any>
         {
 
             this.active = true;
