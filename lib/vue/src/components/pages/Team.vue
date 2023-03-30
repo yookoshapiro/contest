@@ -60,7 +60,7 @@ import { Station, Team } from '../../lib/interface/Tables';
 
 import { stationsStore, teamsStore } from '../../lib/store/stores';
 import { systemAlertStore, SystemAlertType } from '../../lib/store/alert';
-import { systemMessagesStore, SystemMessageType } from "../../lib/store/message";
+import { NotificationsStore, NotificationType } from "../../lib/store/notifications";
 
 import SimpleButton from "../elements/SimpleButton.vue";
 import CustomAlert from "../elements/CustomAlert.vue";
@@ -70,7 +70,7 @@ const teams = teamsStore();
 const stations = stationsStore();
 
 const alert = systemAlertStore();
-const message = systemMessagesStore();
+const notifications = NotificationsStore();
 
 const activateAlert = ref(false);
 const teamName = ref('');
@@ -137,8 +137,8 @@ const showAddTeam = function(): void
         deleteSpinner.value.set( result.data.data.id, false );
 
         showAddSpinner.value = false;
-        message.add({
-          type: SystemMessageType.success,
+        notifications.add({
+          type: NotificationType.success,
           title: 'Team angelegt',
           text: "Das Team '" +teamName.value + "' wurde erfolgreich angelegt."
         });
@@ -167,8 +167,8 @@ const showEditTeam = function(id: string, name: string): void
       if (name !== teamName.value) {
 
         return teams.edit(id, teamName.value).then(() => {
-          message.add({
-            type: SystemMessageType.success,
+          notifications.add({
+            type: NotificationType.success,
             title: 'Team bearbeitet',
             text: "Das Team '" + name + "' wurde zu '" +teamName.value + "' umbenannt."
           });
@@ -176,8 +176,8 @@ const showEditTeam = function(id: string, name: string): void
 
       }
 
-      message.add({
-        type: SystemMessageType.warning,
+      notifications.add({
+        type: NotificationType.warning,
         title: 'Team nicht bearbeitet',
         text: "Der Name des Teams '" + name + "' wurde nicht geändert."
       });
@@ -200,8 +200,8 @@ const deleteTeam = function(id: string, name: string): void
 
       return teams.remove(id).then(() =>
       {
-        message.add({
-          type: SystemMessageType.error,
+        notifications.add({
+          type: NotificationType.error,
           title: 'Team entfernt',
           text: "Das Team '" + name + "' wurde gelöscht."
         });

@@ -1,10 +1,10 @@
-#system-messages {
+#notifications {
     right: 40px;
     bottom: 40px;
     position: absolute;
 }
 
-#system-messages .item {
+#notifications .item {
     width: 350px;
     margin-top: 20px;
     overflow: hidden;
@@ -14,7 +14,7 @@
     box-shadow: 0 0 5px 3px rgba(var(--main), .1);
 }
 
-#system-messages .item:before {
+#notifications .item:before {
     content: "";
     left: 0;
     top: 0;
@@ -23,63 +23,63 @@
     position: absolute;
 }
 
-#system-messages .item.error:before,
-#system-messages .item.error .title.icon:before {
+#notifications .item.error:before,
+#notifications .item.error .title.icon:before {
     background-color: rgba(var(--alert), 1);
 }
 
-#system-messages .item.error .title {
+#notifications .item.error .title {
     color: rgba(var(--alert), 1);
 }
 
-#system-messages .item.warning:before,
-#system-messages .item.warning .title.icon:before {
+#notifications .item.warning:before,
+#notifications .item.warning .title.icon:before {
     background-color: rgba(var(--warning), 1);
 }
 
-#system-messages .item.warning .title {
+#notifications .item.warning .title {
     color: rgba(var(--warning), 1);
 }
 
-#system-messages .item.success:before,
-#system-messages .item.success .title.icon:before {
+#notifications .item.success:before,
+#notifications .item.success .title.icon:before {
     background-color: rgba(var(--highlight), 1);
 }
 
-#system-messages .item.success .title {
+#notifications .item.success .title {
     color: rgba(var(--highlight), 1);
 }
 
-#system-messages .item.info:before,
-#system-messages .item.info .title.icon:before {
+#notifications .item.info:before,
+#notifications .item.info .title.icon:before {
     background-color: rgba(var(--main), 1);
 }
 
-#system-messages .item.info .title {
+#notifications .item.info .title {
     color: rgba(var(--main), 1);
 }
 
-#system-messages .title {
+#notifications .title {
     font-weight: 500;
     margin-bottom: 3px;
 }
 
-#system-messages .title.icon:before {
+#notifications .title.icon:before {
     left: 18px;
     -webkit-mask-size: 30px;
     mask-size: 30px;
 }
 
-#system-messages .item.error .title.icon:before {
+#notifications .item.error .title.icon:before {
     -webkit-mask-size: 34px;
     mask-size: 34px;
 }
 
-#system-messages .body {
+#notifications .body {
     font-size: .75rem;
 }
 
-#system-messages .close {
+#notifications .close {
     top: 0;
     right: 0;
     height: 100%;
@@ -91,11 +91,11 @@
     border-left: 1px solid rgba(var(--main), .1);
 }
 
-#system-messages .close:hover {
+#notifications .close:hover {
     background-color: rgba(var(--main), .1);
 }
 
-#system-messages .close i.icon {
+#notifications .close i.icon {
     cursor: pointer;
     background-color: rgba(var(--main), .5);
 

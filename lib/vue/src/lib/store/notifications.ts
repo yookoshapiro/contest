@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-export enum SystemMessageType {
+export enum NotificationType {
     error = 'error',
     warning = 'warning',
     success = 'success',
@@ -8,40 +8,40 @@ export enum SystemMessageType {
 
 }
 
-export interface SystemMessage
+export interface Notification
 {
 
-    type: SystemMessageType,
+    type: NotificationType,
     title: string,
     text: string
 
 }
 
-interface SystemMessageInternal extends SystemMessage
+interface NotificationInternal extends Notification
 {
 
     created_at: number
 
 }
 
-export const systemMessagesStore = defineStore('system-message', {
+export const NotificationsStore = defineStore('notifications', {
 
     state: () => ({
-        messages: Array<SystemMessageInternal>() as Array<SystemMessageInternal>,
+        messages: Array<NotificationInternal>() as Array<NotificationInternal>,
         time: new Date() as Date
     }),
 
     actions: {
 
-        add(message: SystemMessage, timeout: number = 10000)
+        add(notification: Notification, timeout: number = 10000)
         {
 
             let timestamp = Date.now();
 
             this.messages.push({
-                type: message.type,
-                title: message.title,
-                text: message.text,
+                type: notification.type,
+                title: notification.title,
+                text: notification.text,
                 created_at: timestamp
             });
 
@@ -54,7 +54,7 @@ export const systemMessagesStore = defineStore('system-message', {
         remove(timestamp: number)
         {
 
-            let index = this.messages.findIndex(messages => messages.created_at === timestamp);
+            let index = this.messages.findIndex(notification => notification.created_at === timestamp);
 
             if (index > -1) {
                 this.messages.splice(index, 1);

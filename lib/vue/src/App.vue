@@ -1,10 +1,10 @@
 <template>
   <router-view></router-view>
-  <SystemMessages />
+  <Notifications />
   <SystemAlert />
 </template>
 
 <script setup lang="ts">
-import SystemMessages from './components/elements/SystemMessages.vue';
+import Notifications from './components/elements/Notifications.vue';
 import SystemAlert from "./components/elements/SystemAlert.vue";
 </script>
