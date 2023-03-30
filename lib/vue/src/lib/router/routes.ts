@@ -16,6 +16,8 @@ import Login from '../../components/pages/Login.vue';
 import { default as TeamList } from '../../components/pages/team/List.vue';
 import { default as TeamEdit } from '../../components/pages/team/Edit.vue';
 
+import Team from '../../components/pages/Team.vue';
+
 export const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -23,11 +25,7 @@ export const router = createRouter({
         {path: '/admin', component: AdminLayout, redirect: { name: 'showDashboard' }, children: [
             {path: 'dashboard', component: Home, name: 'showDashboard'},
             {path: 'user', component: Users, name: 'showUsers'},
-            {path: 'team', component: DefaultLayout, children: [
-                {path: '', component: TeamList, name: 'showTeams'},
-                {path: 'add', component: TeamEdit, name: 'addTeam'},
-                {path: ':id', component: TeamEdit, name: 'editTeam'}
-            ]},
+            {path: 'team', component: Team, name: 'showTeams'},
             {path: 'station', component: Stations, name: 'showStations'},
             {path: 'station/:id', component: Stations, name: 'showStation'},
             {path: 'result', component: Results, name: 'showResults'},
