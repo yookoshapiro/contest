@@ -34,6 +34,7 @@ const color = ref(props.color);
   padding: 8px;
   margin-right: 5px;
 
+  user-select: none;
   border-radius: 3px;
   display: inline-block;
   background-color: rgba(var(--highlight), .9);

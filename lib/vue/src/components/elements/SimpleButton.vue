@@ -36,6 +36,7 @@ const color = ref(props.color);
   border: none;
   outline: none;
   cursor: pointer;
+  user-select: none;
   border-radius: 3px;
   position: relative;
   display: inline-block;
