@@ -3,9 +3,9 @@
     <div v-for="[index, notification] in notifications.notifications">
 
       <div class="item" :class="notification.type">
-        <div class="title icon" :class="notification.icon">{{ notification.title }}</div>
+        <div class="title"><Icon :name="notification.icon" class="before" />{{ notification.title }}</div>
         <div class="body">{{ notification.text }}</div>
-        <div class="close" @click="notifications.remove(index)"><i class="icon icon-close" /></div>
+        <div class="close" @click="notifications.remove(index)"><Icon name="x" class="alone" /></div>
       </div>
 
     </div>
@@ -13,6 +13,7 @@
 </template>
 
 <script setup lang="ts">
+import Icon from "./Icon.vue";
 import { NotificationsStore } from '../../lib/store/notifications';
 
 const notifications = NotificationsStore();

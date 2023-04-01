@@ -21,10 +21,10 @@ export interface Notification
 }
 
 export const DefaultNotificationIcon = new Map<NotificationType, string>([
-    [NotificationType.warning, 'icon-error-outline'],
-    [NotificationType.error, 'icon-dangerous'],
-    [NotificationType.success, 'icon-check_circle'],
-    [NotificationType.info, 'icon-circle_notifications']
+    [NotificationType.warning, 'exclamation-circle'],
+    [NotificationType.error, 'exclamation-octagon'],
+    [NotificationType.success, 'check-circle'],
+    [NotificationType.info, 'info-circle']
 ]);
 
 export const NotificationsStore = defineStore('notifications', {
@@ -39,7 +39,7 @@ export const NotificationsStore = defineStore('notifications', {
         {
 
             if (typeof notification.timeout === "undefined") {
-                notification.timeout = 10000;
+                notification.timeout = 100000;
             }
 
             if (typeof notification.icon === "undefined") {
