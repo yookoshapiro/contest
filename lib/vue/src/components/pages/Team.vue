@@ -2,7 +2,7 @@
   <div class="title">
     <h3>Teams</h3>
     <div class="controls">
-      <SimpleButton @click="showAddTeam">Team hinzufügen</SimpleButton>
+      <SimpleButton @click="showAddTeam"><Icon name="person-fill-add" />Team hinzufügen</SimpleButton>
     </div>
   </div>
 
@@ -34,8 +34,8 @@
               </div>
             </td>
             <td>
-              <SimpleButton @click="showEditTeam(team.id, team.name)" :spinner="editSpinner.get(team.id)"><i class="icon icon-edit" />Bearbeiten</SimpleButton>
-              <SimpleButton @click="deleteTeam(team.id, team.name)" color="red" :spinner="deleteSpinner.get(team.id)"><i class="icon icon-delete" />Löschen</SimpleButton>
+              <SimpleButton @click="showEditTeam(team.id, team.name)" :spinner="editSpinner.get(team.id)"><Icon name="pencil-fill" />Bearbeiten</SimpleButton>
+              <SimpleButton @click="deleteTeam(team.id, team.name)" color="red" :spinner="deleteSpinner.get(team.id)"><Icon name="trash-fill" />Löschen</SimpleButton>
             </td>
           </tr>
           <tr v-if="showAddSpinner">
@@ -65,6 +65,7 @@ import { NotificationsStore, NotificationType } from "../../lib/store/notificati
 import SimpleButton from "../elements/SimpleButton.vue";
 import CustomAlert from "../elements/CustomAlert.vue";
 import InputText from "../elements/form/InputText.vue";
+import Icon from "../elements/Icon.vue";
 
 const teams = teamsStore();
 const stations = stationsStore();
