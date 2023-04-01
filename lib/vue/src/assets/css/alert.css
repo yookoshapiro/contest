@@ -71,13 +71,17 @@
     background-color: rgba(var(--white), .7);
 }
 
-/* message-confirm */
-#alert .message-confirm .body:before {
-    -webkit-mask-size: 44px;
-    mask-size: 44px;
-    background-color: rgba(var(--red), 1);
+#alert .message div.bi {
+    width: 80px;
+    color: rgba(var(--red), 1);
 }
 
+#alert .message svg.bi {
+    width: 40px;
+    height: 40px;
+}
+
+/* message-confirm */
 #alert .message-confirm .title {
     color: rgba(var(--red), 1);
 }

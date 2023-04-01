@@ -2,7 +2,8 @@
   <div id="alert" :class="{active: alert.active}" @click.self="alert.reject">
 
     <div v-if="alert.type === AlertType.alert" class="message message-alert">
-      <div class="body icon icon-error-outline">
+      <div class="body">
+        <Icon name="exclamation-circle" class="before" />
         <div class="title">{{ alert.title }}</div>
         <div class="text">{{ alert.text }}</div>
       </div>
@@ -10,7 +11,8 @@
     </div>
 
     <div v-if="alert.type === AlertType.confirm" class="message message-confirm">
-      <div class="body icon icon-dangerous">
+      <div class="body">
+        <Icon name="exclamation-octagon" class="before" />
         <div class="title">{{ alert.title }}</div>
         <div class="text">{{ alert.text }}</div>
       </div>
@@ -29,6 +31,7 @@
 
 <script setup lang="ts">
 
+import Icon from "./Icon.vue";
 import { AlertStore, AlertType } from '../../lib/store/alert';
 
 const alert = AlertStore().alert;
