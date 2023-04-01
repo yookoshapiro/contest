@@ -21,20 +21,19 @@ import Team from '../../components/pages/Team.vue';
 export const router = createRouter({
     history: createWebHistory(),
     routes: [
-        {path: '/', redirect: { name: 'showDashboard' }},
-        {path: '/admin', component: AdminLayout, redirect: { name: 'showDashboard' }, children: [
-            {path: 'dashboard', component: Home, name: 'showDashboard'},
-            {path: 'user', component: Users, name: 'showUsers'},
-            {path: 'team', component: Team, name: 'showTeams'},
-            {path: 'station', component: Stations, name: 'showStations'},
-            {path: 'station/:id', component: Stations, name: 'showStation'},
-            {path: 'result', component: Results, name: 'showResults'},
-            {path: 'result/:id', component: ResultEdit, name: 'editResult'},
-            {path: 'evaluation', component: Evaluation, name: 'showEvaluation'},
-            {path: 'setting', component: Settings, name: 'showSettings'},
-            {path: 'admin', component: AdminSettings, name: 'showAdminSettings'}
+        {path: '/', redirect: { name: 'dashboard' }},
+        {path: '/admin', component: AdminLayout, redirect: { name: 'dashboard' }, children: [
+            {path: 'dashboard', component: Home, name: 'dashboard'},
+            {path: 'user', component: Users, name: 'user'},
+            {path: 'team', component: Team, name: 'team'},
+            {path: 'station', component: Stations, name: 'station'},
+            {path: 'result', component: Results, name: 'result'},
+            {path: 'evaluation', component: Evaluation, name: 'evaluation'},
+            {path: 'setting', component: Settings, name: 'settings'},
+            {path: 'admin', component: AdminSettings, name: 'admin-settings'}
         ]},
-        {path: '/logout', component: Login, name: 'showLogin'}
+        {path: '/login', component: Login, name: 'login'},
+        {path: '/logout', component: Login, name: 'logout'}
 
     ]
 });

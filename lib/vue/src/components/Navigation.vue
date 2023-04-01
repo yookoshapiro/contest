@@ -30,18 +30,18 @@ interface MenuItem {
 }
 
 const menu: Array<MenuItem> = [
-  {name: 'showDashboard', icon: 'grid-1x2-fill', css: 'before', value: 'Dashboard'},
-  {name: 'showUsers', icon: 'person-fill', css: 'before', value: 'Benutzer'},
-  {name: 'showTeams', icon: 'people-fill', css: 'before', value: 'Teams'},
-  {name: 'showStations', icon: 'geo-alt-fill', css: 'before', value: 'Stationen'},
-  {name: 'showResults', icon: 'clipboard2-fill', css: 'before', value: 'Ergebnisse'},
-  {name: 'showEvaluation', icon: 'bar-chart-fill', css: 'before', value: 'Auswertung'},
+  {name: 'dashboard', icon: 'grid-1x2-fill', css: 'before', value: 'Dashboard'},
+  {name: 'user', icon: 'person-fill', css: 'before', value: 'Benutzer'},
+  {name: 'team', icon: 'people-fill', css: 'before', value: 'Teams'},
+  {name: 'station', icon: 'geo-alt-fill', css: 'before', value: 'Stationen'},
+  {name: 'result', icon: 'clipboard2-fill', css: 'before', value: 'Ergebnisse'},
+  {name: 'evaluation', icon: 'bar-chart-fill', css: 'before', value: 'Auswertung'},
 ];
 
 const footer: Array<MenuItem> = [
-  {name: 'showSettings', icon: 'gear-fill', css: 'alone', value: 'Einstellungen'},
-  {name: 'showAdminSettings', icon: 'shield-lock-fill', css: 'alone', value: 'Admin-Einstellungen'},
-  {name: 'showLogin', icon: 'power', css: 'alone', value: 'Abmelden'},
+  {name: 'settings', icon: 'gear-fill', css: 'alone', value: 'Einstellungen'},
+  {name: 'admin-settings', icon: 'shield-lock-fill', css: 'alone', value: 'Admin-Einstellungen'},
+  {name: 'logout', icon: 'power', css: 'alone', value: 'Abmelden'},
 ];
 
 </script>
