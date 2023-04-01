@@ -39,7 +39,7 @@ export const NotificationsStore = defineStore('notifications', {
         {
 
             if (typeof notification.timeout === "undefined") {
-                notification.timeout = 100000;
+                notification.timeout = 10000;
             }
 
             if (typeof notification.icon === "undefined") {
