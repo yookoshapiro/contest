@@ -9,7 +9,9 @@ use Contest\Database\Casts\Password;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Model für die users-Tabelle.
@@ -23,6 +25,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Collection $stations
+ * @property Login $login
  */
 class User extends Model
 {
@@ -43,6 +46,11 @@ class User extends Model
     # Many-To-Many-Beziehung zur Stations-Tabelle
     public function stations(): BelongsToMany {
         return $this->belongsToMany( Station::class );
+    }
+
+
+    public function login(): HasOne {
+        return $this->HasOne( Login::class );
     }
 
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Contest\Controller;
 
 use Contest\Api\ApiStatus;
+use Contest\Middleware\Authorization\AuthorizationMiddleware;
 use Slim\Routing\RouteCollectorProxy;
 use Psr\Http\Message\ResponseInterface as Response;
 use Contest\Contract\Config\ConfigInterface as Config;
@@ -108,13 +109,18 @@ final class ApiController
 
         $group->get('', [self::class, 'show']);
         $group->get('/status', [self::class, 'status']);
-
         $group->group('/auth', [AuthController::class, 'router']);
 
-        $group->group('/team', [TeamController::class, 'router']);
-        $group->group('/user', [UserController::class, 'router']);
-        $group->group('/station', [StationController::class, 'router']);
-        $group->group('/result', [ResultController::class, 'router']);
+        $authorization = new AuthorizationMiddleware();
+
+        $group->group('/team', [TeamController::class, 'router'])
+            ->addMiddleware($authorization);
+        $group->group('/user', [UserController::class, 'router'])
+            ->addMiddleware($authorization);
+        $group->group('/station', [StationController::class, 'router'])
+            ->addMiddleware($authorization);
+        $group->group('/result', [ResultController::class, 'router'])
+            ->addMiddleware($authorization);
 
         $group->get('/{path:.*}', [self::class, 'unknown']);
 
