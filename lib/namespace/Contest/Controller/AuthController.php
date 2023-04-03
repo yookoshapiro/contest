@@ -117,7 +117,7 @@ final class AuthController
         }
 
         return $response
-            ->withStatus(201);
+            ->withStatus(204);
 
     }
 
