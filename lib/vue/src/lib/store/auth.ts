@@ -1,21 +1,15 @@
 import { defineStore } from 'pinia';
 import { AxiosResponse } from 'axios';
 import api from '../api/Api';
-
-interface Auth {
-
-    token?: string,
-    expired: Date
-
-}
+import { useLocalStorage } from "@vueuse/core";
 
 export const AuthStore = defineStore('auth', {
 
     state: () => ({
-        auth: {
+        auth: useLocalStorage('auth', {
             token: undefined,
             expired: new Date(0)
-        } as Auth
+        })
     }),
 
     actions: {
@@ -36,7 +30,19 @@ export const AuthStore = defineStore('auth', {
 
         },
 
-        logout(): void {
+        logout(): Promise<any>
+        {
+
+            return api.logout(this.auth.token ?? '')
+                .then((response: AxiosResponse) =>
+                {
+
+                    this.auth.token = undefined;
+                    this.auth.expired = new Date(0);
+
+                    return response;
+
+                });
 
         }
 

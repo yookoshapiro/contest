@@ -12,9 +12,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onBeforeMount, ref } from "vue";
 import { AuthStore } from "../../lib/store/auth";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 import InputText from "../elements/form/InputText.vue";
 import Submit from "../elements/form/Submit.vue";
@@ -22,11 +22,24 @@ import Submit from "../elements/form/Submit.vue";
 const login = ref('Yooko');
 const password = ref('sonne21');
 const auth = AuthStore();
+
+const route = useRoute();
 const router = useRouter();
+
+onBeforeMount(async () => {
+
+  if( route.name === "logout" ) {
+    await auth.logout()
+        .then(() => {
+          router.push({name: 'login'});
+        });
+  }
+
+})
 
 const send_login = async function() {
 
-  auth.login(login.value, password.value)
+  await auth.login(login.value, password.value)
     .then(() => {
       router.push({ name: 'dashboard' });
     });
