@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Contest\Database\Login;
 use Contest\Database\User;
 use Contest\Middleware\Api\ValidationMiddleware;
+use Contest\Middleware\Authorization\AuthorizationMiddleware;
 use Slim\Routing\RouteCollectorProxy;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -123,6 +124,22 @@ final class AuthController
 
 
     /**
+     * Validieren des übergebenen Schlüssels.
+     *
+     * @param Request  $request
+     * @param Response $response
+     * @return Response
+     */
+    public function validate(Request $request, Response $response): Response
+    {
+
+        return $response
+            ->withStatus(200);
+
+    }
+
+
+    /**
      * Router für die Route '/api/auth'.
      *
      * @param RouteCollectorProxy $group
@@ -135,6 +152,9 @@ final class AuthController
             ->add( ValidationMiddleware::forCreating( [self::class, 'loginValidation'] ) );
 
         $group->post('/logout', [self::class, 'logout']);
+
+        $group->post('/validate', [self::class, 'validate'])
+            ->addMiddleware(new AuthorizationMiddleware);
 
     }
 
