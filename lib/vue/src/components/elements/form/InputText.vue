@@ -1,8 +1,9 @@
 <template>
-  <div class="input input-text" :class="{ readonly, error, vertical }">
-    <label :for="inputId">{{ label }}</label>
+  <div class="input input-text" :class="{ readonly, error, vertical, 'with-icon': icon }">
+    <label v-if="label" :for="inputId">{{ label }}</label>
     <div class="input-field">
-      <input :id="inputId" :name="name" :value="modelValue" @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)" type="text" :placeholder="placeholder" :readonly="readonly" />
+      <Icon v-if="icon" :name="icon" class="before" size="16" />
+      <input :id="inputId" :name="name" :value="modelValue" @input="$emit('update:modelValue', eventValue($event))" :type="type" :placeholder="placeholder" :readonly="readonly" />
       <div v-if="error" class="field-icon"><i class="icon icon-error-outline"></i></div>
     </div>
     <div v-if="error" class="error-message">{{ error }}</div>
@@ -11,26 +12,38 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { Md5 } from "ts-md5";
+import Icon from "../Icon.vue";
+
+const eventValue = function(event: any): string {
+  return (event.target as HTMLInputElement).value;
+}
 
 interface Props {
-  label: string;
   name: string;
+  label?: string;
+  type?: string,
   modelValue?: string;
   error?: string;
   id?: string;
   placeholder?: string;
   readonly?: boolean,
-  vertical?: boolean
+  vertical?: boolean,
+  icon?: string
 }
 
 const props: Props = defineProps({
-  label: {
-    type: String,
-    required: true
-  },
   name: {
     type: String,
     required: true
+  },
+  label: {
+    type: String,
+    default: null
+  },
+  type: {
+    type: String,
+    default: "text"
   },
   value: {
     type: String,
@@ -59,12 +72,14 @@ const props: Props = defineProps({
   vertical: {
     type: Boolean,
     default: false
+  },
+  icon: {
+    type: String,
+    default: null
   }
 });
 
 defineEmits(['update:modelValue']);
 
-const inputId = ref(props.id ?? props.name);
-const placeholder = ref(props.placeholder);
-const readonly = ref(props.readonly);
+const inputId = ref( Md5.hashStr(props.id ?? props.name) );
 </script>

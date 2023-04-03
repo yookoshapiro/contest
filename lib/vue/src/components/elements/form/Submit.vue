@@ -1,6 +1,6 @@
 <template>
   <div class="input input-submit">
-    <button type="submit" :class="{'with-spinner': props['spinner']}">{{ text }}</button>
+    <button type="submit" :class="{'with-spinner': props['spinner']}"><slot /></button>
   </div>
 </template>
 
@@ -9,7 +9,6 @@ import {ref} from 'vue';
 
 interface Props {
   name: string,
-  text: string,
   spinner?: boolean
 }
 
@@ -18,15 +17,9 @@ const props: Props = defineProps({
     type: String,
     required: true
   },
-  text: {
-    type: String,
-    required: true
-  },
   spinner: {
     type: Boolean,
     default: false
   }
 });
-
-const text = ref(props.text);
 </script>

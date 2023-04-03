@@ -11,6 +11,7 @@
     font-weight: 500;
     text-align: right;
     padding-right: 20px;
+    line-height: 1rem;
 }
 
 .input .input-field {
@@ -22,6 +23,25 @@
     border: 1px solid rgba(var(--main), .5);
 }
 
+.input div.bi {
+    background-color: rgba(var(--main), .1);
+    border-right: 1px solid rgba(var(--main), .5);
+}
+
+.input.error div.bi {
+    background-color: rgba(var(--red), .1);
+    border-right: 1px solid rgba(var(--red), .5);
+}
+
+.input svg.bi {
+    width: 20px;
+    height: 20px;
+}
+
+.input.error svg.bi {
+    color: rgba(var(--red), 1);
+}
+
 .input input {
     width: 100%;
     border: none;
@@ -29,6 +49,10 @@
     line-height: 1rem;
     color: rgba(var(--main), 1);
     background-color: transparent;
+}
+
+.input.with-icon input {
+    padding-left: 40px;
 }
 
 .input input::placeholder {
@@ -46,7 +70,6 @@
     padding: 12px;
     cursor: pointer;
     overflow: hidden;
-    margin-left: 300px;
     line-height: 1rem;
     border-radius: 3px;
     position: relative;
