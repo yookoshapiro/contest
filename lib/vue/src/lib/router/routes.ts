@@ -7,14 +7,10 @@ import Home from '../../components/pages/Home.vue';
 import Users from '../../components/pages/Users.vue';
 import Stations from '../../components/pages/Stations.vue';
 import Results from '../../components/pages/Results.vue';
-import ResultEdit from '../../components/pages/ResultEdit.vue';
 import Evaluation from '../../components/pages/Evaluation.vue';
 import Settings from '../../components/pages/Settings.vue';
 import AdminSettings from '../../components/pages/AdminSettings.vue';
 import Login from '../../components/pages/Login.vue';
-
-import { default as TeamList } from '../../components/pages/team/List.vue';
-import { default as TeamEdit } from '../../components/pages/team/Edit.vue';
 
 import Team from '../../components/pages/Team.vue';
 
