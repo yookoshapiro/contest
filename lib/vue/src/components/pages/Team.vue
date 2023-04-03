@@ -58,7 +58,8 @@
 import { onBeforeMount, ref } from 'vue';
 import { Station, Team } from '../../lib/interface/Tables';
 
-import { stationsStore, teamsStore } from '../../lib/store/stores';
+import { teamsStore } from '../../lib/store/data/teams';
+import { stationsStore } from '../../lib/store/data/stations';
 import { AlertStore, AlertType } from '../../lib/store/alert';
 import { NotificationsStore, NotificationType } from "../../lib/store/notifications";
 
