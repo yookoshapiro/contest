@@ -11,6 +11,10 @@ export interface Api
 
     remove(path: string, id: string|number): Promise<any>;
 
+    login(login: string, password: string): Promise<any>;
+
+    logout(token: string): Promise<any>;
+
 }
 
 

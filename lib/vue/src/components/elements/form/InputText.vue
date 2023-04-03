@@ -45,10 +45,6 @@ const props: Props = defineProps({
     type: String,
     default: "text"
   },
-  value: {
-    type: String,
-    default: null
-  },
   modelValue: {
     type: String,
     default: null
@@ -81,5 +77,5 @@ const props: Props = defineProps({
 
 defineEmits(['update:modelValue']);
 
-const inputId = ref( Md5.hashStr(props.id ?? props.name) );
+const inputId = ref( props.id ?? Md5.hashStr(props.name) );
 </script>

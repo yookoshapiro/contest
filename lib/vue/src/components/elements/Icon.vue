@@ -1,6 +1,6 @@
 <template>
 
-  <div class="bi">
+  <div class="bi" :data-size="size">
 
     <svg v-for="i in name('bar-chart-fill')" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart-fill" viewBox="0 0 16 16">
       <path d="M1 11a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3zm5-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2z"/>
@@ -29,6 +29,10 @@
     <svg v-for="i in name('info-circle')" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
       <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
       <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+    </svg>
+
+    <svg v-for="i in name('key-fill')" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
+      <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
     </svg>
 
     <svg v-for="i in name('gear-fill')" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
@@ -83,14 +87,21 @@
 
 <script setup lang="ts">
 
+import { ref } from "vue";
+
 interface Props {
-  name: string
+  name: string,
+  size?: string
 }
 
 const props: Props = defineProps({
   name: {
     type: String,
     required: true
+  },
+  size: {
+    type: String,
+    default: null
   }
 });
 
@@ -145,5 +156,23 @@ svg.bi {
   display: inline-block;
   vertical-align: -0.125rem;
   fill: currentcolor;
+}
+
+/*noinspection CssInvalidPseudoSelector*/
+div.bi[data-size="16"]:deep svg.bi {
+  width: 16px;
+  height: 16px;
+}
+
+/*noinspection CssInvalidPseudoSelector*/
+div.bi[data-size="18"]:deep svg.bi {
+  width: 18px;
+  height: 18px;
+}
+
+/*noinspection CssInvalidPseudoSelector*/
+div.bi[data-size="20"]:deep svg.bi {
+  width: 20px;
+  height: 20px;
 }
 </style>

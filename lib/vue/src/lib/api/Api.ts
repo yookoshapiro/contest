@@ -45,6 +45,14 @@ class Api implements ApiInterface
         return this.handler.delete(this.getUrl(path + '/' + id));
     }
 
+    public login(login: string, password: string): Promise<any> {
+        return this.handler.post(this.getUrl('auth/login'), {name: login, password});
+    }
+
+    public logout(token: string): Promise<any> {
+        return this.handler.post(this.getUrl('auth/logout'), {token});
+    }
+
 }
 
 export default new Api;
