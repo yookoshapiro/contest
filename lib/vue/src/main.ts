@@ -6,13 +6,8 @@ import axios from 'axios';
 import VueAxios from "vue-axios";
 import { createPinia } from 'pinia';
 
-import Navigation from './components/Navigation.vue';
-
-const pinia = createPinia();
-
 createApp(App)
-    .use(pinia)
     .use(router)
+    .use(createPinia())
     .use(VueAxios, axios)
-    .component('Navigation', Navigation)
     .mount('#app');
