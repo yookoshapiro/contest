@@ -39,8 +39,12 @@ router.beforeEach(async (to, from) =>
 
     let auth = AuthStore().auth;
 
+    if (to.name === 'login' && auth.token !== undefined) {
+        return {name: 'dashboard'};
+    }
+
     if (to.meta.requiredAuthorization === true && auth.token === undefined) {
-        return { name: 'login' };
+        return {name: 'login'};
     }
 
 });

@@ -15,6 +15,8 @@ export interface Api
 
     logout(token: string): Promise<any>;
 
+    validate(token: string): Promise<any>;
+
 }
 
 

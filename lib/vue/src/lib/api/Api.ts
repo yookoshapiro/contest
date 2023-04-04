@@ -1,5 +1,7 @@
-import { AxiosStatic, default as axios } from 'axios';
+import { AxiosError, AxiosStatic, default as axios } from 'axios';
 import { Api as ApiInterface, RouteParameter } from '../interface/Api';
+import { AuthStore } from "../store/auth";
+import { router } from "../router/routes";
 
 class Api implements ApiInterface
 {
@@ -25,24 +27,50 @@ class Api implements ApiInterface
 
     }
 
+
+    protected config()
+    {
+
+        let auth = AuthStore();
+
+        return {
+            headers: {
+                Authorization: 'Bearer ' + auth.auth.token
+            },
+        };
+
+    }
+
+    public onUnauthorized(error: AxiosError): void
+    {
+        if( error.response?.status === 401 )
+        {
+            let auth = AuthStore();
+
+            auth.auth.token = undefined;
+            router.replace({name: 'login'});
+
+        }
+    }
+
     public list(path: string, parameter?: RouteParameter): Promise<any> {
-        return this.handler.get(this.getUrl(path, parameter))
+        return this.handler.get(this.getUrl(path, parameter), this.config()).catch(this.onUnauthorized);
     }
 
     public find(path: string, id: string|number): Promise<any> {
-        return this.handler.get(this.getUrl(path) + '/' + id);
+        return this.handler.get(this.getUrl(path) + '/' + id, this.config()).catch(this.onUnauthorized);
     }
 
     public add(path: string, data: object): Promise<any> {
-        return this.handler.post(this.getUrl(path), data);
+        return this.handler.post(this.getUrl(path), data, this.config()).catch(this.onUnauthorized);
     }
 
     public edit(path: string, id: string|number, data: object): Promise<any> {
-        return this.handler.patch(this.getUrl(path) + '/' + id, data);
+        return this.handler.patch(this.getUrl(path) + '/' + id, data, this.config()).catch(this.onUnauthorized);
     }
 
     public remove(path: string, id: string|number): Promise<any> {
-        return this.handler.delete(this.getUrl(path + '/' + id));
+        return this.handler.delete(this.getUrl(path + '/' + id), this.config()).catch(this.onUnauthorized);
     }
 
     public login(login: string, password: string): Promise<any> {
@@ -51,6 +79,10 @@ class Api implements ApiInterface
 
     public logout(token: string): Promise<any> {
         return this.handler.post(this.getUrl('auth/logout'), {token});
+    }
+
+    public validate(): Promise<any> {
+        return this.handler.get(this.getUrl('auth/validate'), this.config());
     }
 
 }

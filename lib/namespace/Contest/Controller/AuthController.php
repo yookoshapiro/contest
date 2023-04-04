@@ -62,8 +62,7 @@ final class AuthController
         $response->getBody()->write(json_encode([
 
             'data' => [
-                'token' => $login->id,
-                'expired_at' => $login->expires_at
+                'token' => $login->id
             ]
 
         ]));
@@ -153,7 +152,7 @@ final class AuthController
 
         $group->post('/logout', [self::class, 'logout']);
 
-        $group->post('/validate', [self::class, 'validate'])
+        $group->get('/validate', [self::class, 'validate'])
             ->addMiddleware(new AuthorizationMiddleware);
 
     }

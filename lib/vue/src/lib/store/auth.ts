@@ -1,14 +1,13 @@
 import { defineStore } from 'pinia';
 import { AxiosResponse } from 'axios';
 import api from '../api/Api';
-import { useLocalStorage } from "@vueuse/core";
+import { useInfiniteScroll, useLocalStorage } from "@vueuse/core";
 
 export const AuthStore = defineStore('auth', {
 
     state: () => ({
         auth: useLocalStorage('auth', {
-            token: undefined,
-            expired: new Date(0)
+            token: undefined
         })
     }),
 
@@ -20,12 +19,9 @@ export const AuthStore = defineStore('auth', {
             return api.login(login, password)
                 .then((response: AxiosResponse<any>) => {
 
-                    let data = response.data.data;
-
-                    this.auth.token = data.token;
-                    this.auth.expired = new Date( data.expired_at );
-
+                    this.auth.token = response.data.data.token;
                     return response;
+
                 });
 
         },
@@ -38,11 +34,27 @@ export const AuthStore = defineStore('auth', {
                 {
 
                     this.auth.token = undefined;
-                    this.auth.expired = new Date(0);
-
                     return response;
 
                 });
+
+        },
+
+        validate(): Promise<any>
+        {
+
+            if (this.auth.token === undefined)
+            {
+
+                return new Promise((resolve, reject) => {
+                    reject();
+                });
+
+            }
+
+            return api.validate().catch(() => {
+                this.auth.token = undefined;
+            });
 
         }
 

@@ -16,6 +16,16 @@ use Symfony\Component\Uid\Uuid;
 class AuthorizationMiddleware implements MiddlewareInterface
 {
 
+    public function __construct()
+    {
+
+        Login::query()
+            ->where('expires_at', '<', 'CURRENT_TIMESTAMP')
+            ->delete();
+
+    }
+
+
     public function process(Request $request, RequestHandler $handler): Response
     {
 
