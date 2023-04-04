@@ -159,19 +159,19 @@ svg.bi {
 }
 
 /*noinspection CssInvalidPseudoSelector*/
-div.bi[data-size="16"]:deep svg.bi {
+div.bi[data-size="16"]:deep(svg.bi) {
   width: 16px;
   height: 16px;
 }
 
 /*noinspection CssInvalidPseudoSelector*/
-div.bi[data-size="18"]:deep svg.bi {
+div.bi[data-size="18"]:deep(svg.bi) {
   width: 18px;
   height: 18px;
 }
 
 /*noinspection CssInvalidPseudoSelector*/
-div.bi[data-size="20"]:deep svg.bi {
+div.bi[data-size="20"]:deep(svg.bi) {
   width: 20px;
   height: 20px;
 }

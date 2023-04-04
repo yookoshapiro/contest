@@ -29,6 +29,6 @@ main {
 }
 
 /*noinspection CssInvalidPseudoSelector*/
-#login-body:deep .input button {
+#login-body:deep(.input button)  {
     width: 100%;
 }
