@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Contest\Middleware\Authorization;
 
+use Carbon\Carbon;
 use Contest\Database\Login;
 use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -20,7 +21,7 @@ class AuthorizationMiddleware implements MiddlewareInterface
     {
 
         Login::query()
-            ->where('expires_at', '<', 'CURRENT_TIMESTAMP')
+            ->where('expires_at', '<', Carbon::now())
             ->delete();
 
     }
