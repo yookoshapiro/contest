@@ -3,7 +3,7 @@
     <div id="logo"></div>
     <nav id="main">
       <ul>
-        <li v-for="item in menu"><router-link :to="{ name: item.name }"><Icon :name="item.icon" :class="item.css" />{{ item.value }}</router-link></li>
+          <li v-for="item in menu"><router-link :to="{ name: item.name }"><Icon :name="item.icon" :class="item.css" /><span>{{ item.value }}</span></router-link></li>
       </ul>
     </nav>
     <div id="sidebar-footer">

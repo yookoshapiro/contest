@@ -50,9 +50,74 @@ h3 {
     overflow: hidden;
 }
 
+#admin #header {
+    float: right;
+    height: 48px;
+    width: calc(100% - 180px);
+    background-color: rgba(var(--main), .1);
+    border-bottom: 1px solid rgba(var(--main), .2);
+}
+
+#admin .nav_controller {
+    width: 38px;
+    height: 34px;
+    margin: 7px;
+    padding: 7px;
+    cursor: pointer;
+    display: inline-block;
+    border: 1px solid rgba(var(--main), 0);
+}
+
+#admin .nav_controller > i {
+    width: 100%;
+    height: 4px;
+    display: block;
+    margin-bottom: 3px;
+    border-radius: 2px;
+    background-color: rgba(var(--main), 1);
+}
+
+#admin .nav_controller > :last-child {
+    margin-bottom: 0;
+}
+
+#admin .logged_in {
+    height: 100%;
+    float: right;
+    font-size: .9rem;
+    line-height: .9rem;
+    display: inline-block;
+}
+
+#admin .logged_in .avatar {
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+    display: block;
+    border-radius: 15px;
+    border: 1px solid rgba(var(--main), .2);
+    background-color: rgba(var(--white), 1);
+}
+
+#admin .logged_in .avatar div.bi {
+    width: 100%;
+    height: 100%;
+}
+
+#admin .logged_in .avatar svg.bi {
+    width: 18px;
+    height: 18px;
+}
+
+#admin .logged_in .user {
+    padding: 18px 35px 0 5px;
+    display: inline-block;
+}
+
 #admin main {
     width: calc(100% - 180px);
-    height: 100vh;
+    height: calc(100vh - 50px);
     float: right;
     padding: 20px;
     background-color: rgb(var(--black), .05);
@@ -69,7 +134,7 @@ h3 {
 #admin #sidebar #logo {
     width: 100%;
     height: 140px;
-    background-size: 70px 70px;
+    background-size: 70px;
     background-repeat: no-repeat;
     background-position: center center;
     background-image: url("../img/trophy.png");
@@ -80,6 +145,7 @@ h3 {
 }
 
 #admin #main a {
+    height: 54px;
     display: block;
     font-size: .9rem;
     line-height: .9rem;
@@ -138,4 +204,49 @@ h3 {
 #admin #sidebar-footer a:hover,
 #admin #sidebar-footer a.router-link-active {
     background-color: rgba(var(--black), .2);
+}
+
+#admin.nav_sm #sidebar #logo {
+    background-size: 40px;
+}
+
+#admin.nav_sm #sidebar {
+    width: 70px;
+}
+
+#admin.nav_sm #main a div.bi {
+    width: 100%;
+}
+
+#admin.nav_sm #main a svg.bi {
+    width: 18px;
+    height: 18px;
+}
+
+#admin.nav_sm #main a span {
+    left: 0;
+    display: none;
+}
+
+#admin.nav_sm #main a:hover span {
+    top: 0;
+    height: 100%;
+    padding: 19px;
+    display: block;
+    position: absolute;
+    left: calc(100% - 5px);
+    background-color: rgba(var(--main), 1);
+}
+
+#admin.nav_sm #main a.router-link-active:hover span {
+    left: 100%;
+}
+
+#admin.nav_sm #sidebar-footer {
+    display: none;
+}
+
+#admin.nav_sm #header,
+#admin.nav_sm main {
+    width: calc(100% - 70px);
 }

@@ -3,12 +3,20 @@ import { AxiosResponse } from 'axios';
 import api from '../api/Api';
 import { useInfiniteScroll, useLocalStorage } from "@vueuse/core";
 
+interface UserData {
+
+    small_navigation?: boolean
+
+}
+
 export const AuthStore = defineStore('auth', {
 
     state: () => ({
         auth: useLocalStorage('auth', {
             token: undefined
-        })
+        }),
+
+        data: useLocalStorage('data', {} as UserData)
     }),
 
     actions: {
@@ -56,6 +64,11 @@ export const AuthStore = defineStore('auth', {
                 this.auth.token = undefined;
             });
 
+        },
+
+
+        setUserData(data: UserData): void {
+            this.data = {...this.data, ...data};
         }
 
     }
