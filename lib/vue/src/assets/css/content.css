@@ -52,16 +52,17 @@
     font-weight: 500;
 }
 
-.block .body.table tbody tr:not(:last-child) {
-    border-bottom: 1px solid rgba(var(--main), .3);
-}
-
 .block .body.table tbody tr:nth-child(2n+1) {
     background-color: rgba(var(--main), .05);
 }
 
 .block .body.table td {
     padding: 15px;
+    border: 1px solid rgba(var(--main), .1);
+}
+
+.block .body.table tbody tr:hover {
+    background-color: rgba(var(--main), .1);
 }
 
 .list-inline i {

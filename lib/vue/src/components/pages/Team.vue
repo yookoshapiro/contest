@@ -34,8 +34,8 @@
               </div>
             </td>
             <td>
-              <SimpleButton @click="showEditTeam(team.id, team.name)" :spinner="editSpinner.get(team.id)"><Icon name="pencil-fill" /></SimpleButton>
-              <SimpleButton @click="deleteTeam(team.id, team.name)" color="red" :spinner="deleteSpinner.get(team.id)"><Icon name="trash-fill" /></SimpleButton>
+              <SimpleButton @click="showEditTeam(team.id, team.name)" :spinner="editSpinner.get(team.id)" title="Bearbeiten"><Icon name="pencil-fill" /></SimpleButton>
+              <SimpleButton @click="deleteTeam(team.id, team.name)" color="red" :spinner="deleteSpinner.get(team.id)" title="Löschen"><Icon name="trash-fill" /></SimpleButton>
             </td>
           </tr>
           <tr v-if="showAddSpinner">
