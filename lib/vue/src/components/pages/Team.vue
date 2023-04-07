@@ -2,7 +2,7 @@
   <div class="title">
     <h3>Teams</h3>
     <div class="controls">
-      <SimpleButton @click="showAddTeam"><Icon name="person-fill-add" />Team hinzufügen</SimpleButton>
+      <SimpleButton @click="showAddTeam"><Icon name="person-fill-add" /><span>Team hinzufügen</span></SimpleButton>
     </div>
   </div>
 
@@ -34,8 +34,8 @@
               </div>
             </td>
             <td>
-              <SimpleButton @click="showEditTeam(team.id, team.name)" :spinner="editSpinner.get(team.id)"><Icon name="pencil-fill" />Bearbeiten</SimpleButton>
-              <SimpleButton @click="deleteTeam(team.id, team.name)" color="red" :spinner="deleteSpinner.get(team.id)"><Icon name="trash-fill" />Löschen</SimpleButton>
+              <SimpleButton @click="showEditTeam(team.id, team.name)" :spinner="editSpinner.get(team.id)"><Icon name="pencil-fill" /></SimpleButton>
+              <SimpleButton @click="deleteTeam(team.id, team.name)" color="red" :spinner="deleteSpinner.get(team.id)"><Icon name="trash-fill" /></SimpleButton>
             </td>
           </tr>
           <tr v-if="showAddSpinner">

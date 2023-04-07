@@ -125,8 +125,12 @@ const name = function(name: string): Array<boolean>
 
 <style scoped>
 div.bi {
-  margin-right: 5px;
   display: inline-block;
+}
+
+/*noinspection CssInvalidPseudoSelector*/
+div.bi:deep ~ * {
+  margin-left: 5px;
 }
 
 div.alone {
