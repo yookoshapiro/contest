@@ -1,13 +1,15 @@
 <template>
-  <div class="input input-text" :class="{ readonly, error, vertical, 'with-icon': icon }">
-    <label v-if="label" :for="inputId">{{ label }}</label>
+  <label :for="inputId" :data-type="type" class="input input-text" :class="{ readonly, error, vertical, 'with-icon': icon }">
+    <span class="label" v-if="label" >{{ label }}</span>
     <div class="input-field">
       <Icon v-if="icon" :name="icon" class="before" size="16" />
-      <input :id="inputId" :name="name" :value="modelValue" @input="$emit('update:modelValue', eventValue($event))" :type="type" :placeholder="placeholder" :readonly="readonly" />
+      <input :id="inputId" :name="name" :value="modelValue" @input="$emit('update:modelValue', eventValue($event))" :type="refType" :placeholder="placeholder" :readonly="readonly" />
       <div v-if="error" class="field-icon"><i class="icon icon-error-outline"></i></div>
+      <div v-if="type === 'password' && refType === 'password'" class="toggle_password" @click="togglePassword"><Icon name="eye" size="16" title="Eingabe anzeigen" /></div>
+      <div v-if="type === 'password' && refType === 'text'" class="toggle_password" @click="togglePassword"><Icon name="eye-slash" size="16" title="Eingabe ausblenden" /></div>
     </div>
     <div v-if="error" class="error-message">{{ error }}</div>
-  </div>
+  </label>
 </template>
 
 <script setup lang="ts">
@@ -78,4 +80,11 @@ const props: Props = defineProps({
 defineEmits(['update:modelValue']);
 
 const inputId = ref( props.id ?? Md5.hashStr(props.name) );
+
+const refType = ref(props.type);
+
+const togglePassword = function() {
+  refType.value === 'password' ? refType.value = 'text' : refType.value = 'password';
+}
+
 </script>

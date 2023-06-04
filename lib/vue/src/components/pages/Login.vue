@@ -4,7 +4,7 @@
       <div id="logo"></div>
       <form method="post" id="login-body" @submit.prevent="send_login">
         <InputText v-model="login" name="login" placeholder="Benutzername" icon="person-fill" vertical />
-        <InputText v-model="password" value="sonne21" name="password" type="password" placeholder="Password" icon="key-fill"  vertical />
+        <InputText v-model="password" name="password" type="password" placeholder="Password" icon="key-fill" vertical />
         <Submit name="send_login" standalone :spinner="spinner">Anmelden</Submit>
       </form>
     </div>
