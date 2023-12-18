@@ -120,6 +120,7 @@ h3 {
     height: calc(100vh - 50px);
     float: right;
     padding: 20px;
+    overflow-y: auto;
     background-color: rgb(var(--black), .05);
 }
 
