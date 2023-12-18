@@ -139,7 +139,7 @@ div.bi {
 }
 
 /*noinspection CssInvalidPseudoSelector*/
-div.bi:deep ~ * {
+div:deep(.bi) ~ * {
   margin-left: 5px;
 }
 
@@ -156,6 +156,10 @@ div.before {
   height: 100%;
   position: absolute;
 
+}
+
+div.inline {
+  margin-right: 5px;
 }
 
 div.before, div.alone {
