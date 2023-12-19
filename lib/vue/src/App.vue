@@ -9,9 +9,6 @@ import { onBeforeMount } from "vue";
 import { AuthStore } from "./lib/store/auth";
 import { useRouter } from "vue-router";
 
-import Notifications from './components/elements/Notifications.vue';
-import Alert from "./components/elements/Alert.vue";
-
 const auth = AuthStore()
 const router = useRouter();
 

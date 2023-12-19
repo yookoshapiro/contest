@@ -20,7 +20,6 @@ import { onBeforeMount, ref } from "vue";
 import { AuthStore } from "../../lib/store/auth";
 
 import Navigation from "../Navigation.vue";
-import Icon from "../elements/Icon.vue";
 
 const small = ref(false);
 const auth = AuthStore();
