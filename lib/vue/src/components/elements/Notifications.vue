@@ -13,7 +13,6 @@
 </template>
 
 <script setup lang="ts">
-import Icon from "./Icon.vue";
 import { NotificationsStore } from '../../lib/store/notifications';
 
 const notifications = NotificationsStore();

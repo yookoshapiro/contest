@@ -1,125 +1,164 @@
-#alert {
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+@media {
 
-    position: absolute;
-    visibility: hidden;
+    #alert {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
 
-    background-color: rgba(var(--main), .8);
+        position: absolute;
+        visibility: hidden;
 
+        background-color: rgba(var(--main), .8);
 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -25%;
+    }
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    #alert.active {
+        visibility: visible;
+    }
+
+    #alert .message {
+        min-width: 200px;
+        max-width: 400px;
+        overflow: hidden;
+        border-radius: 5px;
+        background-color: rgba(var(--main), 1);
+    }
+
+    #alert .message > div {
+        background-color: rgba(var(--white), 1);
+    }
+
+    #alert .body {
+        position: relative;
+        padding: 20px 20px 20px 80px;
+    }
+
+    #alert .body:before {
+        width: 75px;
+        -webkit-mask-size: 40px;
+        mask-size: 40px;
+        background-color: rgba(var(--main), 1);
+    }
+
+    #alert .body .title {
+        font-weight: 500;
+        margin-bottom: 10px;
+        line-height: 1rem;
+    }
+
+    #alert .body .text {
+        font-size: .9rem;
+    }
+
+    #alert button {
+        margin-top: 1px;
+        padding: 10px;
+        text-align: center;
+        font-weight: bold;
+        user-select: none;
+
+        width: 100%;
+        border: none;
+        cursor: pointer;
+        background-color: rgba(var(--white), 1);
+        color: rgba(var(--main), 1);
+    }
+
+    #alert button:hover {
+        color: rgb(var(--white));
+        background-color: rgba(var(--highlight), 1);
+    }
+
+    #alert .message div.bi {
+        width: 80px;
+    }
+
+    #alert .message svg.bi {
+        width: 40px;
+        height: 40px;
+    }
+
+    #alert button,
+    #alert button {
+        width: calc(50% - 1px);
+        float: left;
+    }
+
+    #alert .button-cancel {
+        width: 50%;
+        margin-left: 1px;
+    }
+
+    #alert .message-custom .body {
+        padding: 20px;
+    }
+
+    #alert .message-custom {
+        min-width: 400px;
+    }
+
+    /* Theme: red */
+    #alert.red .message-confirm .title {
+        color: rgba(var(--red), 1);
+    }
+
+    #alert.red .message-confirm .button-confirm:hover {
+        color: rgba(var(--white), 1);
+        background-color: rgba(var(--red), 1);
+    }
+
+    #alert.red .message div.bi {
+        color: rgba(var(--red), 1);
+    }
+
+    #alert.red .message svg.bi {
+        color: rgba(var(--red), 1);
+    }
+
+    /* Theme: yellow */
+    #alert.yellow .message-confirm .title {
+        color: rgba(var(--yellow), 1);
+    }
+
+    #alert.yellow .message-confirm .button-confirm:hover {
+        color: rgba(var(--white), 1);
+        background-color: rgba(var(--yellow), 1);
+    }
+
+    #alert.yellow .message div.bi {
+        color: rgba(var(--yellow), 1);
+    }
+
+    #alert.yellow .message svg.bi {
+        color: rgba(var(--yellow), 1);
+    }
+
 }
 
-#alert.active {
-    visibility: visible;
-}
+@media (prefers-color-scheme: dark)
+{
 
-#alert .message {
-    min-width: 200px;
-    max-width: 400px;
-    overflow: hidden;
-    border-radius: 5px;
-}
+    #alert {
+        background-color: rgba(var(--white), .2);
+    }
 
-#alert .message > div {
-    background-color: rgba(var(--white), 1);
-}
+    #alert .button-confirm,
+    #alert .button-cancel {
+        color: rgb(var(--white));
+        background-color: rgba(var(--main), 1);
+    }
 
-#alert .body {
-    position: relative;
-    padding: 20px 20px 20px 80px;
-}
+    #alert .message {
+        background-color: rgba(var(--white), 1);
+    }
 
-#alert .body:before {
-    width: 75px;
-    -webkit-mask-size: 40px;
-    mask-size: 40px;
-    background-color: rgba(var(--main), 1);
-}
+    #alert .message > div {
+        background-color: rgba(var(--main), 1);
+    }
 
-#alert .body .title {
-    font-weight: 500;
-    margin-bottom: 20px;
-    line-height: 1rem;
-}
-
-#alert .body .text {
-    font-size: .9rem;
-}
-
-#alert button {
-    margin-top: 2px;
-    padding: 10px;
-    text-align: center;
-    font-weight: bold;
-    user-select: none;
-
-    width: 100%;
-    border: none;
-    cursor: pointer;
-    background-color: rgba(var(--white), 1);
-    color: rgba(var(--main), 1);
-}
-
-#alert button:hover {
-    background-color: rgba(var(--white), .7);
-}
-
-#alert .message div.bi {
-    width: 80px;
-    color: rgba(var(--red), 1);
-}
-
-#alert .message svg.bi {
-    width: 40px;
-    height: 40px;
-}
-
-/* message-confirm */
-#alert .message-confirm .title {
-    color: rgba(var(--red), 1);
-}
-
-#alert .message-confirm button,
-#alert .message-custom button {
-    width: calc(50% - 1px);
-    float: left;
-}
-
-#alert .message-confirm .button-confirm:hover {
-    color: rgba(var(--white), 1);
-    background-color: rgba(var(--red), .8);
-}
-
-#alert .message-custom .button-confirm:hover {
-    color: rgba(var(--white), 1);
-    background-color: rgba(var(--highlight), .8);
-}
-
-#alert .message-confirm .button-cancel {
-    margin-left: 2px;
-    color: rgba(var(--white), 1);
-    background-color: rgba(var(--highlight), .7);
-}
-
-#alert .message-custom .button-cancel {
-    margin-left: 2px;
-}
-
-#alert .message-confirm .button-cancel:hover {
-    background-color: rgba(var(--highlight), 1);
-}
-
-#alert .message-custom .body {
-    padding: 20px;
-}
-
-#alert .message-custom {
-    min-width: 400px;
 }

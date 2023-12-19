@@ -1,176 +1,206 @@
-.input {
-    width: 100%;
-    margin-bottom: 20px;
+@media {
+
+    .input {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .input:last-child {
+        margin-bottom: unset;
+    }
+
+    .input span.label {
+        width: 300px;
+        font-weight: 500;
+        text-align: right;
+        padding-right: 20px;
+        line-height: 1rem;
+        display: inline-block;
+    }
+
+    .input .input-field {
+        width: 100%;
+        max-width: 400px;
+        padding: 7px 10px;
+        border-radius: 3px;
+        position: relative;
+        display: inline-block;
+        background-color: rgba(var(--main), .05);
+        border: 1px solid rgba(var(--main), .5);
+    }
+
+    .input .input-field > div.bi {
+        background-color: rgba(var(--main), .1);
+        border-right: 1px solid rgba(var(--main), .5);
+    }
+
+    .input.error .input-field >  div.bi {
+        background-color: rgba(var(--red), .1);
+        border-right: 1px solid rgba(var(--red), .5);
+    }
+
+    .input svg.bi {
+        width: 20px;
+        height: 20px;
+    }
+
+    .input.error svg.bi {
+        color: rgba(var(--red), 1);
+    }
+
+    .input input {
+        width: 100%;
+        border: none;
+        outline: none;
+        line-height: 1rem;
+        color: rgba(var(--main), 1);
+        background-color: transparent;
+    }
+
+    .input.with-icon input {
+        padding-left: 40px;
+    }
+
+    .input input::placeholder {
+        color: rgba(var(--main), .5);
+    }
+
+    .input.readonly,
+    .input.readonly input {
+        cursor: not-allowed;
+    }
+
+    .input button {
+        border: none;
+        outline: none;
+        padding: 12px;
+        cursor: pointer;
+        overflow: hidden;
+        line-height: 1rem;
+        border-radius: 3px;
+        position: relative;
+        color: rgb(var(--white));
+        background-color: rgb(var(--main));
+    }
+
+    button.with-spinner {
+        color: transparent !important;
+    }
+
+    button.with-spinner > i {
+        background-color: transparent !important;
+    }
+
+    @keyframes click-spinner {
+        to {transform: rotate(360deg);}
+    }
+
+    button.with-spinner::before {
+        content: '';
+        position: absolute;
+        box-sizing: border-box;
+        animation: click-spinner 1.4s ease infinite;
+
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        margin-top: -10px;
+        margin-left: -10px;
+
+        border-radius: 50%;
+        border: 2px solid transparent;
+        border-top-color: rgba(var(--white), 1);
+        border-bottom-color: rgba(var(--white), 1);
+    }
+
+    /**
+     * Fehlermeldung
+     */
+
+    .input.error span.label {
+        color: rgba(var(--red), 1);
+    }
+
+    .input.error .input-field {
+        border-color: rgba(var(--red), 1);
+    }
+
+    .input.error input {
+        width: calc(100% - 30px);
+    }
+
+    .input.error input::placeholder {
+        color: rgba(var(--red), .5);
+    }
+
+    .input.error .field-icon {
+        top: 9px;
+        right: 10px;
+        position: absolute;
+    }
+
+    .input.error .field-icon i {
+        width: 22px;
+        height: 22px;
+        -webkit-mask-size: 22px;
+        mask-size: 22px;
+        background-color: rgba(var(--red), 1);
+    }
+
+    .input .error-message {
+        font-weight: 500;
+        margin-left: 20px;
+        display: inline-block;
+        color: rgba(var(--red), 1);
+    }
+
+    .input.vertical span.label {
+        padding: 0;
+        width: 100%;
+        text-align: left;
+        margin-left: 14px;
+        margin-bottom: 7px;
+    }
+
+    .input[data-type="password"] input {
+        width: calc(100% - 40px);
+    }
+
+    .input .toggle_password {
+        top: 0;
+        right: 0;
+        position: absolute;
+        height: 100%;
+        width: 40px;
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
 }
 
-.input:last-child {
-    margin-bottom: unset;
-}
+@media (prefers-color-scheme: dark)
+{
 
-.input span.label {
-    width: 300px;
-    font-weight: 500;
-    text-align: right;
-    padding-right: 20px;
-    line-height: 1rem;
-    display: inline-block;
-}
+    .input .input-field {
+        border-color: rgba(var(--white), 1);
+        background-color: rgba(var(--white), .05);
+    }
 
-.input .input-field {
-    width: 100%;
-    max-width: 400px;
-    padding: 7px 10px;
-    border-radius: 3px;
-    position: relative;
-    display: inline-block;
-    border: 1px solid rgba(var(--main), .5);
-}
+    .input input {
+        color: rgb(var(--white));
+    }
 
-.input .input-field > div.bi {
-    background-color: rgba(var(--main), .1);
-    border-right: 1px solid rgba(var(--main), .5);
-}
+    .input input::placeholder {
+        color: rgba(var(--white), .4);
+    }
 
-.input.error .input-field >  div.bi {
-    background-color: rgba(var(--red), .1);
-    border-right: 1px solid rgba(var(--red), .5);
-}
+    .input .input-field > div.bi {
+        background-color: rgba(var(--main), .9);
+        border-right: 1px solid rgba(var(--white), 1);
+    }
 
-.input svg.bi {
-    width: 20px;
-    height: 20px;
-}
-
-.input.error svg.bi {
-    color: rgba(var(--red), 1);
-}
-
-.input input {
-    width: 100%;
-    border: none;
-    outline: none;
-    line-height: 1rem;
-    color: rgba(var(--main), 1);
-    background-color: transparent;
-}
-
-.input.with-icon input {
-    padding-left: 35px;
-}
-
-.input input::placeholder {
-    color: rgba(var(--main), .5);
-}
-
-.input.readonly,
-.input.readonly input {
-    cursor: not-allowed;
-}
-
-.input button {
-    border: none;
-    outline: none;
-    padding: 12px;
-    cursor: pointer;
-    overflow: hidden;
-    line-height: 1rem;
-    border-radius: 3px;
-    position: relative;
-    background-color: rgba(var(--main), 1);
-}
-
-button.with-spinner {
-    color: transparent !important;
-}
-
-button.with-spinner > i {
-    background-color: transparent !important;
-}
-
-@keyframes click-spinner {
-    to {transform: rotate(360deg);}
-}
-
-button.with-spinner::before {
-    content: '';
-    position: absolute;
-    box-sizing: border-box;
-    animation: click-spinner 1.4s ease infinite;
-
-    top: 50%;
-    left: 50%;
-    width: 20px;
-    height: 20px;
-    margin-top: -10px;
-    margin-left: -10px;
-
-    border-radius: 50%;
-    border: 2px solid transparent;
-    border-top-color: rgba(var(--white), 1);
-    border-bottom-color: rgba(var(--white), 1);
-}
-
-/**
- * Fehlermeldung
- */
-
-.input.error span.label {
-    color: rgba(var(--red), 1);
-}
-
-.input.error .input-field {
-    border-color: rgba(var(--red), 1);
-}
-
-.input.error input {
-    width: calc(100% - 30px);
-}
-
-.input.error input::placeholder {
-    color: rgba(var(--red), .5);
-}
-
-.input.error .field-icon {
-    top: 9px;
-    right: 10px;
-    position: absolute;
-}
-
-.input.error .field-icon i {
-    width: 22px;
-    height: 22px;
-    -webkit-mask-size: 22px;
-    mask-size: 22px;
-    background-color: rgba(var(--red), 1);
-}
-
-.input .error-message {
-    font-weight: 500;
-    margin-left: 20px;
-    display: inline-block;
-    color: rgba(var(--red), 1);
-}
-
-.input.vertical span.label {
-    padding: 0;
-    width: 100%;
-    text-align: left;
-    margin-bottom: 7px;
-}
-
-.input[data-type="password"] input {
-    width: calc(100% - 40px);
-}
-
-.input .toggle_password {
-    top: 0;
-    right: 0;
-    position: absolute;
-    height: 100%;
-    width: 40px;
-    cursor: pointer;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }

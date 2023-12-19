@@ -1,121 +1,149 @@
-.title > h3 {
-    width: 50%;
-    margin-bottom: 20px;
-    display: inline-block;
+@media {
+
+    .title > h3 {
+        width: 50%;
+        margin-bottom: 20px;
+        display: inline-block;
+    }
+
+    .controls {
+        width: 50%;
+        text-align: right;
+        display: inline-block;
+    }
+
+    .block {
+        width: 100%;
+        padding: 10px;
+        min-height: 20px;
+        border: 1px solid rgba(var(--main), .2);
+        background-color: rgb(var(--white));
+
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .block .title,
+    .block .body {
+        padding: 10px;
+    }
+
+    .block .title {
+        font-weight: 500;
+        line-height: 1rem;
+        padding-bottom: 20px;
+        border-bottom: 2px solid rgb(var(--main));
+    }
+
+    .block .body {
+        padding-top: 20px;
+    }
+
+    .block .body.table {
+        padding: 0;
+    }
+
+    .block table {
+        margin: -11px;
+        width: calc(100% + 22px);
+        font-size: .9rem;
+        line-height: .9rem;
+    }
+
+    .block table thead td {
+        font-weight: 500;
+    }
+
+    .block table tbody tr:nth-child(2n+1) {
+        background-color: rgba(var(--main), .1);
+    }
+
+    .block table td {
+        padding: 15px;
+        border: 1px solid rgba(var(--main), .2);
+    }
+
+    .block table tbody tr:hover {
+        background-color: rgba(var(--main), .2);
+    }
+
+    .list-inline i {
+        width: 24px;
+        height: 24px;
+        background-color: rgba(var(--main), .5);
+
+        -webkit-mask-size: 14px;
+        mask-size: 14px;
+    }
+
+    .list-inline-item {
+        padding: 0;
+        float: left;
+        margin-right: 6px;
+        margin-bottom: 6px;
+        border: 1px solid rgba(var(--white), 1);
+        background-color: rgba(var(--main), .1);
+        box-shadow: 0 0 0 1px rgba(var(--main), .3);
+    }
+
+    .list-inline-item.done {
+        background-color: rgba(var(--highlight), .1);
+        box-shadow: 0 0 0 1px rgba(var(--highlight), .5);
+    }
+
+    .list-inline-item.done i {
+        background-color: rgba(var(--highlight), 1);
+    }
+
+    div.with-spinner {
+        padding-left: 20px;
+        position: relative;
+    }
+
+    @keyframes click-spinner {
+        to {transform: rotate(360deg);}
+    }
+
+    div.with-spinner::before {
+        content: '';
+        position: absolute;
+        box-sizing: border-box;
+        animation: click-spinner 1.4s ease infinite;
+
+        top: 50%;
+        left: 0;
+        width: 16px;
+        height: 16px;
+        margin-top: -8px;
+
+        border-radius: 50%;
+        border: 2px solid transparent;
+        border-top-color: rgba(var(--main), 1);
+        border-bottom-color: rgba(var(--main), 1);
+    }
+
 }
 
-.controls {
-    width: 50%;
-    text-align: right;
-    display: inline-block;
+@media (prefers-color-scheme: dark)
+{
+
+    .block {
+        border-color: rgba(var(--white), .4);
+        background-color: rgba(var(--main), 1);
+    }
+
+    .block table tbody tr:nth-child(2n+1) {
+        background-color: rgba(var(--white), .05);
+    }
+
+    .block table td {
+        padding: 15px;
+        border: 1px solid rgba(var(--white), .4);
+    }
+
+    .block table tbody tr:hover {
+        background-color: rgba(var(--white), .2);
+    }
+
 }
 
-.block {
-    width: 100%;
-    padding: 10px;
-    min-height: 50px;
-    border: 1px solid rgba(var(--main), .2);
-    background-color: rgb(var(--white));
-}
-
-.block .title,
-.block .body {
-    padding: 10px;
-}
-
-.block .title {
-    font-weight: 500;
-    line-height: 1rem;
-    padding-bottom: 20px;
-    border-bottom: 2px solid rgb(var(--main));
-}
-
-.block .body {
-    padding-top: 20px;
-}
-
-.block .body.table {
-    padding: 0;
-}
-
-.block .body.table table {
-    width: 100%;
-    font-size: .9rem;
-    line-height: .9rem;
-}
-
-.block .body.table thead {
-    border-bottom: 2px solid rgba(var(--main), .3);
-}
-
-.block .body.table thead td {
-    font-weight: 500;
-}
-
-.block .body.table tbody tr:nth-child(2n+1) {
-    background-color: rgba(var(--main), .05);
-}
-
-.block .body.table td {
-    padding: 15px;
-    border: 1px solid rgba(var(--main), .1);
-}
-
-.block .body.table tbody tr:hover {
-    background-color: rgba(var(--main), .1);
-}
-
-.list-inline i {
-    width: 24px;
-    height: 24px;
-    background-color: rgba(var(--main), .5);
-
-    -webkit-mask-size: 14px;
-    mask-size: 14px;
-}
-
-.list-inline-item {
-    padding: 0;
-    float: left;
-    margin-right: 6px;
-    margin-bottom: 6px;
-    border: 1px solid rgba(var(--white), 1);
-    background-color: rgba(var(--main), .1);
-    box-shadow: 0 0 0 1px rgba(var(--main), .3);
-}
-
-.list-inline-item.done {
-    background-color: rgba(var(--highlight), .1);
-    box-shadow: 0 0 0 1px rgba(var(--highlight), .5);
-}
-
-.list-inline-item.done i {
-    background-color: rgba(var(--highlight), 1);
-}
-
-div.with-spinner {
-    padding-left: 20px;
-    position: relative;
-}
-
-@keyframes click-spinner {
-    to {transform: rotate(360deg);}
-}
-
-div.with-spinner::before {
-    content: '';
-    position: absolute;
-    box-sizing: border-box;
-    animation: click-spinner 1.4s ease infinite;
-
-    top: 50%;
-    left: 0;
-    width: 16px;
-    height: 16px;
-    margin-top: -8px;
-
-    border-radius: 50%;
-    border: 2px solid transparent;
-    border-top-color: rgba(var(--main), 1);
-    border-bottom-color: rgba(var(--main), 1);
-}

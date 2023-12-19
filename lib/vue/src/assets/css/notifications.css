@@ -1,105 +1,131 @@
-#notifications {
-    right: 40px;
-    bottom: 40px;
-    position: absolute;
+@media {
+
+    #notifications {
+        right: 40px;
+        bottom: 40px;
+        position: absolute;
+    }
+
+    #notifications .item {
+        width: 350px;
+        margin-top: 20px;
+        overflow: hidden;
+        border-radius: 5px;
+        position: relative;
+        padding: 10px 60px 10px 70px;
+        background-color: rgba(var(--white), 1);
+        box-shadow: 0 0 5px 3px rgba(var(--main), .1);
+    }
+
+    #notifications .item:before {
+        content: "";
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 10px;
+        position: absolute;
+    }
+
+    #notifications .item.error:before {
+        background-color: rgba(var(--alert), 1);
+    }
+
+    #notifications .item.error .title {
+        color: rgba(var(--alert), 1);
+    }
+
+    #notifications .item.warning:before {
+        background-color: rgba(var(--warning), 1);
+    }
+
+    #notifications .item.warning .title {
+        color: rgba(var(--warning), 1);
+    }
+
+    #notifications .item.success:before {
+        background-color: rgba(var(--highlight), 1);
+    }
+
+    #notifications .item.success .title {
+        color: rgba(var(--highlight), 1);
+    }
+
+    #notifications .item.info:before {
+        background-color: rgba(var(--main), 1);
+    }
+
+    #notifications .item.info .title {
+        color: rgba(var(--main), 1);
+    }
+
+    #notifications .title {
+        font-weight: 500;
+        margin-bottom: 3px;
+    }
+
+    #notifications .title div.bi {
+        left: 18px;
+    }
+
+    #notifications .title svg.bi {
+        width: 30px;
+        height: 30px;
+    }
+
+    #notifications .body {
+        font-size: .75rem;
+    }
+
+    #notifications .close {
+        top: 0;
+        right: 0;
+        height: 100%;
+        padding: 0 10px;
+
+        position: absolute;
+        border-left: 1px solid rgba(var(--main), .1);
+    }
+
+    #notifications .close:hover {
+        background-color: rgba(var(--main), .1);
+    }
+
+    #notifications .close div.bi {
+        cursor: pointer;
+        color: rgba(var(--main), .5);
+
+        height: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #notifications .close svg.bi {
+        width: 30px;
+        height: 30px;
+    }
+
 }
 
-#notifications .item {
-    width: 350px;
-    margin-top: 20px;
-    overflow: hidden;
-    border-radius: 5px;
-    position: relative;
-    padding: 10px 60px 10px 70px;
-    background-color: rgba(var(--white), 1);
-    box-shadow: 0 0 5px 3px rgba(var(--main), .1);
-}
+@media (prefers-color-scheme: dark)
+{
 
-#notifications .item:before {
-    content: "";
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 10px;
-    position: absolute;
-}
+    #notifications .item {
+        background-color: rgba(var(--main), 1);
+    }
 
-#notifications .item.error:before {
-    background-color: rgba(var(--alert), 1);
-}
+    #notifications .close {
+        border-left: 1px solid rgba(var(--white), .1);
+    }
 
-#notifications .item.error .title {
-    color: rgba(var(--alert), 1);
-}
+    #notifications .close:hover {
+        background-color: rgba(var(--white), .05);
+    }
 
-#notifications .item.warning:before {
-    background-color: rgba(var(--warning), 1);
-}
+    #notifications .close div.bi {
+        color: rgba(var(--white), .8);
+    }
 
-#notifications .item.warning .title {
-    color: rgba(var(--warning), 1);
-}
 
-#notifications .item.success:before {
-    background-color: rgba(var(--highlight), 1);
-}
-
-#notifications .item.success .title {
-    color: rgba(var(--highlight), 1);
-}
-
-#notifications .item.info:before {
-    background-color: rgba(var(--main), 1);
-}
-
-#notifications .item.info .title {
-    color: rgba(var(--main), 1);
-}
-
-#notifications .title {
-    font-weight: 500;
-    margin-bottom: 3px;
-}
-
-#notifications .title div.bi {
-    left: 18px;
-}
-
-#notifications .title svg.bi {
-    width: 30px;
-    height: 30px;
-}
-
-#notifications .body {
-    font-size: .75rem;
-}
-
-#notifications .close {
-    top: 0;
-    right: 0;
-    height: 100%;
-    padding: 0 10px;
-
-    position: absolute;
-    border-left: 1px solid rgba(var(--main), .1);
-}
-
-#notifications .close:hover {
-    background-color: rgba(var(--main), .1);
-}
-
-#notifications .close div.bi {
-    cursor: pointer;
-    color: rgba(var(--main), .5);
-
-    height: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#notifications .close svg.bi {
-    width: 30px;
-    height: 30px;
 }

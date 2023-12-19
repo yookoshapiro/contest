@@ -2,71 +2,71 @@
   <div class="title">
     <h3>Teams</h3>
     <div class="controls">
-      <SimpleButton @click="showAddTeam"><Icon name="person-fill-add" /><span>Team hinzufügen</span></SimpleButton>
+      <SimpleButton @click="showAddTeam"><Icon name="person-fill-add" class="inline" /><span>Team hinzufügen</span></SimpleButton>
     </div>
   </div>
 
   <div class="content">
     <div class="block">
-      <div class="body table">
-        <table>
-          <thead>
-          <tr>
-            <td style="width: 40px">#</td>
-            <td style="width: 400px">Team</td>
-            <td style="width: 400px">Ergebnisse</td>
-            <td style="min-width: 150px;">Aktionen</td>
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-for="(team, index) in teams.teams">
-            <td>{{ index+1 }}</td>
-            <td>
-              <div style="margin-bottom: 10px;">{{ team.name }}</div>
-              <div class="little">{{ team.id }}</div>
-            </td>
-            <td>
-              <div v-for="station in stations.stations" class="list-inline">
-                <router-link :to="{ name: 'showStation', params: { id: station.id } }">
-                  <div v-if="isIn(station, team)" :title="station.name" class="list-inline-item done"><i class="icon icon-done"></i></div>
-                  <div v-else :title="station.name" class="list-inline-item"><i class="icon icon-location"></i></div>
-                </router-link>
-              </div>
-            </td>
-            <td>
-              <SimpleButton @click="showEditTeam(team.id, team.name)" :spinner="editSpinner.get(team.id)" title="Bearbeiten"><Icon name="pencil-fill" /></SimpleButton>
-              <SimpleButton @click="deleteTeam(team.id, team.name)" color="red" :spinner="deleteSpinner.get(team.id)" title="Löschen"><Icon name="trash-fill" /></SimpleButton>
-            </td>
-          </tr>
-          <tr v-if="showAddSpinner">
-            <td>X</td>
-            <td colspan="3"><div class="with-spinner">Wird angelegt</div></td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+      <table>
+        <thead>
+        <tr>
+          <td style="width: 40px">#</td>
+          <td style="width: 400px">Team</td>
+          <td style="width: 400px">Ergebnisse</td>
+          <td style="min-width: 150px;">Aktionen</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(team, index) in teams.teams">
+          <td>{{ index+1 }}</td>
+          <td>
+            <div style="margin-bottom: 10px;">{{ team.name }}</div>
+            <div class="little">{{ team.id }}</div>
+          </td>
+          <td>
+            <div v-for="station in stations.stations" class="list-inline">
+              <router-link :to="{ name: 'showStation', params: { id: station.id } }">
+                <div v-if="isIn(station, team)" :title="station.name" class="list-inline-item done"><i class="icon icon-done"></i></div>
+                <div v-else :title="station.name" class="list-inline-item"><i class="icon icon-location"></i></div>
+              </router-link>
+            </div>
+          </td>
+          <td>
+            <SimpleButton @click="showEditTeam(team.id, team.name)" :spinner="editSpinner.get(team.id)" title="Bearbeiten"><Icon name="pencil-fill" /></SimpleButton>
+            <SimpleButton @click="deleteTeam(team.id, team.name)" color="red" :spinner="deleteSpinner.get(team.id)" title="Löschen"><Icon name="trash-fill" /></SimpleButton>
+          </td>
+        </tr>
+        <tr v-if="showAddSpinner">
+          <td>X</td>
+          <td colspan="3"><div class="with-spinner">Wird angelegt</div></td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
   <CustomAlert :active="activateAlert">
-    <InputText v-model="teamName" name="name" :label="inputLabel" placeholder="Name des Teams" vertical />
+    <div>
+      <Icon :name="inputIconName" class="before" />
+      <div style="padding-left: 60px">
+        <div style="margin-bottom: 10px">{{ inputLabel }}</div>
+        <InputText v-model="teamName" name="name" placeholder="Name des Teams" vertical />
+      </div>
+    </div>
+
   </CustomAlert>
 </template>
 
 <script setup lang="ts">
 
-import { onBeforeMount, ref } from 'vue';
-import { Station, Team } from '../../lib/interface/Tables';
+import {onBeforeMount, ref} from 'vue';
+import {Station, Team} from '../../lib/interface/Tables';
 
-import { teamsStore } from '../../lib/store/data/teams';
-import { stationsStore } from '../../lib/store/data/stations';
-import { AlertStore, AlertType } from '../../lib/store/alert';
-import { NotificationsStore, NotificationType } from "../../lib/store/notifications";
-
-import SimpleButton from "../elements/SimpleButton.vue";
-import CustomAlert from "../elements/CustomAlert.vue";
-import InputText from "../elements/form/InputText.vue";
-import Icon from "../elements/Icon.vue";
+import {teamsStore} from '../../lib/store/data/teams';
+import {stationsStore} from '../../lib/store/data/stations';
+import {AlertStore, AlertTheme, AlertType} from '../../lib/store/alert';
+import {NotificationsStore, NotificationType} from "../../lib/store/notifications";
 
 const teams = teamsStore();
 const stations = stationsStore();
@@ -77,6 +77,7 @@ const notifications = NotificationsStore();
 const activateAlert = ref(false);
 const teamName = ref('');
 const inputLabel = ref('');
+const inputIconName = ref('');
 
 const showAddSpinner = ref(false);
 const editSpinner = ref(new Map<string, boolean>());
@@ -124,6 +125,7 @@ const showAddTeam = function(): void
   activateAlert.value = true;
   teamName.value = '';
   inputLabel.value = 'Team hinzufügen';
+  inputIconName.value = 'person-fill-add';
 
   alert.set({type: AlertType.custom})
     .then((response) => {
@@ -174,6 +176,7 @@ const showEditTeam = function(id: string, name: string): void
   activateAlert.value = true;
   teamName.value = name;
   inputLabel.value = 'Team bearbeiten';
+  inputIconName.value = 'pencil-fill';
 
   alert.set({type: AlertType.custom})
     .then(() => {
@@ -216,7 +219,8 @@ const deleteTeam = function(id: string, name: string): void
   alert.set({
     type: AlertType.confirm,
     title: 'Team wirklich löschen?',
-    text: "Soll das Team '" + name + "' wirklich gelöscht werden?"
+    text: "Soll das Team '" + name + "' wirklich gelöscht werden?",
+    theme: AlertTheme.red
   })
     .then(() => {
 

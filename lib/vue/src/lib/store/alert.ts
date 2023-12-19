@@ -8,6 +8,14 @@ export enum AlertType {
 
 }
 
+export enum AlertTheme {
+
+    none = "",
+    yellow = "yellow",
+    red = "red"
+
+}
+
 interface PromiseCallback
 {
     (item: any): void;
@@ -17,7 +25,8 @@ export interface Alert {
 
     type?: AlertType,
     title?: string,
-    text?: string
+    text?: string,
+    theme?: AlertTheme
 
 }
 
@@ -48,6 +57,7 @@ export const AlertStore = defineStore('alert', {
 
             this.alert.active = true;
             this.alert.type = (typeof alert.type === "undefined" ? AlertType.alert : alert.type);
+            this.alert.theme = (typeof alert.theme === "undefined" ? AlertTheme.none : alert.theme);
 
             if (typeof alert.title === "string") {
                 this.alert.title = alert.title;

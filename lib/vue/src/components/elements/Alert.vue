@@ -1,5 +1,5 @@
 <template>
-  <div id="alert" :class="{active: alert.active}" @click.self="alert.reject">
+  <div id="alert" :class="[alert.active ? 'active': '', alert.theme]" @mousedown.self="alert.reject">
 
     <div v-if="alert.type === AlertType.alert" class="message message-alert">
       <div class="body">
@@ -21,7 +21,7 @@
     </div>
 
     <div v-if="alert.type === AlertType.custom" class="message message-custom">
-      <div id="message-custom" class="body"></div>
+      <div id="message-custom" class="body" />
       <button class="button-confirm" @click.self="alert.resolve">Bestätigen</button>
       <button class="button-cancel" @click.self="alert.reject">Abbrechen</button>
     </div>
@@ -31,9 +31,7 @@
 
 <script setup lang="ts">
 
-import Icon from "./Icon.vue";
 import { AlertStore, AlertType } from '../../lib/store/alert';
-
 const alert = AlertStore().alert;
 
 </script>

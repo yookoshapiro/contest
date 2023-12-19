@@ -1,34 +1,52 @@
-main {
-    height: 100vh;
-    background-color: rgb(var(--black), .05);
+@media {
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    main {
+        height: 100vh;
+        background-color: rgb(var(--main), .05);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #login {
+        padding: 0;
+        width: 300px;
+        overflow: hidden;
+        border-radius: 5px;
+        box-shadow: 0 0 3px 3px rgba(var(--main), .5);
+    }
+
+    #logo {
+        height: 140px;
+        background-color: rgba(var(--main), 1);
+        background-image: url("../../assets/img/trophy.png");
+        background-size: 70px 70px;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    #login-body {
+        padding: 20px;
+        background-color: rgb(var(--white));
+    }
+
+    /*noinspection CssInvalidPseudoSelector*/
+    #login-body:deep(.input button) {
+        width: 100%;
+    }
+
 }
 
-#login {
-    padding: 0;
-    width: 300px;
-    overflow: hidden;
-    border-radius: 5px;
-    box-shadow: 0 0 3px 3px rgba(var(--main), .1);
-}
+@media (prefers-color-scheme: dark)
+{
 
-#logo {
-    height: 140px;
-    background-color: rgba(var(--main), 1);
-    background-image: url("../../assets/img/trophy.png");
-    background-size: 70px 70px;
-    background-repeat: no-repeat;
-    background-position: center center;
-}
+    main {
+        background-color: rgb(var(--main), .9);
+    }
 
-#login-body {
-    padding: 20px;
-}
+    #login-body {
+        background-color: rgba(var(--white), .1);
+    }
 
-/*noinspection CssInvalidPseudoSelector*/
-#login-body:deep(.input button)  {
-    width: 100%;
 }
