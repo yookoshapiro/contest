@@ -9,16 +9,18 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
 
+        --main: 42, 63, 84;
+
         --white: 255, 255, 255;
         --black: 0, 0, 0;
-        --main: 42, 63, 84;
-        --highlight: 0, 198, 182;
+        --green: 0, 198, 182;
         --sand: 255,247,214;
         --red: 226, 119, 122;
         --yellow: 240, 173, 78;
 
         --warning: var(--yellow);
         --alert: var(--red);
+        --highlight: var(--green);
 
     }
 
@@ -259,6 +261,11 @@
 
 @media (prefers-color-scheme: dark)
 {
+
+    ::selection {
+        color: rgb(var(--black));
+        background-color: rgb(var(--highlight));
+    }
 
     body {
         color: rgb(var(--white));
