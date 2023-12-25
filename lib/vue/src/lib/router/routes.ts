@@ -6,7 +6,7 @@ import DefaultLayout from '../../components/layouts/Default.vue';
 
 import Home from '../../components/pages/Home.vue';
 import Users from '../../components/pages/Users.vue';
-import Team from '../../components/pages/Team.vue';
+import Teams from '../../components/pages/Teams.vue';
 import Stations from '../../components/pages/Stations.vue';
 import Results from '../../components/pages/Results.vue';
 import Evaluation from '../../components/pages/Evaluation.vue';
@@ -21,8 +21,8 @@ export const router = createRouter({
         {path: '/admin', component: AdminLayout, redirect: { name: 'dashboard' }, meta: {requiredAuthorization: true}, children: [
             {path: 'dashboard', component: Home, name: 'dashboard'},
             {path: 'user', component: Users, name: 'user'},
-            {path: 'team', component: Team, name: 'team'},
-            {path: 'station', component: Stations, name: 'station'},
+            {path: 'teams', component: Teams, name: 'teams'},
+            {path: 'stations', component: Stations, name: 'stations'},
             {path: 'result', component: Results, name: 'result'},
             {path: 'evaluation', component: Evaluation, name: 'evaluation'},
             {path: 'setting', component: Settings, name: 'settings'},

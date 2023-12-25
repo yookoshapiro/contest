@@ -30,8 +30,8 @@ const menu: Array<MenuItem> = [
 
   {name: 'dashboard', icon: 'grid-1x2-fill', css: 'before', value: 'Dashboard'},
   {name: 'user', icon: 'person-fill', css: 'before', value: 'Benutzer'},
-  {name: 'team', icon: 'people-fill', css: 'before', value: 'Teams'},
-  {name: 'station', icon: 'geo-alt-fill', css: 'before', value: 'Stationen'},
+  {name: 'teams', icon: 'people-fill', css: 'before', value: 'Teams'},
+  {name: 'stations', icon: 'geo-alt-fill', css: 'before', value: 'Stationen'},
   {name: 'result', icon: 'clipboard2-fill', css: 'before', value: 'Ergebnisse'},
   {name: 'evaluation', icon: 'bar-chart-fill', css: 'before', value: 'Auswertung'},
 
