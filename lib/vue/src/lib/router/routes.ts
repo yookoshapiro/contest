@@ -13,6 +13,7 @@ import Evaluation from '../../components/pages/Evaluation.vue';
 import Settings from '../../components/pages/Settings.vue';
 import AdminSettings from '../../components/pages/AdminSettings.vue';
 import Login from '../../components/pages/Login.vue';
+import Referees from '../../components/pages/Referees.vue';
 
 export const router = createRouter({
     history: createWebHistory(),
@@ -23,6 +24,7 @@ export const router = createRouter({
             {path: 'user', component: Users, name: 'user'},
             {path: 'teams', component: Teams, name: 'teams'},
             {path: 'stations', component: Stations, name: 'stations'},
+            {path: 'referees', component: Referees, name: 'referees'},
             {path: 'result', component: Results, name: 'result'},
             {path: 'evaluation', component: Evaluation, name: 'evaluation'},
             {path: 'setting', component: Settings, name: 'settings'},
