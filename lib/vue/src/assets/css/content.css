@@ -67,32 +67,30 @@
         background-color: rgba(var(--main), .2);
     }
 
-    .list-inline i {
-        width: 24px;
-        height: 24px;
-        background-color: rgba(var(--main), .5);
-
-        -webkit-mask-size: 14px;
-        mask-size: 14px;
+    .list-inline {
+        margin-bottom: -5px;
+        display: inline-block;
     }
 
     .list-inline-item {
-        padding: 0;
+        padding: 7px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+
         float: left;
-        margin-right: 6px;
-        margin-bottom: 6px;
-        border: 1px solid rgba(var(--white), 1);
-        background-color: rgba(var(--main), .1);
-        box-shadow: 0 0 0 1px rgba(var(--main), .3);
+        border: 1px solid white;
+        box-shadow: 0 0 1px 1px rgba(var(--main), .3);
+        background-color: rgba(var(--main), .3);
     }
 
     .list-inline-item.done {
-        background-color: rgba(var(--highlight), .1);
-        box-shadow: 0 0 0 1px rgba(var(--highlight), .5);
+        cursor: pointer;
+        box-shadow: 0 0 1px 1px rgba(var(--highlight), 1);
+        background-color: rgba(var(--highlight), 1);
     }
 
-    .list-inline-item.done i {
-        background-color: rgba(var(--highlight), 1);
+    .list-inline-item svg.bi {
+        fill: white !important;
     }
 
     div.with-spinner {
@@ -143,6 +141,12 @@
 
     .block table tbody tr:hover {
         background-color: rgba(var(--white), .2);
+    }
+
+    .list-inline-item {
+        border-color: rgba(var(--main), 1);
+        background-color: rgba(var(--white), .2);
+        box-shadow: 0 0 1px 1px rgba(var(--white), .2);
     }
 
 }
