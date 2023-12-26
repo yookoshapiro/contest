@@ -1,4 +1,5 @@
 <template>
+
   <div class="title">
     <h3>Teams</h3>
     <div class="controls">
@@ -10,37 +11,37 @@
     <div class="block">
       <table>
         <thead>
-        <tr>
-          <td style="width: 40px">#</td>
-          <td style="width: 400px">Team</td>
-          <td style="width: 400px">Ergebnisse</td>
-          <td style="min-width: 150px;">Aktionen</td>
-        </tr>
+          <tr>
+            <td style="width: 40px">#</td>
+            <td>Team</td>
+            <td>Ergebnisse</td>
+            <td>Aktionen</td>
+          </tr>
         </thead>
         <tbody>
-        <tr v-for="(team, index) in teams.teams">
-          <td>{{ index+1 }}</td>
-          <td>
-            <div style="margin-bottom: 10px;">{{ team.name }}</div>
-            <div class="little">{{ team.id }}</div>
-          </td>
-          <td>
-            <div v-for="station in stations.stations" class="list-inline">
-              <router-link :to="{ name: 'showStation', params: { id: station.id } }">
-                <div v-if="isIn(station, team)" :title="station.name" class="list-inline-item done"><i class="icon icon-done"></i></div>
-                <div v-else :title="station.name" class="list-inline-item"><i class="icon icon-location"></i></div>
-              </router-link>
-            </div>
-          </td>
-          <td>
-            <SimpleButton @click="showEditTeam(team.id, team.name)" :spinner="editSpinner.get(team.id)" title="Bearbeiten"><Icon name="pencil-fill" /></SimpleButton>
-            <SimpleButton @click="deleteTeam(team.id, team.name)" color="red" :spinner="deleteSpinner.get(team.id)" title="Löschen"><Icon name="trash-fill" /></SimpleButton>
-          </td>
-        </tr>
-        <tr v-if="showAddSpinner">
-          <td>X</td>
-          <td colspan="3"><div class="with-spinner">Wird angelegt</div></td>
-        </tr>
+          <tr v-for="(team, index) in teams.teams">
+            <td>{{ index+1 }}</td>
+            <td>
+              <div style="margin-bottom: 10px;">{{ team.name }}</div>
+              <div class="little">{{ team.id }}</div>
+            </td>
+            <td>
+              <div class="list-inline">
+                <div v-for="station in stations.stations" @click="showStation(station, team)" :title="station.name" class="list-inline-item" :class="{'done': isIn(station, team)}">
+                  <Icon v-if="isIn(station, team)" name="check-lg" />
+                  <Icon v-else name="x" />
+                </div>
+              </div>
+            </td>
+            <td>
+              <SimpleButton @click="showEditTeam(team.id, team.name)" :spinner="editSpinner.get(team.id)" title="Bearbeiten"><Icon name="pencil-fill" /></SimpleButton>
+              <SimpleButton @click="deleteTeam(team.id, team.name)" color="red" :spinner="deleteSpinner.get(team.id)" title="Löschen"><Icon name="trash-fill" /></SimpleButton>
+            </td>
+          </tr>
+          <tr v-if="showAddSpinner">
+            <td>X</td>
+            <td colspan="3"><div class="with-spinner">Wird angelegt</div></td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -54,8 +55,8 @@
         <InputText v-model="teamName" name="name" placeholder="Name des Teams" vertical />
       </div>
     </div>
-
   </CustomAlert>
+
 </template>
 
 <script setup lang="ts">
@@ -83,6 +84,7 @@ const showAddSpinner = ref(false);
 const editSpinner = ref(new Map<string, boolean>());
 const deleteSpinner = ref(new Map<string, boolean>());
 
+
 onBeforeMount(() =>
 {
 
@@ -95,6 +97,7 @@ onBeforeMount(() =>
   }
 
 });
+
 
 const isIn = function(station: Station, team: Team): boolean
 {
@@ -117,7 +120,8 @@ const isIn = function(station: Station, team: Team): boolean
 
   return result.length > 0;
 
-};
+}
+
 
 const showAddTeam = function(): void
 {
@@ -170,6 +174,7 @@ const showAddTeam = function(): void
 
 }
 
+
 const showEditTeam = function(id: string, name: string): void
 {
 
@@ -213,6 +218,7 @@ const showEditTeam = function(id: string, name: string): void
 
 }
 
+
 const deleteTeam = function(id: string, name: string): void
 {
 
@@ -240,6 +246,14 @@ const deleteTeam = function(id: string, name: string): void
     .finally(() => {
       deleteSpinner.value.set(id, false);
     });
+
+}
+
+
+const showStation = function(station: Station, team: Team): void
+{
+
+  console.log(station, team);
 
 }
 
