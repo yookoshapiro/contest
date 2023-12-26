@@ -8,15 +8,18 @@ export const stationsStore = defineStore('stations', {
         stations: Array()
     }),
 
-    actions:
+    actions: {
+
+        async load(): Promise<any>
         {
 
-            load: function() {
-                api.list('station').then((response) => {
+            return api.list('station')
+                .then((response) => {
                     this.stations = response.data.data;
                 });
-            }
 
-        }
+        },
+
+    }
 
 });
