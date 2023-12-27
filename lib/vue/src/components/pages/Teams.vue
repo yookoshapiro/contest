@@ -12,27 +12,17 @@
       <table>
         <thead>
           <tr>
-            <td style="width: 40px">#</td>
+            <td class="width-40">#</td>
             <td>Team</td>
-            <td>Ergebnisse</td>
+            <td>Stationen</td>
             <td>Aktionen</td>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(team, index) in teams.teams">
             <td>{{ index+1 }}</td>
-            <td>
-              <div style="margin-bottom: 10px;">{{ team.name }}</div>
-              <div class="little">{{ team.id }}</div>
-            </td>
-            <td>
-              <div class="list-inline">
-                <div v-for="station in stations.stations" @click="showStation(station, team)" :title="station.name" class="list-inline-item" :class="{'done': isIn(station, team)}">
-                  <Icon v-if="isIn(station, team)" name="check-lg" />
-                  <Icon v-else name="x" />
-                </div>
-              </div>
-            </td>
+            <td>{{ team.name }}</td>
+            <td>{{ team.results.length }} / {{ stations.stations.length }}</td>
             <td>
               <SimpleButton @click="showEditTeam(team.id, team.name)" :spinner="editSpinner.get(team.id)" title="Bearbeiten"><Icon name="pencil-fill" /></SimpleButton>
               <SimpleButton @click="deleteTeam(team.id, team.name)" color="red" :spinner="deleteSpinner.get(team.id)" title="Löschen"><Icon name="trash-fill" /></SimpleButton>
@@ -88,39 +78,21 @@ const deleteSpinner = ref(new Map<string, boolean>());
 onBeforeMount(() =>
 {
 
-  teams.load();
   stations.load();
+  teams.load().then(() =>
+  {
 
-  for(let index in teams.teams) {
-    editSpinner.value.set( teams.teams[ index ].id, false );
-    deleteSpinner.value.set( teams.teams[ index ].id, false );
-  }
+    for(let index in teams.teams)
+    {
 
-});
+      editSpinner.value.set( teams.teams[ index ].id, false );
+      deleteSpinner.value.set( teams.teams[ index ].id, false );
 
+    }
 
-const isIn = function(station: Station, team: Team): boolean
-{
-
-  if (typeof team.results === "undefined") {
-    return false;
-  }
-
-  if (team.results?.length === 0) {
-    return false;
-  }
-
-  const result = team.results?.filter((result) => {
-    return result.station_id === station.id;
   });
 
-  if (typeof result === "undefined") {
-    return false;
-  }
-
-  return result.length > 0;
-
-}
+});
 
 
 const showAddTeam = function(): void
