@@ -149,5 +149,10 @@
         box-shadow: 0 0 1px 1px rgba(var(--white), .2);
     }
 
+    div.with-spinner::before {
+        border-top-color: rgba(var(--white), 1);
+        border-bottom-color: rgba(var(--white), 1);
+    }
+
 }
 
