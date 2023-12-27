@@ -45,8 +45,14 @@
         font-weight: normal;
     }
 
+    /* Text Design */
     .little { font-size: .6666666rem; line-height: .6666666rem; letter-spacing: .02rem; }
+    .text-center { text-align: center; }
 
+    /* Element Design */
+    .width-40 { width: 40px; }
+
+    /* App Design */
     #app {
         position: relative;
     }
