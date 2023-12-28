@@ -1,6 +1,6 @@
 <template>
   <div class="title">
-    <h3>Admin-Einstellungen</h3>
+    <h1>Admin-Einstellungen</h1>
   </div>
 </template>
 

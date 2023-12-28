@@ -1,7 +1,7 @@
 <template>
 
   <div class="title">
-    <h3>Teams</h3>
+    <h1>Teams</h1>
     <div class="controls">
       <SimpleButton @click="showAddTeam"><Icon name="person-fill-add" class="inline" /><span>Team hinzufügen</span></SimpleButton>
     </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="title">
-    <h3>Ergebnis bearbeiten</h3>
+    <h1>Ergebnis bearbeiten</h1>
   </div>
 </template>
 

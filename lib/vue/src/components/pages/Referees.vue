@@ -1,7 +1,7 @@
 <template>
 
   <div class="title">
-    <h3>Kampfrichter</h3>
+    <h1>Kampfrichter</h1>
   </div>
 
   <div class="content">

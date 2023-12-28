@@ -1,6 +1,6 @@
 @media {
 
-    .title > h3 {
+    .title > h1 {
         width: 50%;
         margin-bottom: 20px;
         display: inline-block;
@@ -32,7 +32,7 @@
         font-weight: 500;
         line-height: 1rem;
         padding-bottom: 20px;
-        border-bottom: 2px solid rgb(var(--main));
+        border-bottom: 1px solid rgb(var(--main));
     }
 
     .block .body {
@@ -128,6 +128,10 @@
     .block {
         border-color: rgba(var(--white), .4);
         background-color: rgba(var(--main), 1);
+    }
+
+    .block .title {
+        border-bottom-color: rgba(var(--white), 1);
     }
 
     .block table tbody tr:nth-child(2n+1) {

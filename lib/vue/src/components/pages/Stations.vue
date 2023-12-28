@@ -1,7 +1,7 @@
 <template>
 
   <div class="title">
-    <h3>Stations</h3>
+    <h1>Stations</h1>
     <div class="controls">
       <SimpleButton @click="showAddStation"><Icon name="person-fill-add" class="inline" /><span>Station hinzufügen</span></SimpleButton>
     </div>
