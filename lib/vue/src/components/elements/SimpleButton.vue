@@ -52,7 +52,7 @@ const color = ref(props.color);
   background-color: rgba(var(--red), .9);
 }
 
-.simple-button:deep() i {
-  margin-right: 5px;
+.stand-alone {
+  margin-right: 0;
 }
 </style>
