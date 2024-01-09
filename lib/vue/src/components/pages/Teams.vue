@@ -2,8 +2,8 @@
 
   <div class="title">
     <h1>Teams</h1>
-    <div class="controls">
-      <SimpleButton @click="showAddTeam"><Icon name="person-fill-add" class="inline" /><span>Team hinzufügen</span></SimpleButton>
+    <div class="controls padding-right-10">
+      <SimpleButton @click="showAddTeam" class="stand-alone"><Icon name="person-fill-add" class="inline" />Team hinzufügen</SimpleButton>
     </div>
   </div>
 
@@ -12,7 +12,7 @@
       <table>
         <thead>
           <tr>
-            <td class="width-40">#</td>
+            <td class="width-40 text-center">#</td>
             <td>Team</td>
             <td>Stationen</td>
             <td>Aktionen</td>
@@ -20,7 +20,7 @@
         </thead>
         <tbody>
           <tr v-for="(team, index) in teams.teams">
-            <td>{{ index+1 }}</td>
+            <td class="text-center">{{ index+1 }}</td>
             <td>{{ team.name }}</td>
             <td>{{ team.results.length }} / {{ stations.stations.length }}</td>
             <td>

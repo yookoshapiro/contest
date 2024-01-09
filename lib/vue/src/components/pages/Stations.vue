@@ -2,8 +2,8 @@
 
   <div class="title">
     <h1>Stations</h1>
-    <div class="controls">
-      <SimpleButton @click="showAddStation"><Icon name="person-fill-add" class="inline" /><span>Station hinzufügen</span></SimpleButton>
+    <div class="controls padding-right-10">
+      <SimpleButton @click="showAddStation" class="stand-alone"><Icon name="person-fill-add" class="inline" /><span>Station hinzufügen</span></SimpleButton>
     </div>
   </div>
 

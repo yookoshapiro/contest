@@ -2,6 +2,7 @@
 
     .title > h1 {
         width: 50%;
+        padding-left: 10px;
         margin-bottom: 20px;
         display: inline-block;
     }
@@ -14,7 +15,7 @@
 
     .block {
         width: 100%;
-        padding: 10px;
+        padding: 10px 0;
         min-height: 20px;
         border: 1px solid rgba(var(--main), .2);
         background-color: rgb(var(--white));
@@ -31,20 +32,18 @@
     .block .title {
         font-weight: 500;
         line-height: 1rem;
-        padding-bottom: 20px;
-        border-bottom: 1px solid rgb(var(--main));
     }
 
-    .block .body {
-        padding-top: 20px;
+    .block .body * {
+        margin-bottom: 20px;
     }
 
-    .block .body.table {
-        padding: 0;
+    .block .body :last-child {
+        margin-bottom: 0;
     }
 
     .block table {
-        margin: -11px;
+        margin: -11px -1px;
         width: calc(100% + 22px);
         font-size: .9rem;
         line-height: .9rem;
@@ -59,7 +58,7 @@
     }
 
     .block table td {
-        padding: 15px;
+        padding: 10px;
         border: 1px solid rgba(var(--main), .2);
     }
 
@@ -139,7 +138,6 @@
     }
 
     .block table td {
-        padding: 15px;
         border: 1px solid rgba(var(--white), .4);
     }
 

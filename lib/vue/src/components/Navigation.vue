@@ -8,7 +8,7 @@
     </nav>
     <div id="sidebar-footer">
       <ul>
-        <li v-for="item in footer"><router-link :to="{ name: item.name }"><Icon :name="item.icon" :class="item.css" />{{ item.value }}</router-link></li>
+        <li v-for="item in footer"><router-link :to="{ name: item.name }" :title="item.value"><Icon :name="item.icon" :class="item.css" /></router-link></li>
       </ul>
     </div>
   </aside>

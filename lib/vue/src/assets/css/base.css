@@ -50,7 +50,9 @@
     .text-center { text-align: center; }
 
     /* Element Design */
+    .width-10 { width: 10px; }
     .width-40 { width: 40px; }
+    .padding-right-10 { padding-right: 10px; }
 
     /* App Design */
     #app {
@@ -63,20 +65,21 @@
 
     #admin #header {
         float: right;
-        height: 48px;
-        width: calc(100% - 180px);
+        height: 50px;
+        margin: 20px 20px 0 0;
+        width: calc(100% - 230px);
         background-color: rgba(var(--main), .1);
-        border-bottom: 1px solid rgba(var(--main), .2);
+        border: 1px solid rgba(var(--main), .2);
+        border-radius: 5px;
     }
 
     #admin .nav_controller {
-        width: 38px;
+        width: 36px;
         height: 34px;
-        margin: 7px;
+        margin: 8px 8px 8px 3px;
         padding: 7px;
         cursor: pointer;
         display: inline-block;
-        border: 1px solid rgba(var(--main), 0);
     }
 
     #admin .nav_controller > i {
@@ -122,25 +125,28 @@
     }
 
     #admin .logged_in .user {
-        padding: 18px 35px 0 5px;
         display: inline-block;
+        margin: 18px 15px 0 5px;
     }
 
     #admin main {
-        width: calc(100% - 180px);
-        height: calc(100vh - 48px);
         float: right;
         padding: 20px;
         overflow-y: auto;
-        background-color: rgb(var(--main), .05);
+        width: calc(100% - 190px);
+        height: calc(100vh - 70px);
     }
 
     #admin #sidebar {
         float: left;
-        width: 180px;
-        height: 100vh;
+        width: 170px;
+        min-height: 700px;
         position: relative;
-        background-color: rgb(var(--main));
+        border-radius: 5px;
+        margin: 20px 0 20px 20px;
+        height: calc(100vh - 40px);
+        border: 1px solid rgba(var(--main), .2);
+        background-color: rgba(var(--main), .1);
     }
 
     #admin #sidebar #logo {
@@ -159,10 +165,11 @@
     #admin #main a {
         height: 54px;
         display: block;
+        cursor: pointer;
         font-size: .9rem;
         line-height: .9rem;
         position: relative;
-        color: rgb(var(--white));
+        color: rgb(var(--main));
         padding: 20px 20px 20px 40px;
     }
 
@@ -173,8 +180,8 @@
 
     #admin #main a.router-link-active {
         border-right: 5px solid rgb(var(--highlight));
-        background: linear-gradient(rgba(var(--sand), .05), rgb(var(--main))), rgb(var(--main));
-        box-shadow: rgba(var(--black), .25) 0 1px 0, inset rgba(var(--white), .1) 0 1px 0;
+        background: linear-gradient(rgba(var(--black), .05), rgb(var(--white))), rgb(var(--white));
+        box-shadow: rgba(var(--black), .1) 0 1px 0, inset rgba(var(--white), .1) 0 1px 0;
     }
 
     #admin #sidebar-footer {
@@ -199,7 +206,7 @@
         width: 100%;
         height: 100%;
         display: block;
-        color: rgba(var(--white), 1);
+        color: rgba(var(--main), 1);
     }
 
     #admin #sidebar-footer i,
@@ -246,21 +253,37 @@
         padding: 19px;
         display: block;
         position: absolute;
-        left: calc(100% - 5px);
-        background-color: rgba(var(--main), 1);
+        left: calc(100% + 1px);
+        color: rgba(var(--white), 1);
+        background-color: rgba(var(--highlight), 1);
     }
 
     #admin.nav_sm #main a.router-link-active:hover span {
         left: 100%;
+        margin-left: 5px;
+        padding-left: 20px;
     }
 
     #admin.nav_sm #sidebar-footer {
-        display: none;
+        height: auto;
     }
 
-    #admin.nav_sm #header,
+    #admin.nav_sm #sidebar-footer li {
+        width: 100%;
+        height: 50px
+    }
+
+    #admin.nav_sm #sidebar-footer svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    #admin.nav_sm #header {
+        width: calc(100% - 130px);
+    }
+
     #admin.nav_sm main {
-        width: calc(100% - 70px);
+        width: calc(100% - 90px);
     }
 
 }
@@ -275,15 +298,31 @@
 
     body {
         color: rgb(var(--white));
+        background-color: rgba(var(--main), .6);
     }
 
-    #admin main {
-        background-color: rgb(var(--main), .9);
+    #admin #sidebar {
+        background-color: rgba(var(--main), 1);
+        border: 1px solid rgba(var(--white), .4);
+    }
+
+
+    #admin #main a {
+        color: rgba(var(--white), 1);
+    }
+
+    #admin #main a.router-link-active {
+        background: linear-gradient(rgba(var(--sand), .05), rgb(var(--main))), rgb(var(--main));
+        box-shadow: rgba(var(--black), .25) 0 1px 0, inset rgba(var(--white), .1) 0 1px 0;
+    }
+
+    #admin #sidebar-footer a {
+        color: rgba(var(--white), 1);
     }
 
     #admin #header {
-        background-color: rgba(var(--main), .8);
-        border-bottom-color: rgba(var(--white), .4);
+        border-color: rgba(var(--white), .4);
+        background-color: rgba(var(--main), 1);
     }
 
     #admin .nav_controller > i {
